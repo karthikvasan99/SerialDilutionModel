@@ -1,0 +1,1435 @@
+I'm the best
+Skipping 0_1
+Skipping 0_2
+Skipping 0_3
+Skipping 0_4
+Skipping 0_5
+Skipping 0_6
+Skipping 0_7
+Skipping 0_8
+Skipping 0_9
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.125905
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.947
+Test t=0 -> t=12h | Model Log-R^2=0.972
+Test t=0 -> t=24h | Model Log-R^2=0.931
+Test t=0 -> t=36h | Model Log-R^2=0.863
+Test t=0 -> t=48h | Model Log-R^2=0.767
+Test t=0 -> t=60h | Model Log-R^2=0.648
+==================================================
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.156197
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.950
+Test t=0 -> t=12h | Model Log-R^2=0.970
+Test t=0 -> t=24h | Model Log-R^2=0.911
+Test t=0 -> t=36h | Model Log-R^2=0.783
+Test t=0 -> t=48h | Model Log-R^2=0.568
+Test t=0 -> t=60h | Model Log-R^2=0.398
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.137057
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.950
+Test t=0 -> t=12h | Model Log-R^2=0.948
+Test t=0 -> t=24h | Model Log-R^2=0.923
+Test t=0 -> t=36h | Model Log-R^2=0.877
+Test t=0 -> t=48h | Model Log-R^2=0.862
+Test t=0 -> t=60h | Model Log-R^2=0.802
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.200469
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.951
+Test t=0 -> t=12h | Model Log-R^2=0.974
+Test t=0 -> t=24h | Model Log-R^2=0.944
+Test t=0 -> t=36h | Model Log-R^2=0.875
+Test t=0 -> t=48h | Model Log-R^2=0.772
+Test t=0 -> t=60h | Model Log-R^2=0.621
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.113721
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.942
+Test t=0 -> t=12h | Model Log-R^2=0.955
+Test t=0 -> t=24h | Model Log-R^2=0.923
+Test t=0 -> t=36h | Model Log-R^2=0.861
+Test t=0 -> t=48h | Model Log-R^2=0.842
+Test t=0 -> t=60h | Model Log-R^2=0.750
+==================================================
+
+Split complete: 142 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2130 Train, 225 Val, and 18 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.192183
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 18/18 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.946
+Test t=0 -> t=12h | Model Log-R^2=0.972
+Test t=0 -> t=24h | Model Log-R^2=0.946
+Test t=0 -> t=36h | Model Log-R^2=0.907
+Test t=0 -> t=48h | Model Log-R^2=0.868
+Test t=0 -> t=60h | Model Log-R^2=0.798
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.142608
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.952
+Test t=0 -> t=12h | Model Log-R^2=0.952
+Test t=0 -> t=24h | Model Log-R^2=0.921
+Test t=0 -> t=36h | Model Log-R^2=0.874
+Test t=0 -> t=48h | Model Log-R^2=0.815
+Test t=0 -> t=60h | Model Log-R^2=0.722
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.162484
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.946
+Test t=0 -> t=12h | Model Log-R^2=0.970
+Test t=0 -> t=24h | Model Log-R^2=0.907
+Test t=0 -> t=36h | Model Log-R^2=0.759
+Test t=0 -> t=48h | Model Log-R^2=0.546
+Test t=0 -> t=60h | Model Log-R^2=0.353
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.117765
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.944
+Test t=0 -> t=12h | Model Log-R^2=0.953
+Test t=0 -> t=24h | Model Log-R^2=0.908
+Test t=0 -> t=36h | Model Log-R^2=0.845
+Test t=0 -> t=48h | Model Log-R^2=0.758
+Test t=0 -> t=60h | Model Log-R^2=0.661
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.113002
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.945
+Test t=0 -> t=12h | Model Log-R^2=0.965
+Test t=0 -> t=24h | Model Log-R^2=0.929
+Test t=0 -> t=36h | Model Log-R^2=0.857
+Test t=0 -> t=48h | Model Log-R^2=0.757
+Test t=0 -> t=60h | Model Log-R^2=0.603
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.116320
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.942
+Test t=0 -> t=12h | Model Log-R^2=0.961
+Test t=0 -> t=24h | Model Log-R^2=0.922
+Test t=0 -> t=36h | Model Log-R^2=0.871
+Test t=0 -> t=48h | Model Log-R^2=0.802
+Test t=0 -> t=60h | Model Log-R^2=0.715
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.142994
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.953
+Test t=0 -> t=12h | Model Log-R^2=0.954
+Test t=0 -> t=24h | Model Log-R^2=0.924
+Test t=0 -> t=36h | Model Log-R^2=0.856
+Test t=0 -> t=48h | Model Log-R^2=0.782
+Test t=0 -> t=60h | Model Log-R^2=0.656
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.125183
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.950
+Test t=0 -> t=12h | Model Log-R^2=0.960
+Test t=0 -> t=24h | Model Log-R^2=0.934
+Test t=0 -> t=36h | Model Log-R^2=0.892
+Test t=0 -> t=48h | Model Log-R^2=0.876
+Test t=0 -> t=60h | Model Log-R^2=0.839
+==================================================
+
+Split complete: 134 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2010 Train, 210 Val, and 27 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.082033
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 27/27 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.939
+Test t=0 -> t=12h | Model Log-R^2=0.979
+Test t=0 -> t=24h | Model Log-R^2=0.977
+Test t=0 -> t=36h | Model Log-R^2=0.958
+Test t=0 -> t=48h | Model Log-R^2=0.961
+Test t=0 -> t=60h | Model Log-R^2=0.946
+==================================================
+
+Split complete: 132 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 1980 Train, 210 Val, and 29 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.116014
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 29/29 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.955
+Test t=0 -> t=12h | Model Log-R^2=0.982
+Test t=0 -> t=24h | Model Log-R^2=0.980
+Test t=0 -> t=36h | Model Log-R^2=0.957
+Test t=0 -> t=48h | Model Log-R^2=0.956
+Test t=0 -> t=60h | Model Log-R^2=0.938
+==================================================
+
+Split complete: 131 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 1965 Train, 210 Val, and 30 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.140915
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 30/30 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.935
+Test t=0 -> t=12h | Model Log-R^2=0.983
+Test t=0 -> t=24h | Model Log-R^2=0.976
+Test t=0 -> t=36h | Model Log-R^2=0.962
+Test t=0 -> t=48h | Model Log-R^2=0.954
+Test t=0 -> t=60h | Model Log-R^2=0.944
+==================================================
+
+Split complete: 138 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2070 Train, 225 Val, and 22 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.125930
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 22/22 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.960
+Test t=0 -> t=12h | Model Log-R^2=0.973
+Test t=0 -> t=24h | Model Log-R^2=0.972
+Test t=0 -> t=36h | Model Log-R^2=0.938
+Test t=0 -> t=48h | Model Log-R^2=0.938
+Test t=0 -> t=60h | Model Log-R^2=0.914
+==================================================
+
+Split complete: 137 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2055 Train, 225 Val, and 23 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.146443
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 23/23 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.956
+Test t=0 -> t=12h | Model Log-R^2=0.976
+Test t=0 -> t=24h | Model Log-R^2=0.973
+Test t=0 -> t=36h | Model Log-R^2=0.947
+Test t=0 -> t=48h | Model Log-R^2=0.955
+Test t=0 -> t=60h | Model Log-R^2=0.940
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.149921
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.955
+Test t=0 -> t=12h | Model Log-R^2=0.949
+Test t=0 -> t=24h | Model Log-R^2=0.905
+Test t=0 -> t=36h | Model Log-R^2=0.830
+Test t=0 -> t=48h | Model Log-R^2=0.797
+Test t=0 -> t=60h | Model Log-R^2=0.750
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.122863
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.946
+Test t=0 -> t=12h | Model Log-R^2=0.949
+Test t=0 -> t=24h | Model Log-R^2=0.906
+Test t=0 -> t=36h | Model Log-R^2=0.868
+Test t=0 -> t=48h | Model Log-R^2=0.818
+Test t=0 -> t=60h | Model Log-R^2=0.778
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.096229
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.945
+Test t=0 -> t=12h | Model Log-R^2=0.963
+Test t=0 -> t=24h | Model Log-R^2=0.941
+Test t=0 -> t=36h | Model Log-R^2=0.908
+Test t=0 -> t=48h | Model Log-R^2=0.895
+Test t=0 -> t=60h | Model Log-R^2=0.869
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.092821
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.945
+Test t=0 -> t=12h | Model Log-R^2=0.957
+Test t=0 -> t=24h | Model Log-R^2=0.926
+Test t=0 -> t=36h | Model Log-R^2=0.875
+Test t=0 -> t=48h | Model Log-R^2=0.875
+Test t=0 -> t=60h | Model Log-R^2=0.837
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.113150
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.947
+Test t=0 -> t=12h | Model Log-R^2=0.959
+Test t=0 -> t=24h | Model Log-R^2=0.927
+Test t=0 -> t=36h | Model Log-R^2=0.884
+Test t=0 -> t=48h | Model Log-R^2=0.844
+Test t=0 -> t=60h | Model Log-R^2=0.795
+==================================================
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.147087
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.952
+Test t=0 -> t=12h | Model Log-R^2=0.966
+Test t=0 -> t=24h | Model Log-R^2=0.948
+Test t=0 -> t=36h | Model Log-R^2=0.903
+Test t=0 -> t=48h | Model Log-R^2=0.890
+Test t=0 -> t=60h | Model Log-R^2=0.847
+==================================================
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.141364
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.956
+Test t=0 -> t=12h | Model Log-R^2=0.976
+Test t=0 -> t=24h | Model Log-R^2=0.962
+Test t=0 -> t=36h | Model Log-R^2=0.903
+Test t=0 -> t=48h | Model Log-R^2=0.851
+Test t=0 -> t=60h | Model Log-R^2=0.729
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.116700
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.944
+Test t=0 -> t=12h | Model Log-R^2=0.974
+Test t=0 -> t=24h | Model Log-R^2=0.949
+Test t=0 -> t=36h | Model Log-R^2=0.881
+Test t=0 -> t=48h | Model Log-R^2=0.785
+Test t=0 -> t=60h | Model Log-R^2=0.627
+==================================================
+
+Split complete: 142 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2130 Train, 225 Val, and 18 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.080098
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 18/18 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.945
+Test t=0 -> t=12h | Model Log-R^2=0.978
+Test t=0 -> t=24h | Model Log-R^2=0.961
+Test t=0 -> t=36h | Model Log-R^2=0.933
+Test t=0 -> t=48h | Model Log-R^2=0.909
+Test t=0 -> t=60h | Model Log-R^2=0.864
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.122270
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.950
+Test t=0 -> t=12h | Model Log-R^2=0.977
+Test t=0 -> t=24h | Model Log-R^2=0.965
+Test t=0 -> t=36h | Model Log-R^2=0.911
+Test t=0 -> t=48h | Model Log-R^2=0.873
+Test t=0 -> t=60h | Model Log-R^2=0.759
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.106376
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.944
+Test t=0 -> t=12h | Model Log-R^2=0.953
+Test t=0 -> t=24h | Model Log-R^2=0.902
+Test t=0 -> t=36h | Model Log-R^2=0.833
+Test t=0 -> t=48h | Model Log-R^2=0.783
+Test t=0 -> t=60h | Model Log-R^2=0.708
+==================================================
+
+Split complete: 133 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 1995 Train, 210 Val, and 28 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.156011
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 28/28 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.947
+Test t=0 -> t=12h | Model Log-R^2=0.982
+Test t=0 -> t=24h | Model Log-R^2=0.979
+Test t=0 -> t=36h | Model Log-R^2=0.962
+Test t=0 -> t=48h | Model Log-R^2=0.955
+Test t=0 -> t=60h | Model Log-R^2=0.929
+==================================================
+
+Split complete: 135 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2025 Train, 210 Val, and 26 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1500, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.053241
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 26/26 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.948
+Test t=0 -> t=12h | Model Log-R^2=0.981
+Test t=0 -> t=24h | Model Log-R^2=0.975
+Test t=0 -> t=36h | Model Log-R^2=0.959
+Test t=0 -> t=48h | Model Log-R^2=0.950
+Test t=0 -> t=60h | Model Log-R^2=0.925
+==================================================
+
+Split complete: 138 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2070 Train, 225 Val, and 22 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.139999
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 22/22 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.946
+Test t=0 -> t=12h | Model Log-R^2=0.974
+Test t=0 -> t=24h | Model Log-R^2=0.973
+Test t=0 -> t=36h | Model Log-R^2=0.950
+Test t=0 -> t=48h | Model Log-R^2=0.952
+Test t=0 -> t=60h | Model Log-R^2=0.933
+==================================================
+
+Split complete: 137 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2055 Train, 225 Val, and 23 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.155618
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 23/23 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.950
+Test t=0 -> t=12h | Model Log-R^2=0.976
+Test t=0 -> t=24h | Model Log-R^2=0.973
+Test t=0 -> t=36h | Model Log-R^2=0.945
+Test t=0 -> t=48h | Model Log-R^2=0.950
+Test t=0 -> t=60h | Model Log-R^2=0.915
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.116811
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.948
+Test t=0 -> t=12h | Model Log-R^2=0.964
+Test t=0 -> t=24h | Model Log-R^2=0.929
+Test t=0 -> t=36h | Model Log-R^2=0.869
+Test t=0 -> t=48h | Model Log-R^2=0.832
+Test t=0 -> t=60h | Model Log-R^2=0.759
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.142044
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.948
+Test t=0 -> t=12h | Model Log-R^2=0.948
+Test t=0 -> t=24h | Model Log-R^2=0.918
+Test t=0 -> t=36h | Model Log-R^2=0.868
+Test t=0 -> t=48h | Model Log-R^2=0.874
+Test t=0 -> t=60h | Model Log-R^2=0.817
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.121669
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.952
+Test t=0 -> t=12h | Model Log-R^2=0.966
+Test t=0 -> t=24h | Model Log-R^2=0.941
+Test t=0 -> t=36h | Model Log-R^2=0.895
+Test t=0 -> t=48h | Model Log-R^2=0.884
+Test t=0 -> t=60h | Model Log-R^2=0.832
+==================================================
+
+Split complete: 132 Train arrays, 14 Val arrays.
+Parsing Venturelli datasets...
+Extracted 1980 Train, 210 Val, and 29 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.095483
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 29/29 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.940
+Test t=0 -> t=12h | Model Log-R^2=0.981
+Test t=0 -> t=24h | Model Log-R^2=0.975
+Test t=0 -> t=36h | Model Log-R^2=0.959
+Test t=0 -> t=48h | Model Log-R^2=0.955
+Test t=0 -> t=60h | Model Log-R^2=0.944
+==================================================
+
+Split complete: 137 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2055 Train, 225 Val, and 23 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.117802
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 23/23 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.951
+Test t=0 -> t=12h | Model Log-R^2=0.974
+Test t=0 -> t=24h | Model Log-R^2=0.974
+Test t=0 -> t=36h | Model Log-R^2=0.947
+Test t=0 -> t=48h | Model Log-R^2=0.954
+Test t=0 -> t=60h | Model Log-R^2=0.937
+==================================================
+
+Split complete: 137 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2055 Train, 225 Val, and 23 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.140722
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 23/23 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.954
+Test t=0 -> t=12h | Model Log-R^2=0.977
+Test t=0 -> t=24h | Model Log-R^2=0.971
+Test t=0 -> t=36h | Model Log-R^2=0.945
+Test t=0 -> t=48h | Model Log-R^2=0.948
+Test t=0 -> t=60h | Model Log-R^2=0.921
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.115107
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.951
+Test t=0 -> t=12h | Model Log-R^2=0.951
+Test t=0 -> t=24h | Model Log-R^2=0.922
+Test t=0 -> t=36h | Model Log-R^2=0.858
+Test t=0 -> t=48h | Model Log-R^2=0.847
+Test t=0 -> t=60h | Model Log-R^2=0.750
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.119221
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.944
+Test t=0 -> t=12h | Model Log-R^2=0.963
+Test t=0 -> t=24h | Model Log-R^2=0.929
+Test t=0 -> t=36h | Model Log-R^2=0.888
+Test t=0 -> t=48h | Model Log-R^2=0.844
+Test t=0 -> t=60h | Model Log-R^2=0.786
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 800, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.104309
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.942
+Test t=0 -> t=12h | Model Log-R^2=0.960
+Test t=0 -> t=24h | Model Log-R^2=0.911
+Test t=0 -> t=36h | Model Log-R^2=0.838
+Test t=0 -> t=48h | Model Log-R^2=0.753
+Test t=0 -> t=60h | Model Log-R^2=0.653
+==================================================
+
+Split complete: 138 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2070 Train, 225 Val, and 22 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.092057
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 22/22 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.948
+Test t=0 -> t=12h | Model Log-R^2=0.976
+Test t=0 -> t=24h | Model Log-R^2=0.975
+Test t=0 -> t=36h | Model Log-R^2=0.950
+Test t=0 -> t=48h | Model Log-R^2=0.955
+Test t=0 -> t=60h | Model Log-R^2=0.934
+==================================================
+
+Split complete: 136 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2040 Train, 225 Val, and 24 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.044001
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 24/24 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.939
+Test t=0 -> t=12h | Model Log-R^2=0.975
+Test t=0 -> t=24h | Model Log-R^2=0.956
+Test t=0 -> t=36h | Model Log-R^2=0.915
+Test t=0 -> t=48h | Model Log-R^2=0.882
+Test t=0 -> t=60h | Model Log-R^2=0.826
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.117292
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.949
+Test t=0 -> t=12h | Model Log-R^2=0.967
+Test t=0 -> t=24h | Model Log-R^2=0.945
+Test t=0 -> t=36h | Model Log-R^2=0.913
+Test t=0 -> t=48h | Model Log-R^2=0.902
+Test t=0 -> t=60h | Model Log-R^2=0.868
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.15}
+Best Val KL Loss: 0.144582
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.952
+Test t=0 -> t=12h | Model Log-R^2=0.953
+Test t=0 -> t=24h | Model Log-R^2=0.920
+Test t=0 -> t=36h | Model Log-R^2=0.872
+Test t=0 -> t=48h | Model Log-R^2=0.811
+Test t=0 -> t=60h | Model Log-R^2=0.728
+==================================================
+
+Split complete: 140 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2100 Train, 225 Val, and 20 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.172624
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 20/20 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.951
+Test t=0 -> t=12h | Model Log-R^2=0.973
+Test t=0 -> t=24h | Model Log-R^2=0.944
+Test t=0 -> t=36h | Model Log-R^2=0.895
+Test t=0 -> t=48h | Model Log-R^2=0.836
+Test t=0 -> t=60h | Model Log-R^2=0.764
+==================================================
+
+Split complete: 139 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2085 Train, 225 Val, and 21 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1500, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.070892
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 21/21 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.960
+Test t=0 -> t=12h | Model Log-R^2=0.965
+Test t=0 -> t=24h | Model Log-R^2=0.955
+Test t=0 -> t=36h | Model Log-R^2=0.904
+Test t=0 -> t=48h | Model Log-R^2=0.881
+Test t=0 -> t=60h | Model Log-R^2=0.818
+==================================================
+
+Split complete: 144 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 225 Val, and 16 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.138187
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 16/16 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.949
+Test t=0 -> t=12h | Model Log-R^2=0.969
+Test t=0 -> t=24h | Model Log-R^2=0.945
+Test t=0 -> t=36h | Model Log-R^2=0.882
+Test t=0 -> t=48h | Model Log-R^2=0.825
+Test t=0 -> t=60h | Model Log-R^2=0.676
+==================================================
+
+Split complete: 146 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2190 Train, 240 Val, and 13 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.117617
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 13/13 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.947
+Test t=0 -> t=12h | Model Log-R^2=0.967
+Test t=0 -> t=24h | Model Log-R^2=0.937
+Test t=0 -> t=36h | Model Log-R^2=0.895
+Test t=0 -> t=48h | Model Log-R^2=0.847
+Test t=0 -> t=60h | Model Log-R^2=0.772
+==================================================
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.132706
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.949
+Test t=0 -> t=12h | Model Log-R^2=0.980
+Test t=0 -> t=24h | Model Log-R^2=0.959
+Test t=0 -> t=36h | Model Log-R^2=0.909
+Test t=0 -> t=48h | Model Log-R^2=0.870
+Test t=0 -> t=60h | Model Log-R^2=0.785
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.097248
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.943
+Test t=0 -> t=12h | Model Log-R^2=0.933
+Test t=0 -> t=24h | Model Log-R^2=0.875
+Test t=0 -> t=36h | Model Log-R^2=0.789
+Test t=0 -> t=48h | Model Log-R^2=0.747
+Test t=0 -> t=60h | Model Log-R^2=0.670
+==================================================
+
+Split complete: 145 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2175 Train, 240 Val, and 14 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.139544
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 14/14 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.947
+Test t=0 -> t=12h | Model Log-R^2=0.946
+Test t=0 -> t=24h | Model Log-R^2=0.901
+Test t=0 -> t=36h | Model Log-R^2=0.836
+Test t=0 -> t=48h | Model Log-R^2=0.801
+Test t=0 -> t=60h | Model Log-R^2=0.744
+==================================================
+
+Split complete: 143 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2145 Train, 225 Val, and 17 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 6, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.082638
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 17/17 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.949
+Test t=0 -> t=12h | Model Log-R^2=0.968
+Test t=0 -> t=24h | Model Log-R^2=0.929
+Test t=0 -> t=36h | Model Log-R^2=0.830
+Test t=0 -> t=48h | Model Log-R^2=0.753
+Test t=0 -> t=60h | Model Log-R^2=0.632
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 4, 'epochs': 1000, 'l2_lambda': 0.2}
+Best Val KL Loss: 0.162277
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.939
+Test t=0 -> t=12h | Model Log-R^2=0.976
+Test t=0 -> t=24h | Model Log-R^2=0.961
+Test t=0 -> t=36h | Model Log-R^2=0.924
+Test t=0 -> t=48h | Model Log-R^2=0.901
+Test t=0 -> t=60h | Model Log-R^2=0.840
+==================================================
+
+Split complete: 141 Train arrays, 15 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2115 Train, 225 Val, and 19 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 800, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.143700
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 19/19 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.943
+Test t=0 -> t=12h | Model Log-R^2=0.968
+Test t=0 -> t=24h | Model Log-R^2=0.922
+Test t=0 -> t=36h | Model Log-R^2=0.828
+Test t=0 -> t=48h | Model Log-R^2=0.677
+Test t=0 -> t=60h | Model Log-R^2=0.488
+==================================================
+
+Split complete: 144 Train arrays, 16 Val arrays.
+Parsing Venturelli datasets...
+Extracted 2160 Train, 240 Val, and 15 Test causal trajectories.
+
+Starting Grid Search (27 combinations)...
+Progress: [=                                       ] 1/27 Progress: [===                                     ] 2/27 Progress: [====                                    ] 3/27 Progress: [======                                  ] 4/27 Progress: [=======                                 ] 5/27 Progress: [=========                               ] 6/27 Progress: [==========                              ] 7/27 Progress: [============                            ] 8/27 Progress: [=============                           ] 9/27 Progress: [===============                         ] 10/27 Progress: [================                        ] 11/27 Progress: [==================                      ] 12/27 Progress: [===================                     ] 13/27 Progress: [=====================                   ] 14/27 Progress: [======================                  ] 15/27 Progress: [========================                ] 16/27 Progress: [=========================               ] 17/27 Progress: [===========================             ] 18/27 Progress: [============================            ] 19/27 Progress: [==============================          ] 20/27 Progress: [===============================         ] 21/27 Progress: [=================================       ] 22/27 Progress: [==================================      ] 23/27 Progress: [====================================    ] 24/27 Progress: [=====================================   ] 25/27 Progress: [======================================= ] 26/27 Progress: [========================================] 27/27 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 5, 'epochs': 1000, 'l2_lambda': 0.25}
+Best Val KL Loss: 0.102882
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 15/15 test sets without NaNs.
+Train Scatter | Abundance Log-R^2=0.946
+Test t=0 -> t=12h | Model Log-R^2=0.959
+Test t=0 -> t=24h | Model Log-R^2=0.919
+Test t=0 -> t=36h | Model Log-R^2=0.846
+Test t=0 -> t=48h | Model Log-R^2=0.752
+Test t=0 -> t=60h | Model Log-R^2=0.620
+==================================================
