@@ -97,6 +97,64 @@ class LatentAssemblyModel(nn.Module):
                 
             return x_T, False, max_passages
 
+
+class LinearSoftmaxModel(nn.Module):
+    """
+    Linear Markov / Transition Baseline Model with Softmax.
+    Ablates the latent metabolic bottleneck (Theta, W, a) in favor of a direct full-rank
+    transition matrix A (N x N) and condition-specific bias vectors b (num_conditions x N).
+    
+    If enforce_inoculum_mask=True (default), computes scores = x_T * exp(logits), preserving
+    the ecological invariant that absent species cannot spontaneously emerge.
+    If enforce_inoculum_mask=False, computes pure softmax(logits).
+    """
+    def __init__(self, num_species, num_conditions=1, enforce_inoculum_mask=True):
+        super(LinearSoftmaxModel, self).__init__()
+        self.N = num_species
+        self.num_conditions = num_conditions
+        self.enforce_inoculum_mask = enforce_inoculum_mask
+        
+        # Direct species-to-species interaction/transition matrix A (N x N)
+        self.A = nn.Parameter(torch.randn(self.N, self.N) * 0.01)
+        
+        # Condition-specific baseline fitness/growth vector b (num_conditions x N)
+        self.b = nn.Parameter(torch.randn(num_conditions, self.N) * 0.01)
+
+    def forward(self, x_T, condition_idx):
+        # 1. Linear state transition: x_T @ A + b[condition_idx]
+        b_batch = self.b[condition_idx]
+        logits = torch.matmul(x_T, self.A) + b_batch
+        
+        # 2. Compute probabilities / relative abundances
+        if self.enforce_inoculum_mask:
+            x_T_clamped = torch.clamp(x_T, min=0.0)
+            scores = x_T_clamped * torch.exp(logits)
+            x_T_plus_1 = scores / (scores.sum(dim=-1, keepdim=True) + 1e-12)
+        else:
+            x_T_plus_1 = F.softmax(logits, dim=-1)
+            
+        # 3. Safe log for KLDivLoss
+        safe_x_T_plus_1 = torch.clamp(x_T_plus_1, min=1e-9)
+        log_x_T_plus_1 = torch.log(safe_x_T_plus_1)
+        
+        return log_x_T_plus_1, x_T_plus_1
+
+    def find_steady_state(self, x_0, condition_idx, max_passages=2000, tol=1e-7):
+        """
+        Iterates the discrete map to find the steady-state relative abundances
+        starting from an initial inoculum x_0.
+        """
+        with torch.no_grad():
+            x_T = x_0.clone()
+            for passage in range(max_passages):
+                _, x_T_plus_1 = self.forward(x_T, condition_idx)
+                max_diff = torch.max(torch.abs(x_T_plus_1 - x_T))
+                if max_diff < tol:
+                    return x_T_plus_1, True, passage + 1
+                x_T = x_T_plus_1
+            return x_T, False, max_passages
+
+
 class ConsumerResourceODEFunc(nn.Module):
     """
     The explicit ordinary differential equation (ODE) governing the
