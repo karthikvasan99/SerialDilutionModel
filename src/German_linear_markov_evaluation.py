@@ -45,65 +45,36 @@ def map_environments(trajectories_dict):
     return env_map, unique_envs
 
 
-def train_loo_model(model, train_windows, val_windows, epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.25, verbose=True):
+def train_loo_model(model, train_seqs, train_conds, val_seqs, val_conds, epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.25, verbose=True):
     """
-    Trains the Linear Markov / Softmax ablation model on causal windows using Soft Scheduled Sampling.
+    Trains the Linear Markov / Softmax ablation model on full trajectories (T1 -> T6) using Soft Scheduled Sampling.
     Tracks both training and validation loss with proximal gradient regularization.
     """
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.KLDivLoss(reduction='batchmean')
+    seq_len = train_seqs.size(1)
     
-    train_grouped = defaultdict(list)
-    for seq, c_idx in train_windows:
-        train_grouped[len(seq)].append((seq, c_idx))
-        
-    train_batches = []
-    for length, items in train_grouped.items():
-        seqs = torch.stack([item[0] for item in items])
-        conds = torch.tensor([item[1] for item in items], dtype=torch.long)
-        train_batches.append((seqs, conds))
-        
-    val_grouped = defaultdict(list)
-    for seq, c_idx in val_windows:
-        val_grouped[len(seq)].append((seq, c_idx))
-        
-    val_batches = []
-    for length, items in val_grouped.items():
-        seqs = torch.stack([item[0] for item in items])
-        conds = torch.tensor([item[1] for item in items], dtype=torch.long)
-        val_batches.append((seqs, conds))
-        
     train_loss_hist = []
     val_loss_hist = []
     
     if verbose:
-        print(f"\nTraining Linear Markov Model on {len(train_windows)} causal windows, Validating on {len(val_windows)} windows...")
+        print(f"\nTraining Linear Markov Model on {train_seqs.size(0)} full trajectories (T1->T6), Validating on {val_seqs.size(0)} trajectory...")
         
     for epoch in range(epochs):
         tf_ratio = max(0.0, 1.0 - (epoch / (epochs * 0.8)))
 
         model.train()
         optimizer.zero_grad()
-        epoch_loss = 0.0
-        total_steps = 0
         
-        for seqs, conds in train_batches:
-            seq_len = seqs.size(1)
-            x_curr = seqs[:, 0, :] 
+        x_curr = train_seqs[:, 0, :]
+        batch_loss = 0.0
+        for t in range(1, seq_len):
+            log_pred, x_pred = model(x_curr, train_conds)
+            target = train_seqs[:, t, :]
+            batch_loss = batch_loss + criterion(log_pred, target)
+            x_curr = tf_ratio * target + (1.0 - tf_ratio) * x_pred
             
-            batch_loss = 0.0
-            for t in range(1, seq_len):
-                log_pred, x_pred = model(x_curr, conds)
-                target = seqs[:, t, :]
-                
-                batch_loss = batch_loss + criterion(log_pred, target)
-                # Soft mixing between ground truth and model prediction
-                x_curr = tf_ratio * target + (1.0 - tf_ratio) * x_pred 
-                total_steps += 1
-                
-            (batch_loss / (seq_len - 1)).backward()
-            epoch_loss += batch_loss.item()
-            
+        (batch_loss / (seq_len - 1)).backward()
         optimizer.step()
         
         # Proximal Gradient Descent for L1 and L2 Penalties
@@ -121,24 +92,17 @@ def train_loo_model(model, train_windows, val_windows, epochs=1500, lr=0.02, l1_
                     param.data = torch.sign(param.data) * torch.clamp(torch.abs(param.data) - alpha_l1, min=0.0)
                     
         model.eval()
-        val_epoch_loss = 0.0
-        val_steps = 0
         with torch.no_grad():
-            for seqs, conds in val_batches:
-                seq_len = seqs.size(1)
-                x_curr = seqs[:, 0, :]
-                
-                batch_loss = 0.0
-                for t in range(1, seq_len):
-                    log_pred, x_pred = model(x_curr, conds)
-                    target = seqs[:, t, :]
-                    batch_loss = batch_loss + criterion(log_pred, target)
-                    x_curr = x_pred # Purely autoregressive feedback
-                    val_steps += 1
-                val_epoch_loss += batch_loss.item()
+            x_curr = val_seqs[:, 0, :]
+            val_loss = 0.0
+            for t in range(1, seq_len):
+                log_pred, x_pred = model(x_curr, val_conds)
+                target = val_seqs[:, t, :]
+                val_loss = val_loss + criterion(log_pred, target)
+                x_curr = x_pred
         
-        avg_loss = epoch_loss / total_steps if total_steps > 0 else 0
-        avg_val_loss = val_epoch_loss / val_steps if val_steps > 0 else 0
+        avg_loss = (batch_loss / (seq_len - 1)).item()
+        avg_val_loss = (val_loss / (seq_len - 1)).item()
         
         train_loss_hist.append(avg_loss)
         val_loss_hist.append(avg_val_loss)
@@ -224,11 +188,11 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
         true_active = true_vals[mask]
         pred_active = pred_vals[mask]
         
-        # 2. Calculate Log R^2 directly on true non-zero values (safe clip on pred only to prevent log(0))
+        # 2. Calculate Log R^2 directly on true non-zero values without clamping
         true_log = np.log10(true_active)
-        pred_log = np.log10(np.clip(pred_active, 1e-12, None))
+        pred_log = np.log10(pred_active)
         r, _ = pearsonr(true_log, pred_log)
-        r2 = r**2
+        r2 = r**2 if not np.isnan(r) else 0.0
         
         # 3. Scatter only the true non-zero bacteria
         ax.scatter(true_active, pred_active, alpha=0.5, edgecolors='k', c=color, s=50, label=f'$R^2$={r2:.2f}')
@@ -237,8 +201,7 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
         min_v = true_active.min() * 0.5
         max_v = min(true_active.max() * 1.5, 1.5)
         
-        valid_y = pred_active > 0
-        min_y = pred_active[valid_y].min() * 0.5 if np.any(valid_y) else 1e-4
+        min_y = pred_active.min() * 0.5
         max_y = min(pred_active.max() * 1.5, 1.5)
         
         plot_min = min(min_v, min_y)
@@ -297,6 +260,26 @@ if __name__ == "__main__":
     data = torch.load(DATA_PATH, weights_only=False)
     strains = data['strains']
     trajectories = data['trajectories']
+    num_before = len(strains)
+    
+    # Filter bacteria with mean relative abundance >= 1e-3 in T1 across all samples AND non-zero in all 12 T1 samples
+    t1_passages = torch.stack([seq[0] for seq in trajectories.values()], dim=0)
+    mean_t1_abundance = t1_passages.mean(dim=0)
+    all_t1_present = (t1_passages > 0).all(dim=0)
+    threshold = 1e-3
+    keep_mask = (mean_t1_abundance >= threshold) & all_t1_present
+    num_after = int(keep_mask.sum().item())
+    
+    print(f"\nSpecies T1 Abundance Filtering (Threshold >= {threshold} & Present in All 12 T1 Samples):")
+    print(f" - Total bacteria BEFORE filter: {num_before}")
+    print(f" - Total bacteria AFTER filter:  {num_after}")
+    print(f" - Filtered out: {num_before - num_after} low-abundance / non-ubiquitous noise species")
+    
+    strains = [s for idx, s in enumerate(strains) if keep_mask[idx]]
+    for k in trajectories.keys():
+        filt_seq = trajectories[k][:, keep_mask]
+        trajectories[k] = filt_seq / filt_seq.sum(dim=-1, keepdim=True)
+        
     num_species = len(strains)
     
     # 1. Map 12 trajectories down to 6 unique environmental conditions
@@ -317,31 +300,23 @@ if __name__ == "__main__":
     test_c_idx = env_map[held_out_key]
     
     print(f"\nLeave-One-Out Split Configured:")
-    print(f" - Training Set: {len(train_keys)} trajectories")
-    print(f" - Validation Set: [{val_key}]")
-    print(f" - Held-Out Test Set: [{held_out_key}]")
+    print(f" - Training Set: {len(train_keys)} trajectories (full T1->T6)")
+    print(f" - Validation Set: [{val_key}] (full T1->T6)")
+    print(f" - Held-Out Test Set: [{held_out_key}] (full T1->T6)")
     
-    def get_causal_windows(keys):
-        windows = []
-        for k in keys:
-            seq = trajectories[k]
-            c_idx = env_map[k]
-            n = len(seq)
-            for i in range(n - 1):
-                for j in range(i + 1, n):
-                    windows.append((seq[i:j+1], c_idx))
-        return windows
-        
-    train_windows = get_causal_windows(train_keys)
-    val_windows = get_causal_windows([val_key])
+    # Full trajectory tensors (T1 -> T6)
+    train_seqs = torch.stack([trajectories[k] for k in train_keys]) # Shape: (10, 6, num_species)
+    train_conds = torch.tensor([env_map[k] for k in train_keys], dtype=torch.long)
+    val_seqs = torch.stack([trajectories[val_key]]) # Shape: (1, 6, num_species)
+    val_conds = torch.tensor([env_map[val_key]], dtype=torch.long)
     
     # 3. Initialize Linear Markov / Softmax Ablation Model
     # enforce_inoculum_mask=True enforces x_{T+1} = (x_T * exp(logits)) / Z
     model = LinearSoftmaxModel(num_species=num_species, num_conditions=num_conditions, enforce_inoculum_mask=True)
     
-    # 4. Train on Causal Windows (10 Train trajectories, 1 Val trajectory)
+    # 4. Train on Full Trajectories (10 Train trajectories, 1 Val trajectory)
     trained_model, train_loss_hist, val_loss_hist = train_loo_model(
-        model, train_windows, val_windows,
+        model, train_seqs, train_conds, val_seqs, val_conds,
         epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.25, verbose=True
     )
     

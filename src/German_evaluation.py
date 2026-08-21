@@ -1,4 +1,5 @@
 import os
+import sys
 import copy
 import torch
 import torch.nn as nn
@@ -9,8 +10,24 @@ import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
 from collections import defaultdict
 
-# Import your model
+# Path Resolution
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
+if SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, SCRIPT_DIR)
+
+# Import model
 from SerialDilutionModels import LatentAssemblyModel
+
+BASE_SEED = 42
+
+
+def set_seed(seed=BASE_SEED):
+    """Sets random seeds for reproducibility."""
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+
 
 def map_environments(trajectories_dict):
     """
@@ -27,7 +44,7 @@ def map_environments(trajectories_dict):
         if isinstance(cond_key, tuple) and len(cond_key) >= 2:
             env_label = cond_key[1:]
         else:
-            env_label = cond_key # Fallback if formatting differs
+            env_label = cond_key  # Fallback if formatting differs
             
         if env_label not in unique_envs:
             unique_envs.append(env_label)
@@ -44,65 +61,36 @@ def map_environments(trajectories_dict):
     return env_map, unique_envs
 
 
-def train_loo_model(model, train_windows, val_windows, epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.4, verbose=True):
+def train_loo_model(model, train_seqs, train_conds, val_seqs, val_conds, epochs=1000, lr=0.01, l1_lambda=0.0, l2_lambda=0.0, verbose=True):
     """
-    Trains the model on causal windows using Soft Scheduled Sampling.
+    Trains the model on full trajectories (T1 -> T6) using Soft Scheduled Sampling.
     Tracks both training and validation loss.
     """
     optimizer = optim.Adam(model.parameters(), lr=lr)
     criterion = nn.KLDivLoss(reduction='batchmean')
+    seq_len = train_seqs.size(1)
     
-    train_grouped = defaultdict(list)
-    for seq, c_idx in train_windows:
-        train_grouped[len(seq)].append((seq, c_idx))
-        
-    train_batches = []
-    for length, items in train_grouped.items():
-        seqs = torch.stack([item[0] for item in items])
-        conds = torch.tensor([item[1] for item in items], dtype=torch.long)
-        train_batches.append((seqs, conds))
-        
-    val_grouped = defaultdict(list)
-    for seq, c_idx in val_windows:
-        val_grouped[len(seq)].append((seq, c_idx))
-        
-    val_batches = []
-    for length, items in val_grouped.items():
-        seqs = torch.stack([item[0] for item in items])
-        conds = torch.tensor([item[1] for item in items], dtype=torch.long)
-        val_batches.append((seqs, conds))
-        
     train_loss_hist = []
     val_loss_hist = []
     
     if verbose:
-        print(f"\nTraining on {len(train_windows)} causal windows, Validating on {len(val_windows)} windows...")
+        print(f"\nTraining on {train_seqs.size(0)} full trajectories (T1->T6), Validating on {val_seqs.size(0)} trajectory...")
         
     for epoch in range(epochs):
         tf_ratio = max(0.0, 1.0 - (epoch / (epochs * 0.8)))
 
         model.train()
         optimizer.zero_grad()
-        epoch_loss = 0.0
-        total_steps = 0
         
-        for seqs, conds in train_batches:
-            seq_len = seqs.size(1)
-            x_curr = seqs[:, 0, :] 
+        x_curr = train_seqs[:, 0, :]
+        batch_loss = 0.0
+        for t in range(1, seq_len):
+            log_pred, x_pred = model(x_curr, train_conds)
+            target = train_seqs[:, t, :]
+            batch_loss = batch_loss + criterion(log_pred, target)
+            x_curr = tf_ratio * target + (1.0 - tf_ratio) * x_pred
             
-            batch_loss = 0.0
-            for t in range(1, seq_len):
-                log_pred, x_pred = model(x_curr, conds)
-                target = seqs[:, t, :]
-                
-                batch_loss = batch_loss + criterion(log_pred, target)
-                # Soft mixing between ground truth and model prediction
-                x_curr = tf_ratio * target + (1.0 - tf_ratio) * x_pred 
-                total_steps += 1
-                
-            (batch_loss / (seq_len - 1)).backward()
-            epoch_loss += batch_loss.item()
-            
+        (batch_loss / (seq_len - 1)).backward()
         optimizer.step()
         
         # Proximal Gradient Descent for L1 and L2 Penalties
@@ -118,39 +106,35 @@ def train_loo_model(model, train_windows, val_windows, epochs=1500, lr=0.02, l1_
                     param.data = torch.sign(param.data) * torch.clamp(torch.abs(param.data) - alpha_l1, min=0.0)
                     
         model.eval()
-        val_epoch_loss = 0.0
-        val_steps = 0
         with torch.no_grad():
-            for seqs, conds in val_batches:
-                seq_len = seqs.size(1)
-                x_curr = seqs[:, 0, :]
-                
-                batch_loss = 0.0
-                for t in range(1, seq_len):
-                    log_pred, x_pred = model(x_curr, conds)
-                    target = seqs[:, t, :]
-                    batch_loss = batch_loss + criterion(log_pred, target)
-                    x_curr = x_pred # Purely autoregressive feedback
-                    val_steps += 1
-                val_epoch_loss += batch_loss.item()
+            x_curr = val_seqs[:, 0, :]
+            val_loss = 0.0
+            for t in range(1, seq_len):
+                log_pred, x_pred = model(x_curr, val_conds)
+                target = val_seqs[:, t, :]
+                val_loss = val_loss + criterion(log_pred, target)
+                x_curr = x_pred
         
-        avg_loss = epoch_loss / total_steps if total_steps > 0 else 0
-        avg_val_loss = val_epoch_loss / val_steps if val_steps > 0 else 0
+        avg_loss = (batch_loss / (seq_len - 1)).item()
+        avg_val_loss = (val_loss / (seq_len - 1)).item()
         
         train_loss_hist.append(avg_loss)
         val_loss_hist.append(avg_val_loss)
         
-        if verbose and (epoch % 300 == 0 or epoch == epochs - 1):
+        if verbose and (epoch % 200 == 0 or epoch == epochs - 1):
             print(f"Epoch {epoch:4d}/{epochs} | Train KL: {avg_loss:.6f} | Val KL: {avg_val_loss:.6f}")
             
     return model, train_loss_hist, val_loss_hist
 
 
-def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_envs, train_loss_hist, val_loss_hist, train_keys, trajectories, env_map):
+def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_envs, train_loss_hist, val_loss_hist, train_keys, trajectories, env_map, output_dir=None):
     """
     Performs a purely autoregressive rollout on the held-out test condition and the training conditions.
     Plots a 2x4 grid with Loss, Train Scatter, Test Overall, and Test by Passage.
     """
+    if output_dir is None:
+        output_dir = os.path.join(PROJECT_ROOT, "Images")
+
     print(f"\n==================================================")
     print(f"Evaluating Held-Out Condition: '{test_key}'")
     print(f"Assigned 'a' Vector Index: {c_idx} ({unique_envs[c_idx]})")
@@ -210,39 +194,66 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
     axes[0].legend(loc='upper right', fontsize=12)
     axes[0].grid(True, ls='--', alpha=0.5)
     
-    # Helper function for scatter panels
+    # Helper function for scatter panels (plots active species and zero/floor species in distinct colors)
     def plot_scatter(ax, true_vals, pred_vals, title, color):
-        if len(true_vals) == 0:
-            ax.axis('off')
-            return
-        
-        # Calculate Log R^2
-        true_log = np.log10(np.clip(true_vals, 1e-6, None))
-        pred_log = np.log10(np.clip(pred_vals, 1e-6, None))
-        r, _ = pearsonr(true_log, pred_log)
-        r2 = r**2
-        
-        ax.scatter(true_vals, pred_vals, alpha=0.5, edgecolors='k', c=color, s=50, label=f'$R^2$={r2:.2f}')
-        
-        # Dynamic axis limits based on data
-        plottable = true_vals > 0
-        min_v = true_vals[plottable].min() * 0.5 if np.any(plottable) else 1e-4
-        max_v = min(true_vals.max() * 1.5, 1.5)
-        
-        valid_y = pred_vals > 0
-        min_y = pred_vals[valid_y].min() * 0.5 if np.any(valid_y) else 1e-4
-        max_y = min(pred_vals.max() * 1.5, 1.5)
-        
-        plot_min = min(min_v, min_y)
-        plot_max = max(max_v, max_y)
-        
+        # 1. Non-zero ground truth species metric
+        mask_nz = (true_vals > 0)
+        if np.sum(mask_nz) >= 2:
+            true_log_nz = np.log10(true_vals[mask_nz])
+            pred_log_nz = np.log10(np.clip(pred_vals[mask_nz], 1e-6, None))
+            r_nz, _ = pearsonr(true_log_nz, pred_log_nz)
+            r2_nz = float(r_nz ** 2) if not np.isnan(r_nz) else 0.0
+        else:
+            r2_nz = 0.0
+
+        # 2. All filtered species with 1e-6 clip metric
+        true_log_all = np.log10(np.clip(true_vals, 1e-6, None))
+        pred_log_all = np.log10(np.clip(pred_vals, 1e-6, None))
+        r_all, _ = pearsonr(true_log_all, pred_log_all)
+        r2_all = float(r_all ** 2) if not np.isnan(r_all) else 0.0
+
+        # 3. Clip data to detection floor 1e-6 for log-scale plotting
+        clip_true = np.clip(true_vals, 1e-6, None)
+        clip_pred = np.clip(pred_vals, 1e-6, None)
+
+        # 4. Partition points: active surviving vs zero/floor-clipped
+        is_zero = (true_vals == 0) | (pred_vals <= 1e-6)
+        is_active = ~is_zero
+
+        # Scatter active non-zero species
+        if np.any(is_active):
+            ax.scatter(
+                clip_true[is_active], clip_pred[is_active],
+                alpha=0.65, edgecolors='k', c=color, s=55,
+                label=f'Active Non-Zero ($R^2_{{nz}}={r2_nz:.2f}$)'
+            )
+
+        # Scatter extinct / zero / floor-clipped species in distinct color (purple diamonds)
+        if np.any(is_zero):
+            ax.scatter(
+                clip_true[is_zero], clip_pred[is_zero],
+                alpha=0.85, edgecolors='k', c='#9467bd', marker='D', s=50,
+                label=fr'Extinct / Floor ($\leq 10^{{-6}}$, $R^2_{{all}}={r2_all:.2f}$)'
+            )
+        else:
+            # When no extinct species exist in this passage, still display R^2_all
+            ax.scatter([], [], c='#9467bd', marker='D', label=f'All Taxa ($R^2_{{all}}={r2_all:.2f}$)')
+
+        # Detection threshold floor lines
+        ax.axvline(1e-6, color='gray', linestyle=':', alpha=0.5, lw=1)
+        ax.axhline(1e-6, color='gray', linestyle=':', alpha=0.5, lw=1)
+
+        # Identity reference line
+        plot_min = 4e-7
+        plot_max = 1.5
         ax.plot([plot_min, plot_max], [plot_min, plot_max], 'r--', lw=2, label='y=x')
+
         ax.set_xlim([plot_min, plot_max])
         ax.set_ylim([plot_min, plot_max])
         ax.set_xscale('log')
         ax.set_yscale('log')
         ax.set_title(title, fontsize=16, fontweight='bold')
-        ax.legend(loc='upper left', fontsize=14)
+        ax.legend(loc='upper left', fontsize=11, framealpha=0.9)
         ax.tick_params(axis='both', which='major', labelsize=12)
         ax.grid(True, which="both", ls="--", alpha=0.2)
 
@@ -253,13 +264,12 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
     plot_scatter(axes[2], test_true_flat, test_pred_flat, "Test Autoregressive (All)", 'darkorange')
     
     # Panels 3-7: Test Scatter by Passage (T2 to T6)
-    # Sequence typically has length 6 (T1...T6), so t goes from 1 to 5
     for idx in range(1, 6):
         ax_idx = 2 + idx
         if idx in test_true_dict:
             plot_scatter(axes[ax_idx], test_true_dict[idx], test_pred_dict[idx], f"Test Passage T{idx+1}", 'crimson')
         else:
-            axes[ax_idx].axis('off') # Hide panel if passage doesn't exist
+            axes[ax_idx].axis('off')
             
     fig.supxlabel('True Relative Abundance', fontsize=20, y=0.02)
     fig.supylabel('Predicted Relative Abundance', fontsize=20, x=0.01)
@@ -267,7 +277,6 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
     plt.tight_layout(rect=[0.03, 0.04, 1, 1])
     
     # Save Image
-    output_dir = "../Images"
     os.makedirs(output_dir, exist_ok=True)
     
     if isinstance(test_key, tuple):
@@ -275,22 +284,55 @@ def evaluate_held_out_autoregressive(model, test_key, test_seq, c_idx, unique_en
     else:
         clean_name = str(test_key).replace(" ", "_").replace("|", "").replace(":", "")
         
-    plot_filename = os.path.join(output_dir, f'loo_eval_{clean_name}.png')
+    plot_filename = os.path.join(output_dir, f'loo_eval_nonzero_{clean_name}.png')
     plt.savefig(plot_filename, dpi=300, bbox_inches='tight')
     print(f"Saved held-out evaluation plot to '{plot_filename}'")
 
+
+import argparse
+
 if __name__ == "__main__":
-    DATA_PATH = '../Data/German_processed_data.pt'
-    LATENT_DIMS = 2
+    parser = argparse.ArgumentParser(description="Leave-One-Out Evaluation for Latent Assembly Model on German Dataset")
+    parser.add_argument('--held-out-idx', type=int, default=0, help='Index of held-out trajectory (0 to 11)')
+    parser.add_argument('--val-idx', type=int, default=1, help='Index of validation trajectory (0 to 11)')
+    parser.add_argument('--latent-dims', type=int, default=5, help='Number of latent metabolic dimensions (K, optimal: 5)')
+    parser.add_argument('--l2', type=float, default=0.10, help='Proximal L2 penalty (optimal: 0.10)')
+    parser.add_argument('--epochs', type=int, default=1000, help='Number of training epochs (optimal: 1000)')
+    parser.add_argument('--lr', type=float, default=0.01, help='Learning rate (optimal: 0.01)')
+    parser.add_argument('--seed', type=int, default=BASE_SEED, help='Random seed for reproducibility')
+    args = parser.parse_args()
+
+    set_seed(args.seed)
+    DATA_PATH = os.path.join(PROJECT_ROOT, 'Data', 'German_processed_data.pt')
     
     if not os.path.exists(DATA_PATH):
         raise FileNotFoundError(f"Processed data file '{DATA_PATH}' not found. Please run the parser script first.")
         
     print(f"Loading data from {DATA_PATH}...")
-    # Add weights_only=False to allow loading the list of strings (strains) and tuple keys
     data = torch.load(DATA_PATH, weights_only=False)
     strains = data['strains']
     trajectories = data['trajectories']
+    num_before = len(strains)
+    
+    # Filter bacteria with mean relative abundance >= 1e-3 in T1 across all samples AND non-zero in all 12 T1 samples
+    t1_passages = torch.stack([seq[0] for seq in trajectories.values()], dim=0)
+    mean_t1_abundance = t1_passages.mean(dim=0)
+    all_t1_present = (t1_passages > 0).all(dim=0)
+    threshold = 1e-3
+    keep_mask = (mean_t1_abundance >= threshold) & all_t1_present
+    num_after = int(keep_mask.sum().item())
+    
+    print(f"\nSpecies T1 Abundance Filtering (Threshold >= {threshold} & Present in All 12 T1 Samples):")
+    print(f" - Total bacteria BEFORE filter: {num_before}")
+    print(f" - Total bacteria AFTER filter:  {num_after}")
+    print(f" - Filtered out: {num_before - num_after} low-abundance / non-ubiquitous noise species")
+    
+    # Filter strains list and trajectory tensors (re-normalizing relative abundances)
+    strains = [s for idx, s in enumerate(strains) if keep_mask[idx]]
+    for k in trajectories.keys():
+        filt_seq = trajectories[k][:, keep_mask]
+        trajectories[k] = filt_seq / filt_seq.sum(dim=-1, keepdim=True)
+        
     num_species = len(strains)
     
     # 1. Map 12 trajectories down to 6 unique environmental 'a' vectors
@@ -298,13 +340,9 @@ if __name__ == "__main__":
     num_conditions = len(unique_envs)
     
     # 2. Select Held-Out Condition
-    # You can change `held_out_idx` (0 to 11) to test different held-out trajectories
     all_keys = list(trajectories.keys())
-    held_out_idx = 0 
-    val_idx = 1 # Select the next trajectory to act as the validation set
-    
-    held_out_key = all_keys[held_out_idx]
-    val_key = all_keys[val_idx]
+    held_out_key = all_keys[args.held_out_idx]
+    val_key = all_keys[args.val_idx]
     
     train_keys = [k for k in all_keys if k not in (held_out_key, val_key)]
     
@@ -312,31 +350,24 @@ if __name__ == "__main__":
     test_c_idx = env_map[held_out_key]
     
     print(f"\nLeave-One-Out Split Configured:")
-    print(f" - Training Set: {len(train_keys)} trajectories")
-    print(f" - Validation Set: [{val_key}]")
-    print(f" - Held-Out Test Set: [{held_out_key}]")
+    print(f" - Training Set: {len(train_keys)} trajectories (full T1->T6)")
+    print(f" - Validation Set: [{val_key}] (full T1->T6)")
+    print(f" - Held-Out Test Set: [{held_out_key}] (full T1->T6)")
+    print(f" - Hyperparameters: Latent Dims (K)={args.latent_dims}, L2={args.l2}, Epochs={args.epochs}, LR={args.lr}")
     
-    def get_causal_windows(keys):
-        windows = []
-        for k in keys:
-            seq = trajectories[k]
-            c_idx = env_map[k]
-            n = len(seq)
-            for i in range(n - 1):
-                for j in range(i + 1, n):
-                    windows.append((seq[i:j+1], c_idx))
-        return windows
-        
-    train_windows = get_causal_windows(train_keys)
-    val_windows = get_causal_windows([val_key])
+    # Full trajectory tensors (T1 -> T6)
+    train_seqs = torch.stack([trajectories[k] for k in train_keys])
+    train_conds = torch.tensor([env_map[k] for k in train_keys], dtype=torch.long)
+    val_seqs = torch.stack([trajectories[val_key]])
+    val_conds = torch.tensor([env_map[val_key]], dtype=torch.long)
     
-    # 3. Initialize Model with 6 conditions
-    model = LatentAssemblyModel(num_species=num_species, num_latent_dims=LATENT_DIMS, num_conditions=num_conditions)
+    # 3. Initialize Model with optimal hyperparameter K
+    model = LatentAssemblyModel(num_species=num_species, num_latent_dims=args.latent_dims, num_conditions=num_conditions)
     
-    # 4. Train on Causal Windows (10 Train trajectories, 1 Val trajectory)
+    # 4. Train on Full Trajectories (10 Train trajectories, 1 Val trajectory)
     trained_model, train_loss_hist, val_loss_hist = train_loo_model(
-        model, train_windows, val_windows,
-        epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.25, verbose=True
+        model, train_seqs, train_conds, val_seqs, val_conds,
+        epochs=args.epochs, lr=args.lr, l1_lambda=0.0, l2_lambda=args.l2, verbose=True
     )
     
     # 5. Evaluate Purely Autoregressively on Held-Out Trajectory
