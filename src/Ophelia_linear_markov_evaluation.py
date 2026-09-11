@@ -16,7 +16,7 @@ from SerialDilutionModels import LinearSoftmaxModel
 def load_venturelli_arrays(train_array, val_array, test_array, max_grouping_length=None):
     """
     Parses 3D RNN Tensors of shape (num_samples, time_steps, num_species).
-    Converts absolute abundances to relative abundances and extracts valid trajectories.
+    Converts absolute abundances to relative abundances and extracts full multi-passage trajectories.
     """
     print("Parsing Venturelli datasets...")
     num_species = train_array.shape[2]
@@ -44,13 +44,8 @@ def load_venturelli_arrays(train_array, val_array, test_array, max_grouping_leng
                 continue # Need at least t0 and t1 to train/eval
                 
             if is_train:
-                # Generate all causal windows for training/validation
-                n_train = len(valid_timepoints)
-                for i in range(n_train - 1):
-                    for j in range(i + 1, n_train):
-                        sub_seq = valid_timepoints[i:j+1]
-                        if max_grouping_length is None or len(sub_seq) <= max_grouping_length:
-                            trajectories.append((torch.tensor(np.array(sub_seq), dtype=torch.float32), 0))
+                # Keep full multi-passage trajectory for training/validation
+                trajectories.append((torch.tensor(np.array(valid_timepoints), dtype=torch.float32), 0))
             else:
                 # Test set keeps the full trajectory to test multi-step unrolling
                 trajectories.append((torch.tensor(np.array(valid_timepoints), dtype=torch.float32), 0, f"Sample_{sample_idx}", valid_labels))
@@ -64,7 +59,7 @@ def load_venturelli_arrays(train_array, val_array, test_array, max_grouping_leng
     strains = [f"Species_{i+1}" for i in range(num_species)]
     valid_conds = ["standard_media"] 
     
-    print(f"Extracted {len(train_trajectories)} Train, {len(val_trajectories)} Val, and {len(test_trajectories)} Test causal trajectories.")
+    print(f"Extracted {len(train_trajectories)} Train, {len(val_trajectories)} Val, and {len(test_trajectories)} Test full trajectories.")
     return train_trajectories, val_trajectories, test_trajectories, num_species, strains, valid_conds
 
 
