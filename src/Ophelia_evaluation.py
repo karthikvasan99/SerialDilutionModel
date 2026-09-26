@@ -64,7 +64,7 @@ def load_venturelli_arrays(train_array, val_array, test_array, max_grouping_leng
     return train_trajectories, val_trajectories, test_trajectories, num_species, strains, valid_conds
 
 
-def train_model(model, train_trajectories, eval_trajectories, epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda=0.4, verbose=True):
+def train_model(model, train_trajectories, eval_trajectories, epochs=1500, lr=0.02, l1_lambda=0.0, l2_lambda_theta=0.4, l2_lambda_W=0.4, verbose=True):
     """
     Trains the model autoregressively across multi-passage trajectories using Teacher Forcing.
     Evaluates against the provided Validation Set (eval_trajectories).
@@ -127,10 +127,12 @@ def train_model(model, train_trajectories, eval_trajectories, epochs=1500, lr=0.
         
         # Proximal Gradient Descent for L1 and L2 Penalties
         with torch.no_grad():
-            if l2_lambda > 0.0:
-                l2_factor = 1.0 / (1.0 + 2.0 * lr * l2_lambda)
-                model.Theta.data *= l2_factor
-                model.W.data *= l2_factor
+            if l2_lambda_theta > 0.0:
+                l2_factor_theta = 1.0 / (1.0 + 2.0 * lr * l2_lambda_theta)
+                model.Theta.data *= l2_factor_theta
+            if l2_lambda_W > 0.0:
+                l2_factor_W = 1.0 / (1.0 + 2.0 * lr * l2_lambda_W)
+                model.W.data *= l2_factor_W
 
             if l1_lambda > 0.0:
                 for param in model.parameters():
@@ -230,10 +232,8 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
     train_true = train_true_mat[train_mask_mat]
     train_pred = train_pred_mat[train_mask_mat]
     
-    # Calculate Squared Pearson Correlation (r^2) on Log-Scale Data
-    train_true_log = np.log10(np.clip(train_true, 1e-6, None))
-    train_pred_log = np.log10(np.clip(train_pred, 1e-6, None))
-    r_train, _ = pearsonr(train_true_log, train_pred_log)
+    # Calculate Squared Pearson Correlation (r^2) on Linear-Scale Data
+    r_train, _ = pearsonr(train_true, train_pred)
     r2_train = r_train**2
     
     test_true_mat = np.array(test_true_all)
@@ -255,11 +255,8 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
             true_p = true_p_mat[mask_p_mat]
             pred_p = pred_p_mat[mask_p_mat]
             
-            true_p_log = np.log10(np.clip(true_p, 1e-6, None))
-            pred_p_log = np.log10(np.clip(pred_p, 1e-6, None))
-            
-            if len(true_p_log) > 1: # ensure at least 2 points to compute pearsonr
-                r_p, _ = pearsonr(true_p_log, pred_p_log)
+            if len(true_p) > 1: # ensure at least 2 points to compute pearsonr
+                r_p, _ = pearsonr(true_p, pred_p)
                 r2_p = r_p**2
             else:
                 r2_p = np.nan
@@ -270,11 +267,11 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
             
     print(f"\n==================================================")
     print(f"Successfully predicted {successful_test_reps}/{total_test_reps} test sets without NaNs.")
-    print(f"Train Scatter | Abundance Log-R^2={r2_train:.3f}")
+    print(f"Train Scatter | Abundance R^2={r2_train:.3f}")
     for p in timepoints_to_plot:
         if test_metrics[p] is not None:
             _, _, r2_p = test_metrics[p]
-            print(f"Test t=0 -> {p} | Model Log-R^2={r2_p:.3f}")
+            print(f"Test t=0 -> {p} | Model R^2={r2_p:.3f}")
     print("==================================================")
     
 
@@ -330,8 +327,7 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
         # Decoupled axes limits for Train Set ONLY
         axes[0].set_xlim([plot_min_x, plot_max_x])
         axes[0].set_ylim([plot_min_y, plot_max_y])
-        axes[0].set_xscale('log')
-        axes[0].set_yscale('log')
+
         axes[0].set_title('Train Set (All Timepoints)', fontsize=26)
         axes[0].tick_params(axis='both', which='major', labelsize=22)
         axes[0].legend(loc='upper left', fontsize=20)
@@ -363,8 +359,7 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
                 # Coupled axes limits for Test Sets to maintain square aspect
                 ax.set_xlim([min(plot_min_x_test, plot_min_y_test), max(plot_max_x_test, plot_max_y_test)])
                 ax.set_ylim([min(plot_min_x_test, plot_min_y_test), max(plot_max_x_test, plot_max_y_test)])
-                ax.set_xscale('log')
-                ax.set_yscale('log')
+
                 
                 ax.set_title(f"Test Evaluation ({p})", fontsize=26)
                 ax.tick_params(axis='both', which='major', labelsize=22)
@@ -426,9 +421,11 @@ if __name__ == "__main__":
     num_conds = len(valid_conds)
     
     # --- Grid Search ---
-    latent_dims_grid = [2]
-    epochs_grid = [800]
-    l2_lambda_grid = [0]
+    latent_dims_grid = [2, 4]
+    epochs_grid = [800, 900]
+    l2_lambda_theta_grid = [0.0, 0.005]
+    l2_lambda_W_grid = [0.0, 0.005]
+    lr_grid = [0.02, 0.03]
     
     best_val_loss = float('inf')
     best_params = {}
@@ -436,39 +433,42 @@ if __name__ == "__main__":
     best_train_hist = None
     best_val_hist = None
     
-    total_iterations = len(latent_dims_grid) * len(epochs_grid) * len(l2_lambda_grid)
+    total_iterations = len(latent_dims_grid) * len(epochs_grid) * len(l2_lambda_theta_grid) * len(l2_lambda_W_grid) * len(lr_grid)
     current_iter = 0
     
     print(f"\nStarting Grid Search ({total_iterations} combinations)...")
     
     for k_val in latent_dims_grid:
         for epochs_val in epochs_grid:
-            for l2_val in l2_lambda_grid:
-                current_iter += 1
-                
-                # --- Update Progress Bar ---
-                progress = current_iter / total_iterations
-                bar_length = 40
-                block = int(round(bar_length * progress))
-                text = f"\rProgress: [{'=' * block + ' ' * (bar_length - block)}] {current_iter}/{total_iterations} "
-                sys.stdout.write(text)
-                sys.stdout.flush()
-                
-                model = LatentAssemblyModel(num_species=NUM_SPECIES, num_latent_dims=k_val, num_conditions=num_conds)
-                
-                trained_model, train_loss_hist, val_loss_hist = train_model(
-                    model, train_trajectories, val_trajectories,
-                    epochs=epochs_val, lr=0.02, l1_lambda=0.0, l2_lambda=l2_val, verbose=False
-                )
-                
-                final_val_loss = val_loss_hist[-1]
-                
-                if final_val_loss < best_val_loss:
-                    best_val_loss = final_val_loss
-                    best_params = {'latent_dims': k_val, 'epochs': epochs_val, 'l2_lambda': l2_val}
-                    best_model = copy.deepcopy(trained_model)
-                    best_train_hist = train_loss_hist
-                    best_val_hist = val_loss_hist
+            for l2_theta_val in l2_lambda_theta_grid:
+                for l2_W_val in l2_lambda_W_grid:
+                    for lr_val in lr_grid:
+                        current_iter += 1
+                        
+                        # --- Update Progress Bar ---
+                        progress = current_iter / total_iterations
+                        bar_length = 40
+                        block = int(round(bar_length * progress))
+                        text = f"\rProgress: [{'=' * block + ' ' * (bar_length - block)}] {current_iter}/{total_iterations} "
+                        sys.stdout.write(text)
+                        sys.stdout.flush()
+                        
+                        model = LatentAssemblyModel(num_species=NUM_SPECIES, num_latent_dims=k_val, num_conditions=num_conds)
+                        
+                        trained_model, train_loss_hist, val_loss_hist = train_model(
+                            model, train_trajectories, val_trajectories,
+                            epochs=epochs_val, lr=lr_val, l1_lambda=0.0, 
+                            l2_lambda_theta=l2_theta_val, l2_lambda_W=l2_W_val, verbose=False
+                        )
+                        
+                        final_val_loss = val_loss_hist[-1]
+                        
+                        if final_val_loss < best_val_loss:
+                            best_val_loss = final_val_loss
+                            best_params = {'latent_dims': k_val, 'epochs': epochs_val, 'l2_theta': l2_theta_val, 'l2_W': l2_W_val, 'lr': lr_val}
+                            best_model = copy.deepcopy(trained_model)
+                            best_train_hist = train_loss_hist
+                            best_val_hist = val_loss_hist
                     
     print() # New line after progress bar finishes
                 

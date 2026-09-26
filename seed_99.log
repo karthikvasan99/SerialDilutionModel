@@ -1,0 +1,28 @@
+
+Split complete: 92 Train arrays, 10 Val arrays.
+Parsing Venturelli datasets...
+Extracted 92 Train, 10 Val, and 73 Test full trajectories.
+
+Starting Grid Search (1 combinations)...
+
+Progress: [========================================] 1/1 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {'latent_dims': 2, 'epochs': 800, 'l2_lambda': 0}
+Best Val KL Loss: 0.168677
+==================================================
+
+Running final evaluation and plotting on the best model...
+
+==================================================
+Successfully predicted 73/73 test sets without NaNs.
+Train Scatter | Abundance R^2=0.826
+Test t=0 -> t=12h | Model R^2=0.723
+Test t=0 -> t=24h | Model R^2=0.758
+Test t=0 -> t=36h | Model R^2=0.753
+Test t=0 -> t=48h | Model R^2=0.725
+Test t=0 -> t=60h | Model R^2=0.673
+==================================================
+
+Saved ODE evaluation plot to 'Images/venturelli_ode_evaluation.png'

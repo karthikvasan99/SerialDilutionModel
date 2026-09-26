@@ -172,7 +172,7 @@ def train_and_eval_combo(params):
             if l2 > 0.0:
                 l2_factor = 1.0 / (1.0 + 2.0 * lr * l2)
                 model.Theta.data *= l2_factor
-                model.W.data *= l2_factor
+                model.Phi.data *= l2_factor
 
     # Final Validation Evaluation
     model.eval()

@@ -41,13 +41,12 @@ def load_and_filter_data(data_path, abundance_threshold=1e-3):
     trajectories = data['trajectories']
     num_before = len(strains)
 
-    t1_passages = torch.stack([seq[0] for seq in trajectories.values()], dim=0)
-    mean_t1_abundance = t1_passages.mean(dim=0)
-    all_t1_present = (t1_passages > 0).all(dim=0)
-    keep_mask = (mean_t1_abundance >= abundance_threshold) & all_t1_present
+    all_passages = torch.cat(list(trajectories.values()), dim=0)
+    mean_abundance = all_passages.mean(dim=0)
+    keep_mask = (mean_abundance >= abundance_threshold)
     num_after = int(keep_mask.sum().item())
 
-    print(f"\nSpecies T1 Abundance Filtering (Threshold >= {abundance_threshold} & Present in All 12 T1 Samples):")
+    print(f"\nSpecies Abundance Filtering (Mean across ALL passages >= {abundance_threshold}):")
     print(f" - Total bacteria BEFORE filter: {num_before}")
     print(f" - Total bacteria AFTER filter:  {num_after}")
     print(f" - Filtered out: {num_before - num_after} low-abundance / noise species")

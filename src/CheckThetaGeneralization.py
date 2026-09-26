@@ -99,7 +99,7 @@ def train_phase1(model, x_in, x_out, c_in, epochs=1500, lr=0.02, l1_lambda=0.000
     print("="*50)
     
     model.Theta.requires_grad = True
-    model.W.requires_grad = True
+    model.Phi.requires_grad = True
     model.a.requires_grad = True
     
     optimizer = optim.Adam(model.parameters(), lr=lr)
@@ -134,7 +134,7 @@ def train_phase2(model, x_in, x_out, c_in, epochs=1000, lr=0.02):
     
     # Freeze the biological networks
     model.Theta.requires_grad = False
-    model.W.requires_grad = False
+    model.Phi.requires_grad = False
     # Leave the environment vector unfrozen
     model.a.requires_grad = True
     

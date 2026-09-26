@@ -170,6 +170,9 @@ class ConsumerResourceODEFunc(nn.Module):
         
         # W (K x K): The metabolic cross-feeding/pleiotropy matrix
         self.W = nn.Parameter(torch.randn(self.K, self.K) * 0.1)
+        
+        # alpha (N): Intraspecific competition (self-limitation) coefficient
+        self.alpha_raw = nn.Parameter(torch.randn(self.N) * 0.01)
 
     def forward(self, t, S):
         # S is the concatenated state vector [N(t), R(t)]
@@ -177,18 +180,26 @@ class ConsumerResourceODEFunc(nn.Module):
         N_t = S[..., :self.N]
         R_t = S[..., self.N:]
         
-        # ODE 1: dN_i/dt = N_i(t) * sum_k( Theta_ki * R_k(t) )
+        # Enforce strict positivity for alpha using softplus
+        alpha = torch.nn.functional.softplus(self.alpha_raw)
+        
+        # Clamp to prevent numerical negatives during dopri5 integration
+        N_safe = torch.clamp(N_t, min=0.0)
+        R_safe = torch.clamp(R_t, min=0.0)
+        
+        # ODE 1: dN_i/dt = N_i(t) * sum_k( Theta_ki * R_k(t) ) - alpha_i * N_i(t)^2
         # Shape manipulation: R_t is (..., K), Theta.t() is (K, N) -> (..., N)
-        dN_dt = N_t * torch.matmul(R_t, self.Theta.t())
+        growth_from_resources = torch.matmul(R_safe, self.Theta.t())
+        dN_dt = (N_safe * growth_from_resources) - (alpha * (N_safe ** 2))
         
         # ODE 2: dR_k/dt = -R_k(t) * sum_l sum_j( W_kl * Theta_jl * N_j(t) )
         # community_traits = N(t) @ Theta -> (..., K)
         # metabolic_flux = community_traits @ W^T -> (..., K)
-        community_traits = torch.matmul(N_t, self.Theta)
+        community_traits = torch.matmul(N_safe, self.Theta)
         metabolic_flux = torch.matmul(community_traits, self.W.t())
         
-        # Multiply by -R_t to enforce mass-action kinetics (exponential decay)
-        dR_dt = -R_t * metabolic_flux
+        # Multiply by -R_safe to enforce mass-action kinetics (exponential decay)
+        dR_dt = -R_safe * metabolic_flux
         
         # Return concatenated derivatives
         return torch.cat([dN_dt, dR_dt], dim=-1)
@@ -240,9 +251,9 @@ class LatentAssemblyNeuralODE(nn.Module):
         # 3. Define time span for the ODE solver [0, T_end]
         t_span = torch.tensor([0.0, float(T_end)], device=S_0.device, dtype=S_0.dtype)
         
-        # 4. Integrate forward in continuous time using dopri5 (Runge-Kutta 4(5))
+        # 4. Integrate forward in continuous time using rk4
         # S_t shape will be (len(t_span), batch_size, N + K)
-        S_t = odeint(self.ode_func, S_0, t_span, method='dopri5')
+        S_t = odeint(self.ode_func, S_0, t_span, method='rk4', options={'step_size': 0.05})
         
         # 5. Extract final state at T_end
         S_final = S_t[-1]

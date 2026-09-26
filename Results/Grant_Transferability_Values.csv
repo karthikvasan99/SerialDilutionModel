@@ -1,0 +1,7 @@
+Substrate,Pressure_bar,LOO_R2
+H2:CO2,5.0,0.513
+H2:CO2,30.0,0.698
+H2:CO2 + MeOH,5.0,0.454
+H2:CO2 + MeOH,30.0,0.479
+H2:CO2 + TMA,5.0,0.371
+H2:CO2 + TMA,30.0,0.532

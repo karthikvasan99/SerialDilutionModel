@@ -195,7 +195,7 @@ def train_loo_model(model, train_seqs, train_conds, val_seqs, val_conds, epochs=
             if l2_lambda > 0.0:
                 l2_factor = 1.0 / (1.0 + 2.0 * lr * l2_lambda)
                 model.Theta.data *= l2_factor
-                model.W.data *= l2_factor
+                model.Phi.data *= l2_factor
 
             if l1_lambda > 0.0:
                 for param in model.parameters():

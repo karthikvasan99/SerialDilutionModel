@@ -11,6 +11,14 @@ from scipy.stats import pearsonr
 from collections import defaultdict
 from scipy.io import loadmat
 from SerialDilutionModels import LatentAssemblyModel, LatentAssemblyNeuralODE
+import random
+
+def set_seed(seed=42):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
 
 def load_venturelli_arrays(train_array, val_array, test_array, max_grouping_length=None):
     """
@@ -122,6 +130,7 @@ def train_model(model, train_trajectories, eval_trajectories, epochs=1500, lr=0.
             (batch_loss / (seq_len - 1)).backward()
             epoch_train_loss += batch_loss.item()
             
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
         optimizer.step()
         
         with torch.no_grad():
@@ -230,10 +239,8 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
     train_true = train_true_mat[train_mask_mat]
     train_pred = train_pred_mat[train_mask_mat]
     
-    # Calculate Squared Pearson Correlation (r^2) on Log-Scale Data
-    train_true_log = np.log10(np.clip(train_true, 1e-6, None))
-    train_pred_log = np.log10(np.clip(train_pred, 1e-6, None))
-    r_train, _ = pearsonr(train_true_log, train_pred_log)
+    # Calculate Squared Pearson Correlation (r^2) on Linear-Scale Data
+    r_train, _ = pearsonr(train_true, train_pred)
     r2_train = r_train**2
     
     test_true_mat = np.array(test_true_all)
@@ -255,11 +262,8 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
             true_p = true_p_mat[mask_p_mat]
             pred_p = pred_p_mat[mask_p_mat]
             
-            true_p_log = np.log10(np.clip(true_p, 1e-6, None))
-            pred_p_log = np.log10(np.clip(pred_p, 1e-6, None))
-            
-            if len(true_p_log) > 1: # ensure at least 2 points to compute pearsonr
-                r_p, _ = pearsonr(true_p_log, pred_p_log)
+            if len(true_p) > 1: # ensure at least 2 points to compute pearsonr
+                r_p, _ = pearsonr(true_p, pred_p)
                 r2_p = r_p**2
             else:
                 r2_p = np.nan
@@ -270,11 +274,11 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
             
     print(f"\n==================================================")
     print(f"Successfully predicted {successful_test_reps}/{total_test_reps} test sets without NaNs.")
-    print(f"Train Scatter | Abundance Log-R^2={r2_train:.3f}")
+    print(f"Train Scatter | Abundance R^2={r2_train:.3f}")
     for p in timepoints_to_plot:
         if test_metrics[p] is not None:
             _, _, r2_p = test_metrics[p]
-            print(f"Test t=0 -> {p} | Model Log-R^2={r2_p:.3f}")
+            print(f"Test t=0 -> {p} | Model R^2={r2_p:.3f}")
     print("==================================================")
     
 
@@ -311,25 +315,12 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
         axes[0].scatter(train_true, train_pred, alpha=0.3, edgecolors='k', c='steelblue', label=f'Predicted ($R^2$={r2_train:.2f})')
         
         # Calculate limits independently for x and y
-        plottable_mask = train_true > 0
-        min_x = train_true[plottable_mask].min() if np.any(plottable_mask) else 1e-4
-        max_x = train_true.max()
-        axes[0].plot([min_x, max_x], [min_x, max_x], 'r--', lw=3, label='y=x')
+        axes[0].plot([0, 1], [0, 1], 'r--', lw=3, label='y=x')
         
-        valid_y_mask = train_true > 0
-        min_y = train_pred[valid_y_mask].min() if np.any(valid_y_mask) else 1e-4
-        max_y = train_pred.max()
-        
-        plot_min_x = min_x * 0.5
-        plot_max_x = min(max_x * 1.5, 1.5)
-        plot_min_y = min_y * 0.5
-        plot_max_y = min(max_y * 1.5, 1.5)
-        
-        # Decoupled axes limits for Train Set ONLY
-        axes[0].set_xlim([plot_min_x, plot_max_x])
-        axes[0].set_ylim([plot_min_y, plot_max_y])
-        axes[0].set_xscale('log')
-        axes[0].set_yscale('log')
+        # Hardcoded [0, 1] axes limits for Train Set
+        axes[0].set_xlim([0.0, 1.0])
+        axes[0].set_ylim([0.0, 1.0])
+
         axes[0].set_title('Train Set (All Timepoints)', fontsize=26)
         axes[0].tick_params(axis='both', which='major', labelsize=22)
         axes[0].legend(loc='upper left', fontsize=20)
@@ -344,25 +335,12 @@ def evaluate_predictions(model, train_trajectories, test_trajectories, strains, 
                 ax.scatter(true_p, pred_p, alpha=0.6, edgecolors='k', c='darkorange', label=f'Predicted ($R^2$={r2_p:.2f})')
                 
                 # Calculate limits independently for x and y
-                plottable_mask_p = true_p > 0
-                min_x_test = true_p[plottable_mask_p].min() if np.any(plottable_mask_p) else 1e-4
-                max_x_test = true_p.max()
-                ax.plot([min_x_test, max_x_test], [min_x_test, max_x_test], 'r--', lw=3, label='y=x')
+                ax.plot([0, 1], [0, 1], 'r--', lw=3, label='y=x')
                 
-                valid_y_mask_test = true_p > 0
-                min_y_test = pred_p[valid_y_mask_test].min() if np.any(valid_y_mask_test) else 1e-4
-                max_y_test = pred_p.max()
-                
-                plot_min_x_test = min_x_test * 0.5
-                plot_max_x_test = min(max_x_test * 1.5, 1.5)
-                plot_min_y_test = min_y_test * 0.5
-                plot_max_y_test = min(max_y_test * 1.5, 1.5)
-                
-                # Coupled axes limits for Test Sets to maintain square aspect
-                ax.set_xlim([min(plot_min_x_test, plot_min_y_test), max(plot_max_x_test, plot_max_y_test)])
-                ax.set_ylim([min(plot_min_x_test, plot_min_y_test), max(plot_max_x_test, plot_max_y_test)])
-                ax.set_xscale('log')
-                ax.set_yscale('log')
+                # Hardcoded [0, 1] axes limits for Test Sets to maintain absolute scale
+                ax.set_xlim([0.0, 1.0])
+                ax.set_ylim([0.0, 1.0])
+
                 
                 ax.set_title(f"Test Evaluation ({p})", fontsize=26)
                 ax.tick_params(axis='both', which='major', labelsize=22)
@@ -414,6 +392,9 @@ if __name__ == "__main__":
     print(f"\nSplit complete: {X_train_split.shape[0]} Train arrays, {X_val.shape[0]} Val arrays.")
     
     # Process into causal trajectories
+    # Lock random seed for completely deterministic reproducibility
+    set_seed(99)
+    
     train_trajectories, val_trajectories, test_trajectories, NUM_SPECIES, strains, valid_conds = load_venturelli_arrays(
         train_array=X_train_split,
         val_array=X_val,

@@ -1,0 +1,16 @@
+
+Split complete: 92 Train arrays, 10 Val arrays.
+Parsing Venturelli datasets...
+Extracted 92 Train, 10 Val, and 73 Test full trajectories.
+
+Starting Grid Search (1 combinations)...
+
+Progress: [========================================] 1/1 
+
+==================================================
+Grid Search Complete!
+Best Parameters: {}
+Best Val KL Loss: inf
+==================================================
+
+Running final evaluation and plotting on the best model...
