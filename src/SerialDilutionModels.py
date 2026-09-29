@@ -223,7 +223,7 @@ class LatentAssemblyNeuralODE(nn.Module):
         # a (num_conditions x K): The baseline initial resources (R(0)) for fresh media
         self.a = nn.Parameter(torch.randn(num_conditions, self.K) * 0.1)
 
-    def forward(self, N_prev, condition_idx, T_end=1.0, dilution_factor=None):
+    def forward(self, N_prev, condition_idx, T_end=1.0, dilution_factor=None, ode_method='rk4', ode_step_size=0.05):
         """
         N_prev: Absolute final abundances from the previous passage (batch_size, N)
         condition_idx: Index of the environmental media (batch_size,)
@@ -251,9 +251,11 @@ class LatentAssemblyNeuralODE(nn.Module):
         # 3. Define time span for the ODE solver [0, T_end]
         t_span = torch.tensor([0.0, float(T_end)], device=S_0.device, dtype=S_0.dtype)
         
-        # 4. Integrate forward in continuous time using rk4
-        # S_t shape will be (len(t_span), batch_size, N + K)
-        S_t = odeint(self.ode_func, S_0, t_span, method='rk4', options={'step_size': 0.05})
+        # 4. Integrate forward in continuous time using chosen solver
+        if ode_method in ['dopri5', 'bdf', 'adams']:
+            S_t = odeint(self.ode_func, S_0, t_span, method=ode_method)
+        else:
+            S_t = odeint(self.ode_func, S_0, t_span, method=ode_method, options={'step_size': ode_step_size})
         
         # 5. Extract final state at T_end
         S_final = S_t[-1]
