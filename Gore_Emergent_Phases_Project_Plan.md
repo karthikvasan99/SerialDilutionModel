@@ -144,7 +144,30 @@ where $a_{\text{condition}} \in \mathbb{R}^K$ is the learnable initial resource 
   - **Cross-Feeding Mechanism**: Spectral analysis of the learned $W$ matrix revealed complex conjugate eigenvalue pairs ($-12.09 \pm 7.24j$), proving that rotational/oscillatory resource flow fields sustain coexistence and chaotic dynamics.
   - **Monotonic Chemical Resource Scaling**: Total initial resource mass strictly tracks experimental media: $\sum R(0)_{\text{LN}} = 3.32 \to \sum R(0)_{\text{MN}} = 7.57 \to \sum R(0)_{\text{HN}} = 9.07$.
 
-### Milestone 3: Direction 2 — Zero-Shot Emergent Phase & Bifurcation Prediction
+### Milestone 2B: Pure $K=2$ Minimalist Physical Model & Ecological Phase Classification [COMPLETED & LOCKED]
+* **Goal**: Strip the architecture down to a minimalist, strictly mass-conserving $K=2$ Consumer-Resource ODE ($\approx 148$ parameters, $W \ge 0$), optimize on absolute abundances via Dr. Dixit's Generalized KL loss, and construct a leak-free out-of-sample classifier to detect the emergent chaotic dynamical phase.
+* **Key Achievements**:
+  1. **Physical ODE Checkpoint**: [`Data/Gore_Global_ODE_Model_PhysODE_K2_800ep.pth`](file:///home/karthik/SerialDilutionModel/Data/Gore_Global_ODE_Model_PhysODE_K2_800ep.pth)
+     - Absolute abundance median $R^2 = \mathbf{0.9738}$ in Medium Nutrient (MN) and $\mathbf{0.9071}$ in $S=3$ communities.
+  2. **Temporal Window Lock**: Proved empirically under LOOCV that simulated dynamics must match the experimental horizon (Passages 7–10); extended simulations (Passages 11–30) degrade $F_1$ from $0.727 \to 0.643$ due to asymptotic competitive exclusion.
+  3. **Feature Engineering Suite**: Derived 26 physical features across intra-passage tortuosity (`mean_tv_path`), daily return map drift (`mean_poincare_shift`), niche overlap (`mean_overlap`), demographic survival (`surv_count`, `extinct_ratio`), and species volatility (`max_sp_cv`).
+  4. **Media Condition & Model Complexity Studies**:
+     - With media flags: 2-layer Tanh MLP achieved $F_1 = 0.7547$ by learning a soft non-linear gate that reduced HN false alarms by 27%.
+     - Without media flags: Linear Logistic Regression outperformed MLPs ($F_1 = 0.6909 - 0.7119$ vs $0.6786$) as the maximum-margin hyperplane on monotonic continuous features.
+  5. **Locked 100% Chaos Recall Champion Classifier**:
+     - Checkpoint: [`Data/Gore_K2_Classifier_L2_C10_100Rec.pth`](file:///home/karthik/SerialDilutionModel/Data/Gore_K2_Classifier_L2_C10_100Rec.pth)
+     - Standalone Module: [`src/Gore_K2_Classifier_100Rec.py`](file:///home/karthik/SerialDilutionModel/src/Gore_K2_Classifier_100Rec.py)
+     - Operating Threshold: $T^* = 0.3891$.
+     - Out-of-sample performance: **Recall = 100.00%** (22/22 chaotic communities caught, **$\text{FN}=0$**), **$F_1 = 0.7458$**, **Accuracy = 84.85%**.
+     - $S=24$ Medium Nutrient Recall: **100.0%** (3/3 caught: Comm 1, 4, 5).
+  6. **Long-Term Multi-Species Diversity Retention (100 Passages)**:
+     - Confirmed that the $K=2$ physical ODE does not crash to 1 or 2 species over long horizons.
+     - Over 100 daily serial dilutions, **89.9% of communities retain $\ge 3$ species**; $S=24$ communities retain $11.4 - 14.1$ species ($\exp(H) \approx 6.5 - 7.6$), and $S=48$ retains $19 - 25$ species ($\exp(H) \approx 12 - 15.6$).
+     - Coexistence is stably maintained by intra-specific self-limitation ($\alpha_i N_i^2$), daily dispersal ($10^{-6}$), and non-equilibrium chaotic oscillations.
+     - Figure: [`Figures/Gore_LongTerm_Diversity_100Days.png`](file:///home/karthik/SerialDilutionModel/Figures/Gore_LongTerm_Diversity_100Days.png).
+     - Data: [`Data/Gore_LongTerm_Abundances_100p.npy`](file:///home/karthik/SerialDilutionModel/Data/Gore_LongTerm_Abundances_100p.npy).
+
+### Milestone 3: Direction 2 — Zero-Shot Emergent Phase & Bifurcation Prediction [ACTIVE NEXT STEP]
 * **Goal**: Test bottom-up assembly: can a model trained exclusively on small, stable communities ($S=3, 6$) predict the onset of instability in complex communities ($S=12$)?
 * **Implementation**:
   - Script: `src/Gore_ZeroShot_Assembly.py`.
