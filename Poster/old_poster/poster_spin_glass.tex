@@ -1,0 +1,254 @@
+% Unofficial Yale Poster template.
+% A fork of the UMich template https://www.overleaf.com/latex/templates/university-of-michigan-umich-poster-template/xpnqzzxwbjzc
+% which is fork of the MSU template https://www.overleaf.com/latex/templates/an-unofficial-poster-template-for-michigan-state-university/wnymbgpxnnwd
+% which is a fork of https://www.overleaf.com/latex/templates/an-unofficial-poster-template-for-new-york-university/krgqtqmzdqhg
+% which is a fork of https://github.com/anishathalye/gemini
+% also refer to https://github.com/k4rtik/uchicago-poster
+
+
+
+\documentclass[final]{beamer}
+
+% ====================
+% Packages
+% ====================
+
+\usepackage[T1]{fontenc}
+ \usepackage[utf8]{luainputenc}
+\usepackage{lmodern}
+\usepackage[size=custom, width=122,height=91, scale=1.2]{beamerposter}
+\usetheme{gemini}
+\usecolortheme{msu}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.14}
+\usepackage{anyfontsize}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage[numbers]{natbib}
+
+% ====================
+% Lengths
+% ====================
+
+% If you have N columns, choose \sepwidth and \colwidth such that
+% (N+1)*\sepwidth + N*\colwidth = \paperwidth
+\newlength{\sepwidth}
+\newlength{\colwidth}
+\setlength{\sepwidth}{0.025\paperwidth}
+\setlength{\colwidth}{0.3\paperwidth}
+
+\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{column}}
+\renewcommand{\bibfont}{\small} 
+
+% ====================
+% Title
+% ====================
+
+\title{Low-dimensional coexistence in complex microbial ecosystems}
+
+\author{Karthik Srinivasan\textsuperscript{1}, Germ\'an Plata\textsuperscript{2}, Purushottam Dixit\textsuperscript{1}}
+
+\institute[shortinst]{\textsuperscript{1}Department of Biomedical Engineering, Yale University, \textsuperscript{2}Computational Sciences, BiomEdit, LLC.}
+
+% ====================
+% Footer (optional)
+% ====================
+
+\footercontent{
+  % \href{https://github.com}{Github: https://github.com} 
+  \hfill
+Poster Session \hfill
+  \href{mailto:youremail@yale.edu}{karthik.srinivasan@yale.edu}}
+% (can be left out to remove footer)
+
+% ====================
+% Logo (optional)
+% ====================
+
+% use this to include logos on the left and/or right side of the header:
+% Left: institution
+ \logoleft{\includegraphics[height=8cm]{logos/logo.png}}
+% Right: funding agencies and other affilations 
+\logoright{\includegraphics[height=5.5cm]{figures/attribution and qr.png}}
+% ====================
+% Body
+% ====================
+
+\begin{document}
+
+\begin{frame}[t]
+\begin{columns}[t]
+\separatorcolumn
+
+\begin{column}{\colwidth}
+    
+        
+    \begin{block}{Niche theory predicts niche dimensionality to drive diversity}
+        
+        \begin{minipage}{0.6\textwidth}
+            % \vspace{20pt}
+            \begin{itemize}
+                \item Current physical models treat microbiomes as disordered systems with random, high-dimensional interactions (akin to spin glasses).
+                \item This core assumption of high-dimensional coexistence remains untested empirically.
+                \item Niche theory predicts higher niche dimensionality, $\eta_D$, drives diversity by reducing niche overlap, but estimating $\eta_D$ is difficult.
+                \item We take an effective approach to estimate $\eta_D$ directly from abundance profile data.
+            \end{itemize}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.4\textwidth}
+            \begin{figure}
+                \centering
+                \hspace{-20pt} 
+                \includegraphics[width=\linewidth]{figures/Niche overlap blobs.jpg}
+            \end{figure}
+            \scriptsize{Pianka, Eric R. Evolutionary ecology. Eric R. Pianka, 2011.}
+        \end{minipage}
+        
+    \end{block}
+    \vspace{-20pt}
+    \begin{block}{Latent variable JSDMs can be fit to data and is interpretable}
+        \begin{minipage}{0.5\textwidth}
+        \vspace{20pt}
+        \begin{itemize}
+            \item JSDMs relate species distribution to environmental factors and estimate $\eta_D$.
+            \vspace{10pt}
+            \item Latent variable formulization of JSDMs decompose microbiomes into interpretable sample specific and species specific embeddings.
+            \vspace{10pt}
+            \item We define $\eta_D$ as the characteristic environmental dimensionality that explains composition.
+        \end{itemize}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.5\textwidth}
+            \begin{figure}
+                \centering
+                \hspace{-20pt}
+                \includegraphics[width=\linewidth]{figures/model as matrix factorization.png}
+            \end{figure}
+        \end{minipage}
+        \begin{figure}
+            \centering
+            \vspace{20pt}
+            \includegraphics[width=\linewidth]{figures/model interpretability.png}
+        \end{figure}
+        \vspace{-10pt}
+        
+    \end{block}
+
+
+    \begin{block}{Estimated dimensionality reflects environmental complexity and follows niche dimensionality hypothesis}
+         \begin{itemize}
+            \item Inferred $\eta_D$ correlates with the dimensionality of metabolic environment, validating our abundance only approach.
+            \vspace{10pt}
+            \item Consistent with the macroecological niche dimensionality hypothesis, $\eta_D$ correlates with niche overlap and biodiversity.
+            \vspace{10pt}
+        \end{itemize}
+         \begin{figure}
+            \centering
+            \includegraphics[width=1\linewidth]{figures/Paper_fig_2.png}
+        \end{figure}
+       
+     
+  \end{block}
+  
+\end{column}
+\separatorcolumn
+\begin{column}{\colwidth}
+
+  \begin{block}{Consumer resource models are mechanistic and widely used}
+  \vspace{20pt}
+    \begin{minipage}{0.5\linewidth}
+        \begin{itemize}
+            \item The consumer resource framework uses environmental mediation of bacterial interaction to model microbiomes.
+            \vspace{10pt}
+            \item We incorporate two types of dimensional constraints that can theoretically allow species to exist in low-dimensional niches.
+        \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\linewidth}
+        \begin{align*}
+                &\frac{1}{n_o}\frac{dn_o}{dt} = \sum_{k=1}^{K} r_k(t)\theta_{ko} - \delta_o \\
+                &\frac{dr_k}{dt} = J_k(t) - \sum_{o=1}^O r_k(t) \frac{\theta_{ko}}{w_k} n_o(t)
+            \end{align*}
+    \end{minipage}    
+    \begin{figure}
+        \centering
+        % \hspace{-150pt}
+        \vspace{10pt}
+        \includegraphics[clip, width=0.9\textwidth]{figures/Model.png}
+        \vspace{10pt}
+    \end{figure}
+     \begin{itemize}
+        \item \textbf{Intrinsic tradeoffs:} Modeled as simplex constraints on species preference vectors, placing them on equal footing.
+        \item \textbf{Extrinsic tradeoffs:} Modeled as low-rank correlations in nutrient inflow vectors that reduce the effective degrees of freedom in the environment.
+     \end{itemize}
+  \end{block}
+
+  \begin{block}{Tradeoffs explains how $\eta_D$ relates with community structure}
+        \begin{itemize}
+            \vspace{10pt}
+            \item Tradeoffs successfully reproduce the empirical relationships between community structure, niche overlap, and niche dimensionality.
+        \end{itemize}
+        \begin{figure}
+        \centering
+            \centering
+            \vspace{10pt}
+            \includegraphics[width=\linewidth]{figures/in silico results.png}
+            \vspace{-20pt}
+        \end{figure}
+        \begin{itemize}
+            \item \textbf{Crucially, both intrinsic (simplex constraints) and extrinsic (low-rank correlations) tradeoffs are strictly required} to explain the full set of empirical trends.
+        \end{itemize}
+    \end{block}
+
+  
+
+\end{column}
+\separatorcolumn
+\begin{column}{\colwidth}.
+
+    \begin{block}{Tradeoffs explain low $\eta_D$ of microbiomes}
+
+    \begin{itemize}
+        \item Across $\sim 200$ real microbiome datasets obtained from the Microbiomap project we see that microbiomes are highly low dimensional.
+        \item \textbf{Disordered consumer-resource models tuned to match empirical diversity predict median $\eta_D \approx 13$, directly contradicting the empirically observed median $\eta_D \approx 4$.}
+        \item In simulations, extrinsic tradeoffs (correlated resource supplies) impose stronger dimensional constraints on the effective niche space than intrinsic metabolic tradeoffs alone.
+    \end{itemize}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\linewidth]{figures/BoxPlot Niche dimensionality.png}
+    \end{figure}
+
+  \end{block}
+    
+
+
+  \begin{block}{Implications for Statistical Physics Models}
+    \begin{itemize}
+         \item Our empirical estimates directly challenge theoretical models that draw interactions or consumer preferences i.i.d. from fixed distributions.
+         \vspace{5pt}
+         \item Coexistence in complex microbial ecosystems is not governed by effectively infinite, independent ecological axes.
+         \vspace{5pt}
+         \item To accurately capture macroscopic ecological dynamics, future statistical physics models must explicitly incorporate dimensional constraints.
+         \vspace{5pt}
+         \item \textbf{Key Takeaway:} Incorporating low-rank interaction matrices (in Generalized Lotka-Volterra systems) and correlated resource structures (in CRMs) is essential to model realistic microbiome phase spaces.
+     \end{itemize}
+    
+  \end{block}
+    \vspace{-10pt}
+  \begin{block}{References}
+  % \vspace{-5pt}
+    \nocite{*}
+    \footnotesize{\bibliographystyle{unsrtnat}\bibliography{poster}}
+
+  \end{block}
+
+\end{column}
+
+\separatorcolumn
+\end{columns}
+\end{frame}
+
+\end{document}

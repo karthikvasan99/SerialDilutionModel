@@ -1,0 +1,128 @@
+\section{Mathematical Formulation: Physical Consumer-Resource Neural ODE}
+\label{sec:model}
+
+We model microbial community dynamics in serial dilution regimes through a coupled hybrid dynamical system combining continuous-time physical ordinary differential equations within each incubation cycle with discrete reset maps at transfer boundaries.
+
+\subsection{Continuous-Time Intra-Passage Dynamics \texorpdfstring{($0 \le t \le \tau$)}{(0 <= t <= tau)}}
+Let $N_i(t) \ge 0$ denote the physical biomass density of microbial taxon $i \in \{1, \dots, N\}$, and let $R_k(t) \ge 0$ denote the concentration of latent environmental resource niche $k \in \{1, \dots, K\}$, where $K \ll N$. Within each incubation period of duration $\tau$, the system evolves according to the coupled autonomous ODEs:
+\begin{align}
+    \label{eq:ode_biomass}
+    \frac{dN_i}{dt} &= N_i(t) \left( \sum_{k=1}^K \Theta_{ik} R_k(t) \right) - \alpha_i N_i(t)^2, \\
+    \label{eq:ode_resource}
+    \frac{dR_k}{dt} &= - R_k(t) \sum_{l=1}^K W_{kl} \left( \sum_{j=1}^N \Theta_{jl} N_j(t) \right).
+\end{align}
+
+\subsubsection{Biological and Physical Interpretation of Parameters}
+\begin{itemize}
+    \item \textbf{Consumer Uptake Matrix $\Theta \in \mathbb{R}_{\ge 0}^{N \times K}$:} $\Theta_{ik}$ represents the metabolic uptake affinity and growth yield of species $i$ on resource niche $k$. To enforce strict thermodynamic and biological validity, non-negativity is guaranteed via a smooth transformation:
+    \begin{equation}
+        \Theta = \text{softplus}(\Theta_{\text{raw}}) = \log(1 + \exp(\Theta_{\text{raw}})).
+    \end{equation}
+    \item \textbf{Metabolic Interaction Matrix $W \in \mathbb{R}_{\ge 0}^{K \times K}$:} $W_{kl}$ models resource transformation, cross-feeding, and secondary metabolite coupling between latent niches. Non-negativity $W = \text{softplus}(W_{\text{raw}})$ ensures that resource consumption fluxes remain strictly dissipative and mass-conserving.
+    \item \textbf{Quadratic Self-Limitation $\alpha \in \mathbb{R}_{> 0}^N$:} The term $-\alpha_i N_i^2$ represents intra-species crowding, physical space saturation, autotoxicity, and metabolic waste accumulation \citep{macarthur1970species, posfai2017versatility}. Unlike phenomenological clipping or ad-hoc capacity ceilings, quadratic self-limitation naturally regularizes unbounded exponential explosion, producing smooth, biologically realistic logistic-type saturation as resources are drawn down. It is parameterized as $\alpha_i = \text{softplus}(\alpha_{\text{raw}, i})$.
+\end{itemize}
+
+\subsection{Discrete Transfer Map Between Passages \texorpdfstring{($m \to m+1$)}{(m -> m+1)}}
+At the end of each passage $m \in \{1, \dots, M-1\}$, the culture reaches time $t = \tau$. An aliquot of fraction $1/D$ is sampled and diluted into fresh nutrient media:
+\begin{align}
+    \label{eq:transfer_biomass}
+    N_i(0)^{(m+1)} &= \left( \frac{N_i(\tau)^{(m)}}{D} + \mu \cdot M_{c, i} \right) \cdot M_{c, i}, \\
+    \label{eq:transfer_resource}
+    R_k(0)^{(m+1)} &= R_{0, c, k},
+\end{align}
+where:
+\begin{itemize}
+    \item $D > 1$ is the physical dilution factor (e.g., $D=30.0$ for Gore, $D=100.0$ for Pollard and German, $D=20.0$ for Venturelli).
+    \item $\mu \ge 0$ is the regional dispersal / migration floor. In experiments where migration was artificially introduced by spiking a background regional stock (such as Gore et al., where $\mu = 10^{-6}$), $\mu > 0$ prevents non-physical absorbing-state extinctions. In closed systems (Pollard, German, Venturelli), $\mu = 0.0$ strictly.
+    \item $M_{c, i} \in \{0, 1\}$ is the binary community composition mask indicating whether species $i$ was inoculated into community $c$. Uninoculated species ($M_{c, i} = 0$) are strictly held at zero.
+    \item $R_{0, c} = \text{softplus}(a_c) \in \mathbb{R}_{>0}^K$ is the unconstrained replenished environmental resource vector for experimental condition $c$, optimized via gradient descent.
+\end{itemize}
+
+\subsection{Physical Biomass Continuity vs. The Simplex Reset Bug}
+A critical mathematical insight in this work concerns the propagation of biomass across transfers. In earlier microbial modeling literature, investigators frequently rescaled biomass to the unit simplex at every dilution passage:
+\begin{equation}
+    \label{eq:simplex_reset_flaw}
+    N_i(0)^{(m+1)}_{\text{flawed}} = \frac{N_i(\tau)^{(m)}}{\sum_{j=1}^N N_j(\tau)^{(m)}} \cdot \frac{1}{D}.
+\end{equation}
+While seemingly harmless for relative sequencing reads, equation~\eqref{eq:simplex_reset_flaw} introduces a severe mathematical distortion:
+\begin{itemize}
+    \item In a 50-species community, relative fractions satisfy $x_i \approx 0.02$.
+    \item Consequently, the quadratic self-limitation term becomes:
+    \begin{equation}
+        -\alpha_i N_i^2 \approx -\alpha_i (0.02)^2 = -0.0004 \alpha_i.
+    \end{equation}
+    \item At this suppressed scale, quadratic negative feedback is reduced by three to four orders of magnitude. The dynamics collapse into linear exponential selection where the single fastest-growing species excludes all competitors within 5 to 10 transfers (the classical Competitive Exclusion Principle).
+\end{itemize}
+By replacing equation~\eqref{eq:simplex_reset_flaw} with true \textbf{unnormalized physical biomass continuity} (equation~\eqref{eq:transfer_biomass}), biomass maintains its natural magnitude ($N_i \sim 0.1\text{--}2.0$), restoring the physiological efficacy of $-\alpha_i N_i^2$ and enabling persistent multi-species coexistence across dozens of transfers.
+
+\subsection{Objective Functions and Loss Formulations}
+Depending on the experimental measurement modality of each dataset, we employ tailored, biophysically sound loss functions:
+
+\subsubsection{Unified Generalized KL Loss for Absolute Biomass}
+For datasets where total optical density $\text{OD}_{600}$ is measured (Gore et al. and Venturelli et al.), absolute biomass is known: $y_{c, i}(m) = x_{c, i}(m) \cdot \text{OD}_{c}(m)$. To train without imposing homoskedastic Gaussian noise assumptions on positive-definite biomass, we employ Dr.~Dixit's Generalized KL divergence:
+\begin{equation}
+    \label{eq:loss_gkl}
+    \begin{aligned}
+    \mathcal{L}_{\text{GKL}}(y, \hat{y}) = \sum_{c, m, i} \Big( &\hat{y}_{c, i}(m) - y_{c, i}(m) \\
+    &+ y_{c, i}(m) \log \left( \frac{y_{c, i}(m) + \epsilon}{\hat{y}_{c, i}(m) + \epsilon} \right) \Big),
+    \end{aligned}
+\end{equation}
+where $\epsilon = 10^{-6}$ prevents numerical singularities. Mathematically, Generalized KL is the Bregman divergence corresponding to a Poisson dispersion process ($\text{Var}(y) \propto \hat{y}$), naturally down-weighting high-OD stationary-phase extremes and preserving accurate proportional growth slopes across lag and exponential phases.
+
+\subsubsection{Simplex Relative KL Divergence (Amplicon / Metagenomic Reads)}
+For datasets providing high-throughput sequencing reads without total biomass quantification (e.g., Pollard, German), the predicted biomass is projected onto the simplex:
+\begin{equation}
+    \hat{x}_{c, i}(m) = \frac{\hat{N}_{c, i}(m)}{\sum_{j=1}^N \hat{N}_{c, j}(m) + \epsilon}.
+\end{equation}
+The model is then trained against empirical relative fractions $x_{c, i}(m)$ using discrete relative entropy:
+\begin{equation}
+    \label{eq:loss_kl}
+    \mathcal{L}_{\text{KL}}(x, \hat{x}) = \sum_{c, m, i} x_{c, i}(m) \log \left( \frac{x_{c, i}(m) + \epsilon}{\hat{x}_{c, i}(m) + \epsilon} \right).
+\end{equation}
+In German et al., equation~\eqref{eq:loss_kl} is evaluated strictly over the donor-accessible sub-simplex enforced by host membership masks $M_{c, i}$.
+
+\subsection{Analytical Derivation of the Environment-Dependent Effective Interaction Matrix}
+\label{sec:interaction_matrix}
+
+A central theoretical question in microbial ecology is whether continuous consumer-resource dynamics can be rigorously mapped to macroscopic inter-species interaction matrices of the Lotka-Volterra type, and whether such interactions remain invariant across different environmental regimes \citep{macarthur1970species, case2000illustrated}. In our framework, the per-capita growth rate of species $i$ during continuous intra-passage cultivation is given by:
+\begin{equation}
+    g_i(\mathbf{N}, \mathbf{R}) = \frac{1}{N_i}\frac{dN_i}{dt} = \sum_{k=1}^K \Theta_{ik} R_k(t) - \alpha_i N_i(t).
+\end{equation}
+The effective inter-species interaction coefficient $A_{ij} \equiv \frac{\partial g_i}{\partial N_j}$, representing the marginal influence of species $j$'s abundance on species $i$'s per-capita fitness, is obtained by differentiating $g_i$ with respect to biomass $N_j$:
+\begin{equation}
+    \label{eq:interaction_definition}
+    A_{ij} = \sum_{k=1}^K \Theta_{ik} \frac{\partial R_k}{\partial N_j} - \alpha_i \delta_{ij}.
+\end{equation}
+
+\subsubsection{Resource Depletion and Cross-Feeding Mediated Coupling}
+The sensitivity $\frac{\partial R_k}{\partial N_j}$ quantifies how the growth of species $j$ alters the availability of resource $k$. Integrating the continuous resource dynamics~\eqref{eq:ode_resource} over an incubation passage shows that the instantaneous resource concentration scales directly with the initial environmental nutrient endowment $\mathbf{R}_{0, c} = \text{softplus}(\mathbf{a}_c)$:
+\begin{equation}
+    R_k(t) = R_{0, c, k} \exp\left( - \sum_{j=1}^N \left( \Theta_{jk} - \sum_{l=1}^K \Theta_{jl} W_{lk} \right) \int_0^t N_j(s) ds \right).
+\end{equation}
+Differentiating the time-averaged resource availability over the passage with respect to species $j$ yields:
+\begin{equation}
+    \label{eq:resource_sensitivity}
+    \frac{\partial R_k}{\partial N_j} \approx - \kappa \, R_{0, c, k} \left( \Theta_{jk} - \sum_{l=1}^K \Theta_{jl} W_{lk} \right),
+\end{equation}
+where $\kappa > 0$ represents the characteristic integration time-scale. Substituting equation~\eqref{eq:resource_sensitivity} into equation~\eqref{eq:interaction_definition} yields the closed-form effective interaction matrix for experimental condition $c$:
+\begin{equation}
+    \label{eq:interaction_matrix_component}
+    A_{ij}^{(c)} = - \alpha_i \delta_{ij} - \kappa \sum_{k=1}^K \Theta_{ik} R_{0, c, k} \left( \Theta_{jk} - \sum_{l=1}^K \Theta_{jl} W_{lk} \right).
+\end{equation}
+In compact matrix notation, the effective interaction operator $\mathbf{A}^{(c)} \in \mathbb{R}^{N \times N}$ decomposes into three distinct physical mechanisms:
+\begin{equation}
+    \label{eq:interaction_matrix_closed_form}
+    \mathbf{A}^{(c)} = \underbrace{- \text{diag}(\mathbf{\alpha})}_{\text{Intra-specific crowding}} - \kappa \, \underbrace{\mathbf{\Theta} \, \text{diag}(\mathbf{R}_{0, c}) \, \mathbf{\Theta}^T}_{\text{Niche overlap competition}} + \kappa \, \underbrace{\mathbf{\Theta} \, \text{diag}(\mathbf{R}_{0, c}) \, \mathbf{W}^T \mathbf{\Theta}^T}_{\text{Metabolic cross-feeding facilitation}}.
+\end{equation}
+
+\subsubsection{Key Properties and Environmental Modulation}
+Equation~\eqref{eq:interaction_matrix_closed_form} reveals three fundamental properties that distinguish physical consumer-resource models from phenomenological Generalized Lotka-Volterra matrices:
+\begin{enumerate}
+    \item \textbf{Environmental Nutrient Scaling:} The effective interaction matrix $\mathbf{A}^{(c)}$ is explicitly modulated by the external nutrient vector $\mathbf{R}_{0, c}$. Under low nutrient supplies ($\mathbf{R}_{0, c} \approx 0$), inter-species couplings vanish, and dynamics are dominated by intra-specific crowding ($\alpha_i$). Conversely, nutrient enrichment linearly amplifies both competitive overlap and cross-feeding facilitation. In Gore et al., calculating $\mathbf{A}^{(c)}$ from the learned parameters reveals that the average off-diagonal interaction strength nearly doubles from $1.57$ in Low Nutrients to $3.04$ in High Nutrients, providing the direct physical driver for the emergent chaotic bifurcation at $S=12$.
+    \item \textbf{Context-Dependent Sign Inversion (Competition vs. Facilitation):} In standard gLV models, the sign of $A_{ij}$ is fixed. In equation~\eqref{eq:interaction_matrix_closed_form}, the net coupling between species $i$ and $j$ on resource $k$ is proportional to $R_{0, c, k} (\sum_l \Theta_{jl} W_{lk} - \Theta_{jk})$. If the environment is depleted in metabolite $k$ while primary substrate $l$ is abundant, species $j$ secretes $k$ for species $i$, producing cooperative facilitation ($A_{ij} > 0$). If the medium is artificially supplemented with nutrient $k$, both species consume it directly, flipping the interaction to exploitative competition ($A_{ij} < 0$).
+    \item \textbf{Low-Rank Stability ($\text{rank} \le K \ll N$):} Unlike unconstrained $N \times N$ interaction matrices that contain $N^2$ independent parameters, the off-diagonal interaction network is strictly constrained by the $K$ latent resource dimensions:
+    \begin{equation}
+        \text{rank}\left( \mathbf{A}^{(c)} + \text{diag}(\mathbf{\alpha}) \right) \le K \ll N.
+    \end{equation}
+    This low-rank metabolic constraint prevents destructive destabilizing feedback loops, explaining why high-diversity communities ($N=48$ in Gore, $N=91$ in German) evade the classic May-Wigner complexity-stability limit and maintain robust coexistence across 100 serial transfers.
+\end{enumerate}

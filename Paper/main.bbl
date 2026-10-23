@@ -1,0 +1,84 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Goldford et~al.(2018)Goldford, Lu, Baji{\'c}, Estrela, Tikhonov,
+  Sanchez-Gorostiaga, Segr{\`e}, Mehta, and Sanchez]{goldford2018emergent}
+Joshua~E. Goldford, Nanxi Lu, Djordje Baji{\'c}, Sylvie Estrela, Mikhail
+  Tikhonov, Alicia Sanchez-Gorostiaga, Daniel Segr{\`e}, Pankaj Mehta, and
+  Alvaro Sanchez.
+\newblock Emergent simplicity in microbial community assembly.
+\newblock \emph{Science}, 361\penalty0 (6401):\penalty0 469--474, 2018.
+
+\bibitem[Barbier et~al.(2020)Barbier, Arnoldi, Bunin, and
+  Loreau]{barbier2020generic}
+Matthieu Barbier, Jean-Fran{\c{c}}ois Arnoldi, Guy Bunin, and Michel Loreau.
+\newblock Generic assembly patterns in complex ecological communities.
+\newblock \emph{Physical Review Research}, 2\penalty0 (2):\penalty0 023201,
+  2020.
+
+\bibitem[Hu et~al.(2022)Hu, Amor, Barbier, Bunin, and Gore]{hu2022emergent}
+Jiseon Hu, Daniel~R. Amor, Matthieu Barbier, Guy Bunin, and Jeff Gore.
+\newblock Emergent phases of ecological diversity and dynamics mapped in
+  microcosms.
+\newblock \emph{Science}, 378\penalty0 (6615):\penalty0 85--89, 2022.
+
+\bibitem[Jin et~al.(2023)Jin, Holmes, Bick, and Pollard]{jin2023culturing}
+Xiaowei~C. Jin, Zachary~C. Holmes, Austin~R. Bick, and Katherine~S. Pollard.
+\newblock Culturing of a complex gut microbial community in mucin-hydrogel
+  carriers reveals strain- and gene-associated spatial organization.
+\newblock \emph{Nature Communications}, 14\penalty0 (1):\penalty0 5323, 2023.
+
+\bibitem[Venturelli et~al.(2018)Venturelli, Carr, Fisher, Hsu, Lau, Bowen,
+  Hromada, Northen, and Arkin]{venturelli2018deciphering}
+Ophelia~S. Venturelli, Anthony~V. Carr, Gideon Fisher, Robert~H. Hsu, Ryan Lau,
+  Benjamin~P. Bowen, Sean Hromada, Trent Northen, and Adam~P. Arkin.
+\newblock Deciphering microbial interactions in synthetic human gut microbiome
+  communities.
+\newblock \emph{Molecular Systems Biology}, 14\penalty0 (6):\penalty0 e8157,
+  2018.
+
+\bibitem[MacArthur(1970)]{macarthur1970species}
+Robert MacArthur.
+\newblock Species packing and competitive equilibrium for many species.
+\newblock \emph{Theoretical Population Biology}, 1\penalty0 (1):\penalty0
+  1--11, 1970.
+
+\bibitem[P{\'o}sfai et~al.(2017)P{\'o}sfai, Zhou, and
+  Gore]{posfai2017versatility}
+Anna P{\'o}sfai, Tianwei Zhou, and Jeff Gore.
+\newblock Versatility of microbial communities in resource competition.
+\newblock \emph{Physical Review E}, 95\penalty0 (2):\penalty0 022410, 2017.
+
+\bibitem[Tilman(1982)]{tilman1982resource}
+David Tilman.
+\newblock \emph{Resource Competition and Community Structure}.
+\newblock Princeton University Press, 1982.
+
+\bibitem[Chen et~al.(2018)Chen, Rubanova, Bettencourt, and
+  Duvenaud]{chen2018neural}
+Ricky~TQ Chen, Yulia Rubanova, Jesse Bettencourt, and David~K Duvenaud.
+\newblock Neural ordinary differential equations.
+\newblock \emph{Advances in Neural Information Processing Systems}, 31, 2018.
+
+\bibitem[Case(2000)]{case2000illustrated}
+Ted~J. Case.
+\newblock \emph{An illustrated guide to theoretical ecology}.
+\newblock Oxford University Press, 2000.
+
+\bibitem[Friedman et~al.(2017)Friedman, Higgins, and
+  Gore]{friedman2017community}
+Jonathan Friedman, Logan~M. Higgins, and Jeff Gore.
+\newblock Community assembly rules admitted by pairwise interactions.
+\newblock \emph{Nature Ecology \& Evolution}, 1\penalty0 (5):\penalty0 0109,
+  2017.
+
+\bibitem[May(1972)]{may1972will}
+Robert~M. May.
+\newblock Will a large complex system be stable?
+\newblock \emph{Nature}, 238\penalty0 (5364):\penalty0 413--414, 1972.
+
+\end{thebibliography}

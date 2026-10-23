@@ -1,0 +1,38 @@
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{authblk}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\title{\textbf{A Unified Physical Consumer-Resource Neural ODE Framework for Microbial Serial Dilution Ecology Across Diverse Microbiomes}}
+
+\author[1]{Karthik}
+\author[1,2]{Computational Microbial Ecology Group}
+\affil[1]{Serial Dilution Modeling Project}
+\affil[2]{Department of Computational Biology \& Ecology}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Microbial community dynamics in serial dilution regimes are governed by continuous within-passage substrate uptake, metabolic cross-feeding, and density-dependent crowding, interrupted by periodic discrete dilution and dispersal events. Traditional modeling paradigms rely either on high-parameter phenomenological Generalized Lotka-Volterra matrices that suffer from severe overfitting, or on discrete multi-step Markov approximations that obscure intra-passage kinetics and distort nonlinear regulation via artificial simplex resets. Here, we present a unified \textbf{Physical Consumer-Resource Neural Ordinary Differential Equation (Neural ODE)} framework that integrates low-dimensional latent resource niches ($K \ll N$), thermodynamic non-negativity constraints, quadratic self-limitation, and unnormalized physical biomass continuity across dilution passages. We demonstrate the universality of this model across four benchmark empirical serial dilution datasets spanning soil, mammalian rumen, and human gut microbiota: (i) 48 soil and gut isolates under 3 nutrient regimes with daily $1:30$ dilution and $10^{-6}$ regional dispersal (Gore et al., \textit{Science} 2022); (ii) 50 human gut isolates across 5 spatial carrier microenvironments with $1:100$ dilution (Pollard / Jin et al., \textit{Nat. Commun.} 2023); (iii) 32 rumen microbiome taxa under 6 high-pressure and chemical forcing regimes across 2 donor hosts (German et al.); and (iv) 12 synthetic gut species across 175 combinatorial designs under exact $1:20$ serial transfers with dual-phase intra-passage sampling (Venturelli et al., \textit{Mol. Syst. Biol.} 2018). Our physical ODE framework achieves superior predictive accuracy across all datasets ($R^2 = 0.67\text{--}0.97$), resolves the simplex reset artifact by boosting empirical $R^2$ by up to $+9.4\%$, and sustains stable multi-species coexistence across 100 simulated transfers without artificial extinction collapses.
+\end{abstract}
+
+\input{sections/01_introduction.tex}
+\input{sections/02_model.tex}
+\input{sections/03_datasets.tex}
+\input{sections/04_results.tex}
+\input{sections/05_discussion.tex}
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

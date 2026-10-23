@@ -1,0 +1,110 @@
+\section{Empirical Datasets and Experimental Modeling Protocols}
+\label{sec:datasets}
+
+To assess the universality and predictive accuracy of our Physical Consumer-Resource Neural ODE framework, we applied it to four distinct, high-impact microbial serial dilution datasets spanning soil, mammalian rumen, and human gut microbiota. Table~\ref{tab:protocols} summarizes the physical parameters, experimental designs, and modeling configurations across all four studies.
+
+\begin{table*}[t]
+\centering
+\small
+\caption{Cross-Dataset Protocol and Modeling Parameter Comparison.}
+\label{tab:protocols}
+\begin{tabularx}{\textwidth}{lXXXX}
+\toprule
+\textbf{Dimension} & \textbf{Gore et al. (2022)} & \textbf{Pollard / Jin et al. (2023)} & \textbf{German et al. (Rumen)} & \textbf{Venturelli et al. (2018)} \\
+\midrule
+Biological System & Soil \& gut isolates & Human gut isolates & Cow rumen fluid & Human gut core strains \\
+Species Count ($N$) & 48 & 50 & 91 & 12 \\
+Latent Niches ($K$) & 2 & 5 & 12 & 2 \\
+Dilution Factor ($D$) & $1:30$ ($30.0$) & $1:100$ ($100.0$) & $1:100$ ($100.0$) & $1:20$ ($20.0$) \\
+Transfer Cadence ($\tau$) & $24\text{ h}$ & $24\text{ h}$ & Variable batch cycle & $24\text{ h}$ \\
+Sampling Horizon & Days 0--10 (10 transfers) & Passages 1--6 (6 transfers) & Transfers 1--6 (6 transfers) & $t \in \{0, 12, 24, 36, 48, 60\}\text{h}$ \\
+Data Modality & Absolute $\text{OD}_{600}$ biomass & Relative read fractions & Relative 16S read fractions & Absolute $\text{OD}_{600}$ biomass \\
+Dispersal Floor ($\mu$) & $10^{-6}$ (Authentic lab pool) & $0.0$ (Strictly closed) & $0.0$ (Strictly closed) & $0.0$ (Strictly closed) \\
+Nutrient / Media Regimes & 3 (LN, MN, HN) & 5 (Spatial carriers/broth) & 6 (Pressure $\times$ Substrate) & 1 (Anaerobic Basal Broth) \\
+Environmental Vector $R_0$ & Monotonic scalar ladder & Learned $\mathbb{R}^5$ per carrier & Learned $\mathbb{R}^4$ per condition & Learned $\mathbb{R}^2$ baseline \\
+Loss Function & Generalized KL (GKL) & Simplex Relative KL & Simplex Relative KL & Hybrid $\text{MSE} + 0.05 \cdot \text{KL}$ \\
+Community Inocula & 99 ($S=3,6,12,24,48$) & 5 conditions (all 50 sp.) & 12 (2 hosts $\times$ 6 cond.) & 175 (Pairs, trios, dropouts) \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\subsection{Gore et al. (\textit{Science} 2022): Emergent Phases of Ecological Dynamics}
+\subsubsection{Biological Microcosms and Combinatorial Assembly}
+\citet{hu2022emergent} constructed synthetic microcosms from a defined pool of 48 bacterial strains: Species 1--24 are soil isolates, and Species 25--48 are \textit{Caenorhabditis elegans} gut isolates. Microcosms were assembled combinatorially at five levels of initial richness:
+\begin{itemize}
+    \item $S = 3$ (8 distinct communities, soil isolates only),
+    \item $S = 6$ (8 distinct communities, soil isolates only),
+    \item $S = 12$ (8 distinct communities, soil isolates only; the critical bifurcation point),
+    \item $S = 24$ (8 distinct communities, mixed soil and gut isolates),
+    \item $S = 48$ (1 community, full 48-species library).
+\end{itemize}
+Each of the 33 communities was cultivated in triplicate across three nutrient environments:
+\begin{enumerate}
+    \item \textbf{Low Nutrient (LN)}: Base medium without supplementary carbon/nitrogen sources.
+    \item \textbf{Medium Nutrient (MN)}: Base medium supplemented with $5\text{ g/L}$ glucose and $4\text{ g/L}$ urea.
+    \item \textbf{High Nutrient (HN)}: Base medium supplemented with $20\text{ g/L}$ glucose and $16\text{ g/L}$ urea ($4\times$ scalar increase over MN).
+\end{enumerate}
+
+\subsubsection{Physical Transfer and Dispersal Modeling}
+Communities underwent daily $1:30$ serial dilutions ($D = 30.0$) over 10 consecutive days. Crucially, the experimental protocol incorporated a continuous regional dispersal floor: each day, a background stock solution of all 48 species was introduced at a relative frequency of $\mu = 10^{-6}$. In our model, this is faithfully represented as:
+\begin{equation}
+    N_i(0)^{(m+1)} = \left( \frac{N_i(\tau)^{(m)}}{30.0} + 10^{-6} \cdot M_{c, i} \right) \cdot M_{c, i}.
+\end{equation}
+The environmental supply vectors were parameterized monotonically to mirror the chemical recipe:
+\begin{align}
+    R_0(\text{LN}) &= \text{softplus}(a_0), \nonumber \\
+    R_0(\text{MN}) &= R_0(\text{LN}) + \text{softplus}(\Delta a_1), \nonumber \\
+    R_0(\text{HN}) &= R_0(\text{MN}) + 4 \cdot \text{softplus}(\Delta a_2).
+\end{align}
+Total biomass is tracked via $\text{OD}_{600}$ and trained using the Generalized KL loss (equation~\eqref{eq:loss_gkl}).
+
+\subsection{Pollard / Jin et al. (\textit{Nat.\ Commun.} 2023): Spatial Structuring in Gut Consortia}
+\subsubsection{Microbiome Consortia and Spatial Particulate Niches}
+\citet{jin2023culturing} cultivated a complex synthetic consortium of 50 human gut bacterial isolates across 6 daily serial passages ($1:100$ dilution, $D = 100.0$) to investigate how physical spatial structures preserve taxonomic diversity. The consortia were grown in 5 physical carrier conditions:
+\begin{enumerate}
+    \item Mucin-agar hydrogel beads,
+    \item Mucin bead supernatant (planktonic fraction),
+    \item Plain-agar hydrogel beads,
+    \item Plain bead supernatant,
+    \item Liquid broth control (no physical carriers).
+\end{enumerate}
+
+\subsubsection{Closed System Modeling and Simplex Reset Elimination}
+Because the Pollard experiment was completely closed without regional migration, the dispersal parameter is strictly set to zero ($\mu = 0.0$):
+\begin{equation}
+    N_i(0)^{(m+1)} = \frac{N_i(\tau)^{(m)}}{100.0}.
+\end{equation}
+The 5 environmental niches are represented by freely learned 5-dimensional resource supply vectors $R_{0, c} = \text{softplus}(a_c) \in \mathbb{R}^5$ ($c \in \{1, \dots, 5\}$). As detailed in Section~\ref{sec:model}, previous models rescaled the biomass vector to the unit simplex at every transfer, which suppressed $-\alpha_i N_i^2$ by a factor of $(1/50)^2 = 0.0004$ and triggered severe extinction cascades. Propagating unnormalized physical biomass resolved this defect, accurately reproducing the high diversity retained in mucin carriers ($21\text{--}24$ surviving species) relative to liquid broth ($11$ species).
+
+\subsection{German et al.: Rumen Enrichment Under High Pressure and Chemical Forcing}
+\subsubsection{Enrichment Regimes and Donor Inocula}
+The German et al.\ dataset tracks the selective enrichment of core anaerobic rumen microbial communities subjected to 6 distinct metabolic and physical forcing regimes:
+\begin{itemize}
+    \item Headspace gas pressure: 5.0 bar vs.\ 30.0 bar ($\text{H}_2 : \text{CO}_2$),
+    \item Methanogenic substrate supplementation: Methanol (MeOH) vs.\ Trimethylamine (TMA) vs.\ unsupplemented control.
+\end{itemize}
+These 6 conditions were inoculated in parallel using rumen fluid from two distinct donor cows (OSU and BRRS), generating 12 independent longitudinal trajectories tracked across 6 serial transfer cycles (T1 to T6). Rather than using an overly restrictive baseline filter that discarded 45 out of 46 methanogens, we apply a longitudinal peak abundance threshold of $\ge 1\%$ ($\max_{c, t} x_{c, t, i} \ge 0.01$). This retains $N = 91$ core taxa, comprising 22 methanogenic archaea (capturing $98.5\%$ of all archaeal reads) and 69 bacteria spanning major fermenter guilds, achieving $92.3\%$ total community coverage across all 72 samples.
+
+\subsubsection{Parameterization and Closed Dynamics}
+Serial transfers followed a 100-fold dilution factor ($D = 100.0$) with zero migration ($\mu = 0.0$). A 12-dimensional latent resource space ($K = 12$), selected by minimal validation loss, captures primary hydrogenotrophic, methylotrophic, and syntrophic fermentation pathways. Resource supplies $R_{0, c} = \text{softplus}(a_c) \in \mathbb{R}^{12}$ were optimized independently for each treatment. The model was trained using the relative simplex KL loss (equation~\eqref{eq:loss_kl}).
+
+\subsection{Ophelia / Venturelli et al. (\textit{Mol.\ Syst.\ Biol.} 2018): High-Throughput Synthetic Gut Consortia}
+\subsubsection{Combinatorial Assembly in Anaerobic Basal Broth}
+\citet{venturelli2018deciphering} characterized microbial interactions in a 12-species synthetic human gut consortium by systematically testing 175 combinatorial sub-communities in Anaerobic Basal Broth (ABB):
+\begin{itemize}
+    \item 109 pairwise communities ($S = 2$),
+    \item 33 trio communities ($S = 3$),
+    \item 18 higher-order mixtures ($S \in \{4, 5, 6\}$),
+    \item 15 dropout communities ($S \in \{11, 12\}$).
+\end{itemize}
+
+\subsubsection{Authentic Serial Transfer Protocol and Multi-Phase Temporal Sampling}
+While earlier analyses sometimes treated the Venturelli dataset as an unperturbed continuous batch culture, audit of the primary experimental methods revealed that the experiment was conducted as a \textbf{24-hour serial transfer experiment with 20-fold dilution ($D = 20.0$)}:
+\begin{itemize}
+    \item Cultures were transferred into fresh ABB media at $24\text{ h}$ and $48\text{ h}$ using a $1:20$ dilution factor.
+    \item Optical density $\text{OD}_{600}$ and individual species abundances were measured at \textbf{both $12\text{ h}$ (mid-exponential phase) and $24\text{ h}$ (stationary phase)} of each passage:
+    \begin{equation}
+        t_{\text{sample}} \in \{0\text{ h}, 12\text{ h}, 24\text{ h}, 36\text{ h}, 48\text{ h}, 60\text{ h}\}.
+    \end{equation}
+\end{itemize}
+We parameterized this exact multi-phase sampling schedule inside the ODE solver. The initial biomass of each community was derived from the measured Day 0 $\text{OD}_{600}$, with zero migration ($\mu = 0.0$) and composition strictly masked by $M_{c, i}$. The model was trained via the hybrid objective (equation~\eqref{eq:loss_hybrid}) with $K = 2$ latent resources.

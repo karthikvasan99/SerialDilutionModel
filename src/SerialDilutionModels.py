@@ -272,3 +272,89 @@ class LatentAssemblyNeuralODE(nn.Module):
         log_x_T_plus_1 = torch.log(safe_x_T_plus_1)
         
         return log_x_T_plus_1, x_T_plus_1, N_final, R_final
+
+
+class PurePhysicalConsumerResourceNeuralODE(nn.Module):
+    """
+    Consolidated Physical Consumer-Resource Neural ODE Framework.
+    Guarantees:
+      1. Mass Conservation: Cross-feeding matrix W >= 0.
+      2. Intra-specific Self-Limitation: alpha_i = softplus(alpha_raw) > 0.
+      3. Non-negative Resource Utilization Traits: Theta >= 0.
+      4. Freely Learned Environmental Resources: R0 = softplus(a) > 0 (no artificial scaling constraints).
+      5. Unnormalized Physical Biomass Propagation: Serial dilution divides true unnormalized
+         biomass by the dilution factor (N_0 = N_tau / D + dispersal) without simplex resets.
+    """
+    def __init__(self, num_species, num_latent_dims, num_conditions=1, default_dilution_factor=100.0, dispersal_rate=1e-6):
+        super(PurePhysicalConsumerResourceNeuralODE, self).__init__()
+        self.N = num_species
+        self.K = num_latent_dims
+        self.num_conditions = num_conditions
+        self.default_dilution_factor = default_dilution_factor
+        self.dispersal_rate = dispersal_rate
+
+        # Unconstrained environmental baseline resources (R0 = softplus(a))
+        self.a = nn.Parameter(torch.randn(num_conditions, num_latent_dims) * 0.5 + 2.0)
+        # Metabolic traits Theta >= 0
+        self.theta_raw = nn.Parameter(torch.randn(num_species, num_latent_dims) * 0.1)
+        # Cross-feeding W >= 0
+        self.w_raw = nn.Parameter(torch.randn(num_latent_dims, num_latent_dims) * 0.1)
+        # Self-limitation alpha > 0
+        self.alpha_raw = nn.Parameter(torch.randn(num_species) * 0.05 - 1.0)
+        # Initial unnormalized biomass scale
+        self.b0_raw = nn.Parameter(torch.tensor(2.0))
+
+    def get_params(self):
+        Theta = F.softplus(self.theta_raw)
+        W = F.softplus(self.w_raw)
+        alpha = F.softplus(self.alpha_raw)
+        R0 = F.softplus(self.a)
+        B0 = F.softplus(self.b0_raw)
+        return Theta, W, alpha, R0, B0
+
+    def ode_deriv(self, t, S, Theta, W, alpha):
+        N_t = torch.clamp(S[..., :self.N], min=0.0)
+        R_t = torch.clamp(S[..., self.N:], min=0.0)
+        
+        # dN/dt = N * (R @ Theta^T) - alpha * N^2
+        growth = torch.matmul(R_t, Theta.t())
+        dN_dt = N_t * growth - alpha * (N_t ** 2)
+        
+        # dR/dt = - R * ((N @ Theta) @ W^T)
+        flux = torch.matmul(torch.matmul(N_t, Theta), W.t())
+        dR_dt = - R_t * flux
+        
+        return torch.cat([dN_dt, dR_dt], dim=-1)
+
+    def forward(self, N_prev, condition_idx, T_end=1.0, dilution_factor=None, ode_step_size=0.05):
+        """
+        Executes one unnormalized physical dilution cycle.
+        N_prev: unnormalized biomass from previous cycle (or initial biomass).
+        """
+        if dilution_factor is None:
+            dilution_factor = self.default_dilution_factor
+            
+        Theta, W, alpha, R0_table, B0 = self.get_params()
+        
+        # Physical serial dilution transfer: N_0 = N_prev / D + dispersal (NO SIMPLEX NORMALIZATION)
+        N_0 = torch.clamp(N_prev / dilution_factor + self.dispersal_rate, min=0.0)
+        R_0 = R0_table[condition_idx]
+        
+        S_0 = torch.cat([N_0, R_0], dim=-1)
+        t_span = torch.tensor([0.0, float(T_end)], device=S_0.device, dtype=S_0.dtype)
+        
+        def f(t, S):
+            return self.ode_deriv(t, S, Theta, W, alpha)
+            
+        S_t = odeint(f, S_0, t_span, method='euler', options={'step_size': ode_step_size})
+        S_final = S_t[-1]
+        N_final = torch.clamp(S_final[..., :self.N], min=0.0)
+        R_final = S_final[..., self.N:]
+        
+        # Relative abundance projection (for loss against sequencing reads)
+        tot_bio = N_final.sum(dim=-1, keepdim=True) + 1e-8
+        x_pred = N_final / tot_bio
+        safe_x_pred = torch.clamp(x_pred, min=1e-9)
+        log_x_pred = torch.log(safe_x_pred)
+        
+        return log_x_pred, x_pred, N_final, R_final

@@ -38,7 +38,7 @@ ax1 = axes[0, 0]
 for name, arr, col in [
     ('Gore (S=3..48, K=2)', surv_gore, colors['Gore']),
     ('Pollard (N=50, K=5)', surv_p, colors['Pollard']),
-    ('German (N=32, K=4)', surv_g, colors['German']),
+    ('German (N=91, K=12)', surv_g, colors['German']),
     ('Ophelia (N=12, K=2)', surv_o, colors['Ophelia'])
 ]:
     mean_val = arr.mean(axis=0)
@@ -59,7 +59,7 @@ ax2 = axes[0, 1]
 for name, arr, col in [
     ('Gore (S=3..48, K=2)', eff_gore, colors['Gore']),
     ('Pollard (N=50, K=5)', eff_p, colors['Pollard']),
-    ('German (N=32, K=4)', eff_g, colors['German']),
+    ('German (N=91, K=12)', eff_g, colors['German']),
     ('Ophelia (N=12, K=2)', eff_o, colors['Ophelia'])
 ]:
     mean_val = arr.mean(axis=0)
@@ -94,9 +94,9 @@ ax3.set_xlim(0, 100)
 
 # --- Panel 4: German Rumen Trajectories over 100 Passages ---
 ax4 = axes[1, 1]
-german_arr = data_cross['german_arr'] # (12, 101, 32)
+german_arr = data_cross['german_arr'] # (12, 101, 91)
 sample_idx_g = 0 # BRRS H2:CO2 5 bar
-for sp in range(32):
+for sp in range(german_arr.shape[-1]):
     traj = german_arr[sample_idx_g, :, sp]
     if traj.max() >= 0.02:
         ax4.plot(passages, traj, lw=1.8, alpha=0.8, label=f"Taxon {sp+1}")
