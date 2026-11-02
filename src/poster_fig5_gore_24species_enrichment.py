@@ -54,7 +54,7 @@ df_taxa = pd.DataFrame({
 }).sort_values('diff', ascending=False)
 
 plt.style.use('seaborn-v0_8-white' if 'seaborn-v0_8-white' in plt.style.available else 'default')
-fig = plt.figure(figsize=(15.0, 3.6), dpi=300)
+fig = plt.figure(figsize=(15.0, 4.5), dpi=300)
 gs = gridspec.GridSpec(1, 3, width_ratios=[1.0, 1.35, 1.15], wspace=0.32)
 
 # Panel A
@@ -70,12 +70,12 @@ for idx, (_, row) in enumerate(df_mn24.iterrows()):
     ax0.text(row['prob'] + 0.02, idx, label_txt, va='center', fontsize=10.0, fontweight='bold', color='#1A365D')
 
 ax0.set_yticks(y_pos)
-ax0.set_yticklabels(df_mn24['comm_id'], fontsize=11.0, fontweight='bold')
-ax0.set_xlabel(r'$P(\mathrm{Chaos})$', fontsize=12.5, fontweight='bold', color='#1A365D')
-ax0.set_title(r'$\mathbf{(A)\;Classifier\;Scores\;(S=24)}$', fontsize=13.0, fontweight='bold', color='#0F2942', pad=6)
+ax0.set_yticklabels(df_mn24['comm_id'], fontsize=13.0, fontweight='bold')
+ax0.set_xlabel(r'$P(\mathrm{Chaos})$', fontsize=16.0, fontweight='bold', color='#1A365D')
+ax0.text(0.06, 0.88, r'$\mathbf{Classifier\ Scores\ (S=24)}$', transform=ax0.transAxes, fontsize=14.0, fontweight='bold', color='#00356B', bbox=dict(boxstyle='round,pad=0.35', facecolor='#F0F4F8', edgecolor='#00356B', alpha=0.92, lw=1.5))
 ax0.set_xlim(0, 1.05)
-ax0.tick_params(axis='x', labelsize=11.0)
-ax0.legend(loc='lower right', fontsize=11.5, framealpha=0.95, edgecolor='#0F2942')
+ax0.tick_params(labelsize=13.5)
+ax0.legend(loc='lower right', fontsize=13.0, framealpha=0.95, edgecolor='#0F2942')
 ax0.grid(True, axis='x', linestyle='--', alpha=0.5, zorder=0)
 
 # Panel B
@@ -100,11 +100,11 @@ ax1.axhline(-0.3, color='#1B6CA8', linestyle=':', lw=1.4, alpha=0.8)
 ax1.text(39, 0.85, 'Sp 31–36\n(+80% Chaos)', color='#802010', fontsize=10.5, fontweight='bold', ha='center')
 ax1.text(7, -0.92, 'Sp 37–42\n(+80% Stable)', color='#0B4F6C', fontsize=10.5, fontweight='bold', ha='center')
 
-ax1.set_xlabel('48 Species (Ranked by Enrichment)', fontsize=12.5, fontweight='bold', color='#1A365D')
-ax1.set_ylabel(r'$\Delta\,\mathrm{Prevalence}$', fontsize=12.5, fontweight='bold', color='#1A365D')
-ax1.set_title(r'$\mathbf{(B)\;Taxonomic\;Biomarkers}$', fontsize=13.0, fontweight='bold', color='#0F2942', pad=6)
+ax1.set_xlabel('48 Species (Ranked)', fontsize=15.0, fontweight='bold', color='#1A365D')
+ax1.set_ylabel(r'$\Delta\,\mathrm{Prevalence}$', fontsize=16.0, fontweight='bold', color='#1A365D')
+ax1.text(0.06, 0.88, r'$\mathbf{Taxonomic\ Biomarkers}$', transform=ax1.transAxes, fontsize=14.0, fontweight='bold', color='#00356B', bbox=dict(boxstyle='round,pad=0.35', facecolor='#F0F4F8', edgecolor='#00356B', alpha=0.92, lw=1.5))
 ax1.set_ylim(-1.08, 1.08)
-ax1.tick_params(labelsize=11.0)
+ax1.tick_params(labelsize=13.5)
 ax1.grid(True, axis='y', linestyle='--', alpha=0.5, zorder=0)
 
 # Panel C
@@ -137,11 +137,11 @@ ax2.annotate('Stabilizing Specialists\n(Sp 37–42, Partitioning)',
              arrowprops=dict(arrowstyle="->", color='#0B4F6C', lw=1.6),
              fontsize=10.0, fontweight='bold', color='#0B4F6C')
 
-ax2.set_xlabel(r'Resource 1 Uptake $(\theta_{i,1})$', fontsize=12.5, fontweight='bold', color='#1A365D')
-ax2.set_ylabel(r'Resource 2 Uptake $(\theta_{i,2})$', fontsize=12.5, fontweight='bold', color='#1A365D')
-ax2.set_title(r'$\mathbf{(C)\;Trait\;Mechanism\;}\mathbf{\Theta}$', fontsize=13.0, fontweight='bold', color='#0F2942', pad=6)
-ax2.tick_params(labelsize=11.0)
-ax2.legend(loc='upper left', fontsize=11.0, framealpha=0.95, edgecolor='#0F2942')
+ax2.set_xlabel(r'Resource 1 Uptake $(\theta_{i,1})$', fontsize=15.0, fontweight='bold', color='#1A365D')
+ax2.set_ylabel(r'Resource 2 Uptake $(\theta_{i,2})$', fontsize=15.0, fontweight='bold', color='#1A365D')
+ax2.text(0.06, 0.88, r'$\mathbf{Trait\ Mechanism\ (\Theta)}$', transform=ax2.transAxes, fontsize=14.0, fontweight='bold', color='#00356B', bbox=dict(boxstyle='round,pad=0.35', facecolor='#F0F4F8', edgecolor='#00356B', alpha=0.92, lw=1.5))
+ax2.tick_params(labelsize=13.5)
+ax2.legend(loc='upper left', fontsize=12.5, framealpha=0.95, edgecolor='#0F2942')
 ax2.grid(True, linestyle='--', alpha=0.5)
 
 out_path = 'Poster/figures/Gore_24Species_Enrichment.png'

@@ -1,0 +1,121 @@
+Loaded all 99 communities: Batch 11 = 75 | Batch 4 = 24
+
+===========================================================================
+TRAINING POSTER PHYSICAL ODE: K = 8 | 500 EPOCHS | ZERO REGULARIZATION
+===========================================================================
+K= 8 | Epoch   1/500 | Loss: 0.6776 (TF: 1.00) | Best: 0.6776 | Time: 0.9s
+K= 8 | Epoch  50/500 | Loss: 0.2797 (TF: 0.87) | Best: 0.2797 | Time: 27.4s
+K= 8 | Epoch 100/500 | Loss: 0.2873 (TF: 0.73) | Best: 0.2763 | Time: 55.2s
+K= 8 | Epoch 150/500 | Loss: 0.3142 (TF: 0.60) | Best: 0.2763 | Time: 82.6s
+K= 8 | Epoch 200/500 | Loss: 0.3483 (TF: 0.47) | Best: 0.2763 | Time: 108.2s
+K= 8 | Epoch 250/500 | Loss: 0.3950 (TF: 0.33) | Best: 0.2763 | Time: 134.4s
+K= 8 | Epoch 300/500 | Loss: 0.4648 (TF: 0.20) | Best: 0.2763 | Time: 159.7s
+K= 8 | Epoch 350/500 | Loss: 0.5917 (TF: 0.07) | Best: 0.2763 | Time: 184.8s
+K= 8 | Epoch 400/500 | Loss: 0.7490 (TF: 0.00) | Best: 0.2763 | Time: 209.7s
+K= 8 | Epoch 450/500 | Loss: 0.7449 (TF: 0.00) | Best: 0.2763 | Time: 235.5s
+K= 8 | Epoch 500/500 | Loss: 0.7439 (TF: 0.00) | Best: 0.2763 | Time: 260.5s
+
+--- Dynamic Evaluation (Passages 15..30) for K=8 ---
+48-sp Low Nutrients  : Max Std = 0.0044 | Direction Flips = 3
+48-sp High Nutrients : Max Std = 0.0053 | Direction Flips = 12 | Min Pair Corr = -1.00
+24-sp High Nutrients : Max Std = 0.0022 | Direction Flips = 8 | Min Pair Corr = 1.00
+Saved checkpoint to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_K8_500ep.pth
+
+===========================================================================
+TRAINING POSTER PHYSICAL ODE: K = 9 | 500 EPOCHS | ZERO REGULARIZATION
+===========================================================================
+K= 9 | Epoch   1/500 | Loss: 0.6564 (TF: 1.00) | Best: 0.6564 | Time: 0.5s
+K= 9 | Epoch  50/500 | Loss: 0.2902 (TF: 0.87) | Best: 0.2902 | Time: 27.3s
+K= 9 | Epoch 100/500 | Loss: 0.2952 (TF: 0.73) | Best: 0.2854 | Time: 54.6s
+K= 9 | Epoch 150/500 | Loss: 0.3226 (TF: 0.60) | Best: 0.2854 | Time: 80.3s
+K= 9 | Epoch 200/500 | Loss: 0.3571 (TF: 0.47) | Best: 0.2854 | Time: 106.6s
+K= 9 | Epoch 250/500 | Loss: 0.4043 (TF: 0.33) | Best: 0.2854 | Time: 133.0s
+K= 9 | Epoch 300/500 | Loss: 0.4744 (TF: 0.20) | Best: 0.2854 | Time: 160.0s
+K= 9 | Epoch 350/500 | Loss: 0.6011 (TF: 0.07) | Best: 0.2854 | Time: 187.1s
+K= 9 | Epoch 400/500 | Loss: 0.7558 (TF: 0.00) | Best: 0.2854 | Time: 214.6s
+K= 9 | Epoch 450/500 | Loss: 0.7515 (TF: 0.00) | Best: 0.2854 | Time: 242.4s
+K= 9 | Epoch 500/500 | Loss: 0.7504 (TF: 0.00) | Best: 0.2854 | Time: 269.5s
+
+--- Dynamic Evaluation (Passages 15..30) for K=9 ---
+48-sp Low Nutrients  : Max Std = 0.0039 | Direction Flips = 6
+48-sp High Nutrients : Max Std = 0.0053 | Direction Flips = 12 | Min Pair Corr = 1.00
+24-sp High Nutrients : Max Std = 0.0018 | Direction Flips = 6 | Min Pair Corr = 1.00
+Saved checkpoint to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_K9_500ep.pth
+
+===========================================================================
+TRAINING POSTER PHYSICAL ODE: K = 10 | 500 EPOCHS | ZERO REGULARIZATION
+===========================================================================
+K=10 | Epoch   1/500 | Loss: 0.6599 (TF: 1.00) | Best: 0.6599 | Time: 0.5s
+K=10 | Epoch  50/500 | Loss: 0.2873 (TF: 0.87) | Best: 0.2873 | Time: 26.8s
+K=10 | Epoch 100/500 | Loss: 0.2926 (TF: 0.73) | Best: 0.2828 | Time: 52.2s
+K=10 | Epoch 150/500 | Loss: 0.3203 (TF: 0.60) | Best: 0.2828 | Time: 77.5s
+K=10 | Epoch 200/500 | Loss: 0.3552 (TF: 0.47) | Best: 0.2828 | Time: 103.5s
+K=10 | Epoch 250/500 | Loss: 0.4028 (TF: 0.33) | Best: 0.2828 | Time: 130.1s
+K=10 | Epoch 300/500 | Loss: 0.4735 (TF: 0.20) | Best: 0.2828 | Time: 157.0s
+K=10 | Epoch 350/500 | Loss: 0.6004 (TF: 0.07) | Best: 0.2828 | Time: 183.4s
+K=10 | Epoch 400/500 | Loss: 0.7548 (TF: 0.00) | Best: 0.2828 | Time: 209.6s
+K=10 | Epoch 450/500 | Loss: 0.7501 (TF: 0.00) | Best: 0.2828 | Time: 236.6s
+K=10 | Epoch 500/500 | Loss: 0.7489 (TF: 0.00) | Best: 0.2828 | Time: 263.9s
+
+--- Dynamic Evaluation (Passages 15..30) for K=10 ---
+48-sp Low Nutrients  : Max Std = 0.0043 | Direction Flips = 5
+48-sp High Nutrients : Max Std = 0.0041 | Direction Flips = 17 | Min Pair Corr = 0.98
+24-sp High Nutrients : Max Std = 0.0026 | Direction Flips = 8 | Min Pair Corr = 1.00
+Saved checkpoint to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_K10_500ep.pth
+
+===========================================================================
+TRAINING POSTER PHYSICAL ODE: K = 11 | 500 EPOCHS | ZERO REGULARIZATION
+===========================================================================
+K=11 | Epoch   1/500 | Loss: 0.6283 (TF: 1.00) | Best: 0.6283 | Time: 0.6s
+K=11 | Epoch  50/500 | Loss: 0.2847 (TF: 0.87) | Best: 0.2847 | Time: 26.9s
+K=11 | Epoch 100/500 | Loss: 0.2897 (TF: 0.73) | Best: 0.2798 | Time: 52.4s
+K=11 | Epoch 150/500 | Loss: 0.3168 (TF: 0.60) | Best: 0.2798 | Time: 79.3s
+K=11 | Epoch 200/500 | Loss: 0.3510 (TF: 0.47) | Best: 0.2798 | Time: 105.8s
+K=11 | Epoch 250/500 | Loss: 0.3975 (TF: 0.33) | Best: 0.2798 | Time: 131.0s
+K=11 | Epoch 300/500 | Loss: 0.4666 (TF: 0.20) | Best: 0.2798 | Time: 155.6s
+K=11 | Epoch 350/500 | Loss: 0.5919 (TF: 0.07) | Best: 0.2798 | Time: 180.1s
+K=11 | Epoch 400/500 | Loss: 0.7442 (TF: 0.00) | Best: 0.2798 | Time: 206.9s
+K=11 | Epoch 450/500 | Loss: 0.7403 (TF: 0.00) | Best: 0.2798 | Time: 233.6s
+K=11 | Epoch 500/500 | Loss: 0.7394 (TF: 0.00) | Best: 0.2798 | Time: 259.6s
+
+--- Dynamic Evaluation (Passages 15..30) for K=11 ---
+48-sp Low Nutrients  : Max Std = 0.0039 | Direction Flips = 5
+48-sp High Nutrients : Max Std = 0.0034 | Direction Flips = 14 | Min Pair Corr = 1.00
+24-sp High Nutrients : Max Std = 0.0016 | Direction Flips = 7 | Min Pair Corr = 0.23
+Saved checkpoint to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_K11_500ep.pth
+
+===========================================================================
+TRAINING POSTER PHYSICAL ODE: K = 12 | 500 EPOCHS | ZERO REGULARIZATION
+===========================================================================
+K=12 | Epoch   1/500 | Loss: 0.6637 (TF: 1.00) | Best: 0.6637 | Time: 0.5s
+K=12 | Epoch  50/500 | Loss: 0.2932 (TF: 0.87) | Best: 0.2932 | Time: 26.0s
+K=12 | Epoch 100/500 | Loss: 0.2971 (TF: 0.73) | Best: 0.2877 | Time: 53.9s
+K=12 | Epoch 150/500 | Loss: 0.3249 (TF: 0.60) | Best: 0.2877 | Time: 81.7s
+K=12 | Epoch 200/500 | Loss: 0.3596 (TF: 0.47) | Best: 0.2877 | Time: 109.3s
+K=12 | Epoch 250/500 | Loss: 0.4068 (TF: 0.33) | Best: 0.2877 | Time: 136.2s
+K=12 | Epoch 300/500 | Loss: 0.4765 (TF: 0.20) | Best: 0.2877 | Time: 163.7s
+K=12 | Epoch 350/500 | Loss: 0.6012 (TF: 0.07) | Best: 0.2877 | Time: 191.6s
+K=12 | Epoch 400/500 | Loss: 0.7505 (TF: 0.00) | Best: 0.2877 | Time: 217.6s
+K=12 | Epoch 450/500 | Loss: 0.7464 (TF: 0.00) | Best: 0.2877 | Time: 244.9s
+K=12 | Epoch 500/500 | Loss: 0.7454 (TF: 0.00) | Best: 0.2877 | Time: 271.3s
+
+--- Dynamic Evaluation (Passages 15..30) for K=12 ---
+48-sp Low Nutrients  : Max Std = 0.0047 | Direction Flips = 4
+48-sp High Nutrients : Max Std = 0.0039 | Direction Flips = 19 | Min Pair Corr = 1.00
+24-sp High Nutrients : Max Std = 0.0023 | Direction Flips = 6 | Min Pair Corr = 1.00
+Saved checkpoint to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_K12_500ep.pth
+
+=====================================================================================
+FINAL SUMMARY: 500-EPOCH K-SCAN ON ALL 99 COMMUNITIES (ZERO REGULARIZATION)
+=====================================================================================
+K    | Best Loss  | 48 HN Std   | 48 HN Flips  | 24 HN Std   | 24 HN Flips  | LN Std    
+-------------------------------------------------------------------------------------
+8    | 0.2763     | 0.0053      | 12           | 0.0022      | 8            | 0.0044    
+9    | 0.2854     | 0.0053      | 12           | 0.0018      | 6            | 0.0039    
+10   | 0.2828     | 0.0041      | 17           | 0.0026      | 8            | 0.0043    
+11   | 0.2798     | 0.0034      | 14           | 0.0016      | 7            | 0.0039    
+12   | 0.2877     | 0.0039      | 19           | 0.0023      | 6            | 0.0047    
+
+Winning Model with Lowest KL Divergence: K = 8 (Loss = 0.2763)
+Total Sweep Time: 22.2 minutes
+Saved full sweep summary to: /home/karthik/SerialDilutionModel/Data/Gore_PosterModel_sweep_summary.pt

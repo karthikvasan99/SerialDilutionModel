@@ -20,6 +20,10 @@
 \usepackage{anyfontsize}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{bm}
+\usefonttheme{professionalfonts}
+\renewcommand*{\normalsize}{\fontsize{30.5}{36.6}\selectfont}
+\setbeamerfont{block body}{size=\normalsize}
 
 % ====================
 % Lengths
@@ -38,7 +42,7 @@
 % Title & Authors
 % ====================
 
-\title{A Universal Physical Consumer-Resource Neural ODE Framework for Microbial Serial Dilution Ecology}
+\title{Low-Dimensional Microbial Assembly: A Latent Consumer-Resource Neural ODE for Serial Dilution Ecology}
 
 \author{Karthik Srinivasan\textsuperscript{1}, Germ\'an Plata\textsuperscript{2}, Purushottam Dixit\textsuperscript{1}}
 
@@ -49,13 +53,13 @@
 % ====================
 
 \footercontent{
-  \textbf{Cross-Dataset Benchmarks:} Venturelli et al. (\textit{MSB} 2018) \;\textbullet\; Pollard et al. (\textit{Nat. Commun.} 2023) \;\textbullet\; German et al. (Rumen) \;\textbullet\; Gore et al. (\textit{Science} 2022)
+  \textbf{Cross-Dataset Benchmarks:} Venturelli et al. (\textit{Mol. Syst. Biol.} 2018) \;\textbullet\; Jin et al. (\textit{Nat. Commun.} 2023) \;\textbullet\; German et al. (BiomEdit Inc., Virginia Tech) \;\textbullet\; Hu et al. (\textit{Science} 2022)
   \hfill
   \href{mailto:karthik.srinivasan@yale.edu}{karthik.srinivasan@yale.edu}
 }
 
 \logoleft{\includegraphics[height=5.2cm]{logos/logo.png}}
-\logoright{\includegraphics[height=4.6cm]{figures/attribution_and_qr.png}}
+\logoright{\includegraphics[height=4.6cm]{figures/attribution_and_qr.png}\hspace{3.0cm}\mbox{}}
 
 % ====================
 % Document Body
@@ -72,47 +76,72 @@
 % ════════════════════════════════════════════════════════════════════════════════
 \begin{column}{\colwidth}
 
-  % 1. BACKGROUND & DILEMMA
-  \begin{block}{1. Background: Serial Dilution Regimes \& Modeling Dilemma}
-    \begin{itemize}
-      \item \textbf{Serial Dilution Ecology:} Cycles of continuous intra-cycle nutrient uptake and metabolic interaction interrupted by periodic discrete dilution ($1:D$) and dispersal ($\mu$).
-      \item \textbf{Why Generalized Lotka-Volterra (gLV) Fails:} Requires $N^2$ empirical interaction coefficients, assumes fixed interaction signs, cannot model substrate depletion, and overfits severely ($N=48$ requires $2{,}304$ parameters).
-      \item \textbf{The Simplex Reset Artifact:} Normalizing relative abundances to $\sum x_i = 1$ at transfers mutes quadratic self-limitation ($-\alpha_i N_i^2$) and triggers artificial competitive exclusion cascades.
-    \end{itemize}
+  % 1. SERIAL DILUTION ECOLOGY
+  \begin{block}{Serial dilution is a controlled, repeatable ecology experiment}
+    \begin{minipage}[c]{0.64\linewidth}
+      \begin{itemize}
+        \item Grow microbes in batches, then transfer a measured fraction into fresh medium to begin the next cycle.
+        \vspace{20pt}
+        \item Control community composition, nutrients, dilution, and growth conditions to systematically test ecological theories.
+        \vspace{20pt}
+        \item Models help navigate the many possible combinations of these variables to design communities, prioritize informative experiments, and generate testable predictions.
+      \end{itemize}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.32\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{Serial dilution.png}
+    \end{minipage}
   \end{block}
 
-  % 2. PHYSICAL NEURAL ODE FORMULATION
-  \begin{block}{2. Physical Consumer-Resource Neural ODE Formulation}
-    We model continuous within-passage growth coupled to discrete dilution transfers:
-    \begin{align*}
-      \frac{dN_i}{dt} &= N_i(t) \left( \sum_{k=1}^K \Theta_{ik} R_k(t) \right) - \alpha_i N_i(t)^2 \\
-      \frac{dR_k}{dt} &= - R_k(t) \left[ \sum_{i=1}^N \Theta_{ik} N_i(t) - \sum_{l=1}^K W_{lk} \left( \sum_{j=1}^N \Theta_{jl} N_j(t) \right) \right]
-    \end{align*}
+  % 2. BACKGROUND & DILEMMA
+  \begin{block}{Current models fail to extrapolate dynamics of serial dilution}
     \begin{itemize}
-      \item \textbf{Physical Constraints:} $\mathbf{\Theta} \ge 0$ (uptake traits), $\mathbf{W} \ge 0$ (cross-feeding), $\mathbf{\alpha} > 0$ (self-limitation), $\mathbf{R}_0 = \text{softplus}(\mathbf{a}_c) \ge 0$.
-      \item \textbf{Physical Continuity Across Passages ($m \to m+1$):}
-        $N_i(0)^{(m+1)} = \frac{N_i(\tau)^{(m)}}{D} + \mu \cdot M_{c, i}, \quad R_k(0)^{(m+1)} = R_{0, c, k}$. Eliminates simplex resets.
-      \item \textbf{Closed-Form Effective Interaction Operator:}
-        $\mathbf{A}^{(c)} = -\text{diag}(\mathbf{\alpha}) - \kappa \, \mathbf{\Theta} \, \text{diag}(\mathbf{R}_{0, c}) \, (\mathbf{I} - \mathbf{W})^T \mathbf{\Theta}^T$.
-        Decomposes into intra-specific crowding ($-\mathbf{\alpha}$), niche competition ($-\mathbf{\Theta}\mathbf{R}_0\mathbf{\Theta}^T$), and facilitation ($+\mathbf{\Theta}\mathbf{R}_0\mathbf{W}^T\mathbf{\Theta}^T$); rank $\le K \ll N$.
+      \item \textbf{Consumer-resource models:} Mechanistic and interpretable, but their many species--resource parameters make fitting raw abundance data difficult.
+      \item \textbf{Machine-learning models:} Can fit abundance data, but often lack interpretable mechanisms and fail to generalize to unseen environments or bacteria.
+      \item \textbf{gLV models:} A quasi-mechanistic middle ground, but also hard to fit to data due to excessive parameters ($N^2$ pairwise interactions) that are condition-specific and largely latent.
     \end{itemize}
-  \end{block}
-
-  % 3. HELD-OUT GENERALIZATION: OPHELIA
-  \begin{block}{3. Out-of-Sample Generalization: Venturelli et al. (2018)}
-    \begin{itemize}
-      \item \textbf{Held-Out Test Consortia:} 73 complex synthetic human gut communities ($4{,}380$ dynamic points) never seen during model training.
-      \item \textbf{Minimal Validation Loss Architecture ($K=7$):} Optimal trade-off between expressive capacity and generalization ($\mathcal{L}_{\text{GKL}} = \mathbf{0.12950}$).
-    \end{itemize}
-
     \begin{figure}
       \centering
-      \includegraphics[width=0.98\linewidth]{figures/Ophelia_Test_Scatter.png}
-      \caption{\textbf{Six-Panel Held-Out Generalization Across Time ($t=12n$, $n=0\dots5$).} Observed vs. predicted absolute biomass ($OD_{600}$) across 73 unseen gut communities and 12 species from $t=0\text{h}$ to $60\text{h}$ ($R^2 = \mathbf{0.69\text{--}0.75}$, Pearson $r = \mathbf{0.84\text{--}0.87}$ across dynamic timepoints; overall test $R^2 = \mathbf{0.7233}$, $\log_{10} r = \mathbf{0.9652}$, Spearman $\rho = \mathbf{0.9901}$).}
+      \begin{minipage}[t]{0.32\linewidth}
+        \includegraphics[height=11cm, width=\linewidth, keepaspectratio]{gLV_image.png}
+        \par\vspace{6pt}{\scriptsize\textit{gLVs - Venturelli et al.\ (MSB 2018)}}
+      \end{minipage}\hfill
+      \begin{minipage}[t]{0.32\linewidth}
+        \centering
+        \includegraphics[height=11cm, width=\linewidth, keepaspectratio]{CRM.png}
+        \par\vspace{6pt}{\scriptsize\textit{Consumer-resource models}}
+      \end{minipage}\hfill
+      \begin{minipage}[t]{0.32\linewidth}
+        \centering
+        \includegraphics[height=11cm, width=\linewidth, keepaspectratio]{NN_LSTM-Cell_v2.pdf}
+        \par\vspace{6pt}{\scriptsize\textit{LSTMs}}
+      \end{minipage}
     \end{figure}
   \end{block}
 
-\end{column}
+  % 3. PHYSICAL NEURAL ODE FORMULATION
+  \begin{block}{We develop a low-dimensional consumer-resource model}
+    \begin{itemize}
+      \item Serial-dilution communities occupy a low-dimensional niche space ($K \ll N$; Srinivasan et al., \textit{PRX Life} 2026); we represent $N$ species using $K$ latent resources.
+      \vspace{10pt}
+      \item Intra-passage dynamics are governed by non-equilibrium consumer-resource kinetics:
+      \vspace{10pt}
+      \begin{align*}
+          \frac{dN_i}{dt} &= N_i \sum_k \Theta_{ik} \frac{R_k}{R_k + K_{m,k}} - \alpha_i N_i^2 \\
+          \frac{dR_k}{dt} &= - \sum_i N_i \Phi_{ik} \frac{R_k}{R_k + K_{m,k}} + \sum_l W_{lk} \sum_j N_j \Phi_{jl} \frac{R_l}{R_l + K_{m,l}}
+      \end{align*}
+      \vspace{10pt}
+      where $\bm{N}$ is species abundance, $\bm{R}$ latent resource concentration, $\bm{\Theta}$ biomass yield, $\bm{\Phi}$ resource uptake rate, and $\mathbf{W}$ metabolic cross-feeding.
+      \vspace{10pt}
+      \item Nonnegative yields, uptake, and cross-feeding, with $\alpha_i, K_{m,k}>0$ and $\sum_k W_{jk}<1$, enforce physical constraints and mass conservation.
+      \vspace{10pt}
+      \item At each transfer, biomass is diluted and migration added; the medium resets: $N_i^{(m+1)}(0)=N_i^{(m)}(\tau)/D+\mu M_{c,i}$, $R_k^{(m+1)}(0)=R_{0,c,k}$.
+      \vspace{10pt}
+      \item Models are trained end-to-end via scheduled teacher forcing, annealing from observed transfer inocula to fully autonomous multi-passage rollouts to stabilize stiff ODE integration and eliminate compounding drift.
+    \end{itemize}
+  \end{block}
+
+  \end{column}
 
 \separatorcolumn
 
@@ -121,36 +150,37 @@
 % ════════════════════════════════════════════════════════════════════════════════
 \begin{column}{\colwidth}
 
-  % 4. UNIVERSALITY: POLLARD
-  \begin{block}{4. Universality of Metabolic Trait Matrices: Pollard et al. (2023)}
+  % 4. HELD-OUT GENERALIZATION: OPHELIA
+  \begin{block}{Model accurately predicts trajectories in unseen communities}
     \begin{itemize}
-      \item \textbf{Spatial Carrier Microenvironments:} 50 human gut isolates transferred across 5 carriers: Liquid broth, Mucin carriers, Plain agar, and Supernatants.
-      \item \textbf{Universal Invariant Traits:} A single metabolic uptake matrix $\mathbf{\Theta}$ ($50 \times 5$) and cross-feeding matrix $\mathbf{W}$ ($5 \times 5$) govern all 5 environments. Carrier divergence is controlled strictly by the learned environmental vector $\mathbf{a}_c \in \mathbb{R}^5$.
-      \item \textbf{Spatial Refugia Prevent Washout:} Solid carriers stably preserve $\mathbf{21\text{--}24}$ \textbf{species} ($\exp(H) \approx 11\text{--}15$) over 100 serial passages by sheltering sensitive taxa, whereas liquid broth collapses to $11.0$ species ($\exp(H) = 5.44$).
+      \item Synthetic human gut communities assembled from 12 prevalent bacterial isolates grown anaerobically across monoculture, co-culture, and multi-species dropout designs.
+      \item Longitudinal biomass time-series tracking species optical densities across sequential sampling intervals ($t = 12\,\text{h} \to 60\,\text{h}$) throughout batch growth cycles.
+      \item Invariant consumer-resource parameters learned from training sub-communities enable continuous dynamic trajectory forecasting on completely held-out community compositions.
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.98\linewidth]{figures/Pollard_Universal_Matrices.png}
-      \caption{\textbf{Universality Across 5 Spatial Microenvironments.} \textbf{(A)} Clustered uptake traits $\mathbf{\Theta}$ reveal specialized metabolic guilds. \textbf{(B)} Cross-feeding byproduct matrix $\mathbf{W}$. \textbf{(C)} Matched $\mathbf{a}_c$ achieves $R^2 = \mathbf{0.725\text{--}0.862}$ (mean $\mathbf{0.813}$), whereas carrier swaps ($R^2 = 0.511$) and shuffled nulls ($R^2 = 0.580$) collapse.}
+      \includegraphics[width=1\linewidth]{figures/Ophelia_Test_Scatter.png}
     \end{figure}
   \end{block}
 
-  % 5. ENVIRONMENTAL SPECIFICITY: GERMAN
-  \begin{block}{5. Meaningful Environmental Vectors: German et al. (Rumen)}
+
+
+  % 5. UNIVERSALITY: POLLARD
+  \begin{block}{Parameters of the model are interpretable}
     \begin{itemize}
-      \item \textbf{Longitudinal Methanogen Recovery ($N=91$ Strains, Peak $\ge 1\%$):} Retains $\mathbf{22}$ \textbf{methanogenic archaea} capturing $\mathbf{98.5\%}$ of archaeal reads and $\mathbf{92.3\%}$ of total community coverage across 6 geochemical perturbations.
-      \item \textbf{Environmental Specificity vs. Severe Null Collapse:} True learned $\mathbf{a}$ achieves $\mathbf{R^2 = 0.8224}$ (Pearson $\mathbf{r = 0.9074}$, $\mathcal{L}_{\text{KL}} = \mathbf{1.7128}$ at $K=12$). Condition swaps cause a $\mathbf{59.7\%}$ collapse in accuracy ($R^2 = 0.3313$), while shuffling $\mathbf{a}$ completely destroys predictive ability ($R^2 = -1.1257$).
+      \item Human gut communities of 50 diverse isolates propagated through 100 serial dilution cycles across 5 spatial environments, including liquid broth and structured hydrogel beads.
+      \item Multi-passage abundance profiles tracking community succession, spatial sheltering of slow-growing taxa, and long-term taxonomic retention.
+      \item Invariant uptake traits $\mathbf{\Theta}$ and cross-feeding networks $\mathbf{W}$ generalize across well-mixed and structured phases without phase-specific parameter re-tuning.
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.98\linewidth]{figures/German_A_Vector_Null_Comparison.png}
-      \caption{\textbf{Environmental Specificity vs. Null Baselines.} \textbf{(A)} True learned $\mathbf{a}$ ($R^2 = \mathbf{0.822}$, $r = \mathbf{0.907}$) significantly outperforms persistence null ($R^2 = 0.559$), mismatched conditions ($R^2 = 0.331$), and shuffled null ($R^2 = -1.13$). \textbf{(B)} Multi-passage horizon stability over 20 days. \textbf{(C)} PCA of learned $\mathbf{a}$ vectors autonomously clusters substrate and pressure chemistry.}
+      \includegraphics[width=0.96\linewidth]{figures/Pollard_Universal_Matrices.png}
     \end{figure}
   \end{block}
 
-\end{column}
+  \end{column}
 
 \separatorcolumn
 
@@ -159,42 +189,59 @@
 % ════════════════════════════════════════════════════════════════════════════════
 \begin{column}{\colwidth}
 
-  % 6. GORE: PHASE SPACE & MULTI-CYCLE RESOURCE TRAJECTORIES
-  \begin{block}{6. Phase Space Dynamics \& Multi-Cycle Resource Divergence}
+  % 6. PREDICTIVE MEDIA SEARCH: GERMAN
+  \begin{block}{Model prescribes therapeutic interventions}
     \begin{itemize}
-      \item \textbf{Non-Equilibrium Bifurcations (Gore et al., \textit{Science} 2022):} 48 isolates across 99 communities. Minimalist $K=2$ model captures transitions between stable fixed points and persistent chaos \textbf{purely by modulating $\mathbf{R}_0$}.
-      \item \textbf{Identical Community, Divergent Phases ($S=12$, Community 3):} Species pool $\mathbf{m}$ is 100\% identical; switching $\mathbf{R}_{0, \text{LN}} \to \mathbf{R}_{0, \text{HN}}$ triggers chaos ($P = 0.0108 \to 0.8921$).
+      \item Bovine rumen inocula from distinct donors (BRRS and OSU) cultivated in pressurized bioreactors under $\mathrm{H_2:CO_2}$ (5 bar and 30 bar) with MeOH or TMA.
+      \item Trained on all OSU conditions and 30 bar BRRS data; predicted 5 bar BRRS regimes to evaluate cross-donor and cross-pressure generalization.
+      \item Naive cross-host therapeutic intervention fails to enrich the target microbe; our model predicts +TMA at 5 bar rescues enrichment, confirmed in wet-lab validation (23\% observed).
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.98\linewidth]{figures/Gore_Phase_Space_Dynamics.png}
-      \caption{\textbf{Stability vs. Chaos Driven Purely by Environmental Resources $\mathbf{R}_0$.} \textbf{(A1–A2)} Biomass dynamics $N_i(t)$ damping to a fixed point in LN vs. irregular oscillations in HN. \textbf{(B1–B2)} Multi-cycle resource trajectories $(R_1, R_2)$ converge onto an identical closed limit cycle in LN ($\|\Delta\mathbf{R}\| \to \mathbf{0.0003}$), but wander and diverge in HN ($\|\Delta\mathbf{R}\| \approx \mathbf{0.0214}$).}
+      \includegraphics[width=0.88\linewidth]{figures/German_Prescriptive_Biotech_Search.png}
     \end{figure}
+    \vspace{-1ex}
+    \par{\scriptsize\textit{Data contributors:} Bela Haifa Khairunisa, Niel Baxter, Dwi Susanti, and Germ\'an Plata (BiomEdit Inc.); Christian Heryakusuma, Colin Short, and Biswarup Mukhopadhyay (Virginia Tech).}
   \end{block}
 
-  % 7. EXPLORING MODEL EXTREMES: 24-SPECIES ENRICHMENT
-  \begin{block}{7. Exploring Model Extremes: Taxonomic Biomarkers of Chaos}
+
+
+  % 7. GORE: MODEL FIT AND NON-EQUILIBRIUM OSCILLATIONS
+  \begin{block}{Model provides mechanistic insight for cause of limit cycles}
     \begin{itemize}
-      \item \textbf{Locked 100\% Recall Chaos Classifier:} Trained on $K=2$ physical trajectory features ($F_1 = 0.7458$, Recall = $100\%$, $T^* = 0.3891$). Correctly separates experimental $S=24$ communities in Medium Nutrients into stable and chaotic phases.
-      \item \textbf{Chaotic Drivers (Sp 31–36, $+80\%$ in Chaos):} Generalists with balanced traits ($\theta_1 \approx \theta_2$) that concentrate competitive pressure in the niche center, driving chaos.
-      \item \textbf{Stabilizing Specialists (Sp 37–42, $+80\%$ in Stable):} Extreme niche partitioners ($\theta_1/\theta_2 > 1.5$) that cleanly divide resources and enforce stability (a taxonomic mechanism missed by bacteria-agnostic random matrix models).
+      \item Synthetic bacterial consortia under daily serial dilution across low, medium, and high nutrient concentrations. Hu et al. (\textit{Science} 2022) explain stable vs.\ oscillatory behavior using medium-specific average interaction strengths.
+      \item When species decouple resource \emph{uptake} from \emph{growth yield} ($\mathbf{\Phi}\neq\mathbf{\Theta}$), the effective interaction matrix $\mathbf{A} = \mathbf{\Theta}\tilde{\mathbf{R}}\mathbf{\Phi}^T$ becomes skew-symmetric, destroying MacArthur's Lyapunov function (Blumenthal et al., \textit{PRL} 2024) and enabling a supercritical Hopf bifurcation.
+      \item Fitting the model to a high-fluctuation 3-species community with cyclic cross-feeding produces sustained limit cycles (ongoing work).
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.98\linewidth]{figures/Gore_24Species_Enrichment.png}
-      \caption{\textbf{Classifier Separation \& Taxonomic Biomarkers of Chaos.} \textbf{(A)} Classifier scores on experimental $S=24$ communities in MN. \textbf{(B)} Species enrichment $\Delta \text{Prevalence}$. \textbf{(C)} Metabolic trait map in $\mathbf{\Theta}$ space.}
+      \includegraphics[width=0.94\linewidth]{figures/Gore_Oscillation_Combined_Panel.png}
     \end{figure}
   \end{block}
 
-  % 8. KEY TAKEAWAYS & CONCLUSIONS
-  \begin{block}{8. Key Takeaways \& Conclusions}
-    \begin{enumerate}
-      \item \textbf{Trait Universality:} Metabolic traits ($\mathbf{\Theta}$) and cross-feeding networks ($\mathbf{W}$) are universal biological invariants across spatial carriers and chemical perturbations ($R^2 = 0.72\text{--}0.97$).
-      \item \textbf{Meaningful Environment Encoding:} Learned vectors $\mathbf{a}_c$ autonomously capture genuine environmental chemistry, outperforming null baselines and persistence models.
-      \item \textbf{Deterministic Chaos \& Biomarkers:} Transitions between stability and chaos can be modulated purely by initial resources $\mathbf{R}_0$. Chaos is driven by symmetric niche generalists, whereas specialized resource partitioners enforce ecological stability.
-    \end{enumerate}
+  % % 7. KEY TAKEAWAYS & CONCLUSIONS
+  % \begin{block}{7. Key Takeaways \& Conclusions}
+  %   \begin{enumerate}
+  %     \item \textbf{Low-Dimensional Microbiomes:} Under serial dilution kinetics, high-dimensional CRMs collapse onto a $K \ll N$ latent resource manifold (Srinivasan et al., \textit{PRX Life} 2026), making community-level fitting tractable for the first time.
+  %     \item \textbf{Trait Invariance:} Consumer-resource traits ($\mathbf{\Theta}, \mathbf{W}$) are transferable biological properties that generalize across spatial regimes, chemical additives, nutrient conditions, and community compositions.
+  %     \item \textbf{Non-Equilibrium Bifurcations:} Environmental nutrient supply alone triggers transitions between stability and oscillation, mediated by the symmetry of growth vs.\ uptake ($\mathbf{\Phi}$ vs.\ $\mathbf{\Theta}$).
+  %     \item \textbf{Predictive Bioengineering:} Learned traits support prescriptive media search, predicting conditions that rescue desired enrichment outcomes confirmed in wet lab.
+  %   \end{enumerate}
+  % \end{block}
+
+  % REFERENCES
+  \begin{block}{References}
+    \footnotesize
+    \begin{itemize}
+      \setlength{\itemsep}{0pt}
+      \item Srinivasan et al.\ \textit{PRX Life} \textbf{4}, 033026 (2026) --- Low-dimensional coexistence in complex microbial ecosystems.
+      \item Blumenthal, Rocks \& Mehta. \textit{Phys.\ Rev.\ Lett.} \textbf{132}, 127401 (2024) --- Phase transition to chaos in complex ecosystems with nonreciprocal species-resource interactions.
+      \item Hu et al.\ \textit{Science} \textbf{378}, 85--89 (2022) --- Emergent phases of ecological diversity and dynamics mapped in microcosms.
+      \item Venturelli et al.\ \textit{Mol.\ Syst.\ Biol.} \textbf{14}, MSB178157 (2018) --- Deciphering microbial interactions in synthetic human gut microbiome communities.
+      \item Jin et al.\ \textit{Nat.\ Commun.} \textbf{14}, 3510 (2023) --- Culturing of a complex gut microbial community in mucin-hydrogel carriers.
+    \end{itemize}
   \end{block}
 
 \end{column}

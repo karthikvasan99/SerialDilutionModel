@@ -13,6 +13,11 @@ import torch.nn.functional as F
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 # 1. Load Data
+train_mat = loadmat('Data/train_data.mat')['train_data']
+train_valid = [np.nan_to_num(train_mat[i], nan=0.0) for i in range(train_mat.shape[0]) 
+              if not np.isnan(train_mat[i][0]).any() and np.sum(train_mat[i][0]) > 1e-4]
+train_tensor = torch.tensor(np.array(train_valid), dtype=torch.float32, device=device)
+
 test_mat = loadmat('Data/test_data.mat')['test_data']
 test_valid = [np.nan_to_num(test_mat[i], nan=0.0) for i in range(test_mat.shape[0]) 
               if not np.isnan(test_mat[i][0]).any() and np.sum(test_mat[i][0]) > 1e-4]
@@ -41,31 +46,82 @@ ckpt = torch.load('Data/Ophelia_Physical_ODE_12Strains.pth', weights_only=False)
 model.load_state_dict(ckpt['model_state_dict'])
 model.eval()
 
-# 3. Simulate on Held-Out Test Data
+# 3. Simulate on Train and Held-Out Test Data
 t_span = torch.linspace(0.0, 5.0, 6, device=device)
 with torch.no_grad():
     Theta, W, alpha, R0_table = model.get_params()
-    N0_val = val_tensor[:, 0, :]
-    batch_size = N0_val.size(0)
-    R0_batch = R0_table[0].unsqueeze(0).expand(batch_size, -1)
-    S0_val = torch.cat([N0_val, R0_batch], dim=-1)
     
+    # Train rollout
+    N0_train = train_tensor[:, 0, :]
+    batch_size_tr = N0_train.size(0)
+    R0_batch_tr = R0_table[0].unsqueeze(0).expand(batch_size_tr, -1)
+    S0_train = torch.cat([N0_train, R0_batch_tr], dim=-1)
+    S_t_train = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha), S0_train, t_span, method='euler', options={'step_size': 0.1})
+    train_pred = torch.clamp(S_t_train[..., :12].permute(1, 0, 2), min=0.0)
+    
+    # Test rollout
+    N0_val = val_tensor[:, 0, :]
+    batch_size_val = N0_val.size(0)
+    R0_batch_val = R0_table[0].unsqueeze(0).expand(batch_size_val, -1)
+    S0_val = torch.cat([N0_val, R0_batch_val], dim=-1)
     S_t_val = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha), S0_val, t_span, method='euler', options={'step_size': 0.1})
     val_pred = torch.clamp(S_t_val[..., :12].permute(1, 0, 2), min=0.0)
 
+train_true_np = train_tensor.cpu().numpy()
+train_pred_np = train_pred.cpu().numpy()
 val_true_np = val_tensor.cpu().numpy()
 val_pred_np = val_pred.cpu().numpy()
 
-# 4. Create Six-Panel Figure Sized for Column Width with Extra Large Legend/Badge Fonts
+# 4. Create Six-Panel Figure Sized for Column Width with Right-Side Legend
 plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
-fig, axes = plt.subplots(2, 3, figsize=(15.0, 6.6), dpi=300)
+plt.rcParams['font.family'] = 'DejaVu Sans'
+plt.rcParams['axes.linewidth'] = 1.8
+plt.rcParams['xtick.major.width'] = 1.6
+plt.rcParams['ytick.major.width'] = 1.6
+plt.rcParams['xtick.major.size'] = 6
+plt.rcParams['ytick.major.size'] = 6
+
+fig, axes = plt.subplots(2, 3, figsize=(15.2, 6.2), dpi=300)
 axes = axes.flatten()
 
 species_colors = plt.cm.tab20(np.linspace(0, 1, 12))
-time_labels = ['t = 0h (Inoculum)', 't = 12h', 't = 24h', 't = 36h', 't = 48h', 't = 60h']
 
-for t_idx in range(6):
-    ax = axes[t_idx]
+# --- Panel 0: Full Training Fit (Dynamic timepoints t = 12h to 60h) ---
+ax0 = axes[0]
+o_tr_dyn = train_true_np[:, 1:, :]  # (102, 5, 12)
+p_tr_dyn = train_pred_np[:, 1:, :]
+
+o_tr_flat = o_tr_dyn.flatten()
+p_tr_flat = p_tr_dyn.flatten()
+var_tr = np.sum((o_tr_flat - np.mean(o_tr_flat))**2)
+r2_tr = 1.0 - np.sum((o_tr_flat - p_tr_flat)**2) / var_tr
+
+for sp in range(12):
+    o_sp = o_tr_dyn[:, :, sp].flatten()
+    p_sp = p_tr_dyn[:, :, sp].flatten()
+    ax0.scatter(o_sp, p_sp, color=species_colors[sp], alpha=0.35, s=22, edgecolors='none')
+
+max_val0 = max(np.max(o_tr_flat), np.max(p_tr_flat)) * 1.08
+ax0.plot([0, max_val0], [0, max_val0], 'k--', lw=2.0, alpha=0.8)
+ax0.set_xlim(-0.02 * max_val0, max_val0)
+ax0.set_ylim(-0.02 * max_val0, max_val0)
+
+badge_tr = (
+    r"$\mathbf{Training\ Fit}$"
+    + "\n"
+    + rf"$R^2 = {r2_tr:.3f}$"
+)
+props_tr = dict(boxstyle='round,pad=0.45', facecolor='#EBF3FA', edgecolor='#00356B', alpha=0.95, lw=1.6)
+ax0.text(0.06, 0.94, badge_tr, transform=ax0.transAxes, fontsize=15.0, fontweight='bold',
+         verticalalignment='top', bbox=props_tr)
+ax0.tick_params(labelsize=14)
+ax0.grid(True, linestyle='--', alpha=0.3)
+
+# --- Panels 1-5: Dynamic Generalization (t = 12h to 60h) ---
+test_time_labels = ['12', '24', '36', '48', '60']
+
+for i, t_idx in enumerate(range(1, 6)):
+    ax = axes[i + 1]
     o_t = val_true_np[:, t_idx, :]
     p_t = val_pred_np[:, t_idx, :]
     
@@ -74,9 +130,7 @@ for t_idx in range(6):
     
     var_t = np.sum((o_flat - np.mean(o_flat))**2)
     r2_t = 1.0 - np.sum((o_flat - p_flat)**2) / var_t if var_t > 0 else 1.0
-    r_t, _ = pearsonr(o_flat, p_flat) if np.std(p_flat) > 0 else (1.0, 0.0)
     
-    # Larger scatter points
     for sp in range(12):
         ax.scatter(o_t[:, sp], p_t[:, sp], color=species_colors[sp], alpha=0.65, s=32, edgecolors='none')
         
@@ -85,36 +139,34 @@ for t_idx in range(6):
     ax.set_xlim(-0.02 * max_val, max_val)
     ax.set_ylim(-0.02 * max_val, max_val)
     
-    # Extra large font size for badge / metrics (15pt, bold)
-    if t_idx == 0:
-        badge_text = f"$\\mathbf{{{time_labels[t_idx]}}}$\n$R^2 = 1.000$\n$r = 1.000$"
-    else:
-        badge_text = f"$\\mathbf{{{time_labels[t_idx]}}}$\n$R^2 = {r2_t:.3f}$\n$r = {r_t:.3f}$"
-        
-    props = dict(boxstyle='round,pad=0.5', facecolor='#F0F4F8', edgecolor='#0F2942', alpha=0.92, lw=1.6)
-    ax.text(0.06, 0.94, badge_text, transform=ax.transAxes, fontsize=14.5, fontweight='bold', 
+    badge_text = (
+        rf"$\mathbf{{t = {test_time_labels[i]}\ h}}$"
+        + "\n"
+        + rf"$R^2 = {r2_t:.3f}$"
+    )
+    props = dict(boxstyle='round,pad=0.45', facecolor='#F0F4F8', edgecolor='#0F2942', alpha=0.92, lw=1.6)
+    ax.text(0.06, 0.94, badge_text, transform=ax.transAxes, fontsize=15.0, fontweight='bold',
             verticalalignment='top', bbox=props)
-    
-    # Extra large axis labels and ticks
-    if t_idx in [3, 4, 5]:
-        ax.set_xlabel('Observed OD$_{600}$', fontsize=15.0, fontweight='bold', color='#1A365D')
-    if t_idx in [0, 3]:
-        ax.set_ylabel('Predicted OD$_{600}$', fontsize=15.0, fontweight='bold', color='#1A365D')
         
-    ax.tick_params(labelsize=12.5)
-    ax.grid(True, linestyle='--', alpha=0.5)
+    ax.tick_params(labelsize=14)
+    ax.grid(True, linestyle='--', alpha=0.3)
 
-# 5. Prominent, Extra-Large Species Legend Across the Bottom
+# 5. Prominent Species Legend Box on the Right
 legend_handles = [
     mlines.Line2D([], [], color=species_colors[sp], marker='o', linestyle='None',
-                  markersize=9, label=f'Sp {sp+1}')
+                  markersize=10, label=f'Sp {sp+1}')
     for sp in range(12)
 ]
-fig.legend(handles=legend_handles, loc='lower center', ncol=6, fontsize=13.5, 
-           frameon=True, facecolor='#FFFFFF', edgecolor='#0F2942', framealpha=0.95,
-           bbox_to_anchor=(0.5, -0.02))
+fig.legend(handles=legend_handles, loc='center left', bbox_to_anchor=(0.88, 0.5),
+           ncol=1, fontsize=13.5, labelspacing=0.55,
+           frameon=True, facecolor='#FFFFFF', edgecolor='black', framealpha=0.95,
+           title=r'$\mathbf{Species}$', title_fontsize=14.5)
 
-plt.tight_layout(rect=[0, 0.05, 1, 1])
+# 6. Single Shared X and Y Axis Labels
+plt.tight_layout(rect=[0.035, 0.045, 0.88, 0.98])
+fig.supxlabel('Observed OD', fontsize=18.0, fontweight='bold', color='black', y=0.015)
+fig.supylabel('Predicted OD', fontsize=18.0, fontweight='bold', color='black', x=0.012)
+
 out_path = 'Poster/figures/Ophelia_Test_Scatter.png'
 plt.savefig(out_path, dpi=300, bbox_inches='tight')
-print(f"Saved large font 6-panel Ophelia test figure with species legend to {out_path}")
+print(f"Saved updated Ophelia figure to {out_path}")

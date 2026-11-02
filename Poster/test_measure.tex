@@ -32,7 +32,8 @@
 \setlength{\sepwidth}{0.025\paperwidth}
 \setlength{\colwidth}{0.30\paperwidth}
 
-\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{minipage}\egroup\typeout{MEASURED_COL_HEIGHT: \the\ht0}}
+\newcommand{\separatorcolumn}{\begin{column}{\sepwidth}\end{minipage}\egroup\typeout{MEASURED_COL_HEIGHT: \the\ht0}
+\end{column}}
 
 % ====================
 % Title & Authors
@@ -103,18 +104,19 @@
   % 3. HELD-OUT GENERALIZATION: OPHELIA
   \begin{block}{3. Out-of-Sample Generalization: Venturelli et al. (2018)}
     \begin{itemize}
-      \item \textbf{Held-Out Test Consortia:} 73 complex synthetic human gut communities ($4{,}380$ dynamic points) never seen during model training.
-      \item \textbf{Minimal Validation Loss Architecture ($K=7$):} Optimal trade-off between expressive capacity and generalization ($\mathcal{L}_{\text{GKL}} = \mathbf{0.12950}$).
+      \item \textbf{High-Fidelity Training Fit:} Trained on 102 combinatorial gut communities under Generalized KL loss ($R^2 = \mathbf{0.780}$, Pearson $r = \mathbf{0.884}$ across dynamic points).
+      \item \textbf{Unseen Test Generalization ($K=7$):} Champion selected by minimal held-out validation loss ($\mathcal{L}_{\text{GKL}} = \mathbf{0.12950}$) tested on 73 completely held-out communities ($4{,}380$ dynamic points).
     \end{itemize}
 
     \begin{figure}
       \centering
       \includegraphics[width=0.98\linewidth]{figures/Ophelia_Test_Scatter.png}
-      \caption{\textbf{Six-Panel Held-Out Generalization Across Time ($t=12n$, $n=0\dots5$).} Observed vs. predicted absolute biomass ($OD_{600}$) across 73 unseen gut communities and 12 species from $t=0\text{h}$ to $60\text{h}$ ($R^2 = \mathbf{0.69\text{--}0.75}$, Pearson $r = \mathbf{0.84\text{--}0.87}$ across dynamic timepoints; overall test $R^2 = \mathbf{0.7233}$, $\log_{10} r = \mathbf{0.9652}$, Spearman $\rho = \mathbf{0.9901}$).}
+      \caption{\textbf{Training Fit and Held-Out Generalization Across Time ($t=12\dots60\text{h}$).} Observed vs. predicted absolute biomass ($OD_{600}$) across 12 gut species. \textbf{Top-left:} Full training fit across 102 communities and all dynamic timepoints ($R^2 = \mathbf{0.780}$, $r = \mathbf{0.884}$). \textbf{Remaining panels:} Dynamic generalization across 73 unseen test communities from $t=12\text{h}$ to $60\text{h}$ ($R^2 = \mathbf{0.69\text{--}0.75}$, Pearson $r = \mathbf{0.84\text{--}0.87}$; overall test $R^2 = \mathbf{0.7233}$, $\log_{10} r = \mathbf{0.9652}$, Spearman $\rho = \mathbf{0.9901}$).}
     \end{figure}
   \end{block}
 
 \end{minipage}\egroup\typeout{MEASURED_COL_HEIGHT: \the\ht0}
+\end{column}
 
 \separatorcolumn
 
@@ -153,6 +155,7 @@
   \end{block}
 
 \end{minipage}\egroup\typeout{MEASURED_COL_HEIGHT: \the\ht0}
+\end{column}
 
 \separatorcolumn
 
@@ -201,6 +204,7 @@
   \end{block}
 
 \end{minipage}\egroup\typeout{MEASURED_COL_HEIGHT: \the\ht0}
+\end{column}
 
 \separatorcolumn
 \end{columns}

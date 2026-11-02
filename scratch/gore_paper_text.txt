@@ -1,0 +1,614 @@
+--- PAGE 1 ---
+REPORT
+◥
+COMMUNITY ECOLOGY
+Emergent phases of ecological diversity and
+dynamics mapped in microcosms
+Jiliang Hu1,2, Daniel R. Amor 1†, Matthieu Barbier 3,4, Guy Bunin 5, Jeff Gore 1*
+From tropical forests to gut microbiomes, ecological communities host notably high numbers of
+coexisting species. Beyond high biodiversity, communities exhibit a range of complex dynamics that
+are difficult to explain under a unified framework. Using bacterial microcosms, we performed a
+direct test of theory predicting that simple community-level features dictate emergent behaviors of
+communities. As either the number of species or the strength of interactions increases, we show that
+microbial ecosystems transition between three distinct dynamical phases, from a stable equilibrium in
+which all species coexist to partial coexistence to emergence of persistent fluctuations in species
+abundances, in the order predicted by theory. Under fixed conditions, high biodiversity and fluctuations
+reinforce each other. Our results demonstrate predictable emergent patterns of diversity and
+dynamics in ecological communities.
+I
+n nature, species reside and interact with
+myriad other species in complex commu-
+nities (1). Central challenges in ecology in-
+clude understanding how many species are
+able to coexist, why biodiversity is higher
+in some places than others, why communities
+show varying dynamical behaviors (2, 3), and
+how these factors shape ecosystem functioning
+(4). A long-standing debate concerns whether
+the diversity of a community enhances or weak-
+ens its stability (5). By studying natural com-
+munities, ecologists havei d e n t i f i e dp o t e n t i a l
+environmental drivers that could affect both
+biodiversity and community dynamics (6). Lab-
+oratory experiments facilitate disentangling such
+environmental drivers from inherent community
+properties, such as species interactions, that
+may also shape biodiversity and dynamics.
+Experimental communities with few species
+have been shown to display predictable
+dynamics, such as stable equilibria and pe-
+riodic oscillations ( 7–11), and have allowed
+an understanding of the role of interactions
+ranging from predation (9–11) to competition
+(7, 8) to cross-feeding (12). In more biodiverse
+laboratory microcosms derived from natural
+habitats, however, community composition is
+only reproducible and predictable at family
+or higher levels of taxonomy (3, 13–15). Given
+the relative inaccessibility of detailed infor-
+mation on the ecological roles of every spe-
+cies (capturing every interaction strength,
+growth rate, and carrying capacity, among
+others), the question arises: Is it possible to
+predict the biodiversity and dynamics of these
+complex communities with simple community-
+level parameters?
+Starting with the pioneering work by
+Robert May (16), ecologists have sought to pre-
+dict community behaviors using community-
+level parameters such as the number of species
+and the distribution of interaction strengths
+between species. The interaction strengths
+quantify how strongly a species influences
+the growth and survival of other organisms in
+the community and therefore determines the
+overall composition and stability of commu-
+nities (14). May and others have suggested that
+a large number of species and strong interac-
+tions lead to instability of community dynam-
+ics (16–20), yet we still do not understand how
+communities behave beyond the transition
+to instability. Recent theory suggests that a
+fraction of species tend to go extinct before
+the community loses stability ( 21–23)a n d
+that unstable communities can exhibit fluc-
+tuations, which could in turn reinforce bio-
+diversity ( 24–30). This body of theory has
+been difficult to validate because the asso-
+ciated parameters are hard to estimate and
+manipulate ( 31). Experimental microcosms
+have now reached the necessary controlla-
+bility (8, 14, 15) to test theoretical predictions
+based on community-level parameters of eco-
+logical communities. We aim to uncover the
+relationship between stability and diversity
+through experimentally controlling two fac-
+tors that are usually unobservable in natural
+settings: the strength of interspecies inter-
+actions and the number of species introduced
+in the experiment (referred to as the species
+pool size).
+We began by summarizing the predictions
+on community dynamics and biodiversity from
+the well-known generalized Lotka-Volterra
+model, modified to include dispersal from a
+species pool:
+dNi
+dt ¼ Ni 1 /C0
+XS
+j¼1
+aij Nj
+ !
+þ D ð1Þ
+where Ni is the abundance of species i (nor-
+malized to its carrying capacity), aij is the in-
+teraction strength that captures how strongly
+speciesj inhibits speciesi (with self-regulation
+aii =1 ) ,a n d D is the dispersal rate. We sim-
+ulated the dynamics of communities with dif-
+ferent species pool sizes S and interaction
+matrices. We sampled the interaction strength
+from a uniform distribution U [0, 2< aij>],
+where <aij> is the mean interaction strength
+between species (which also determines the
+variance of interactions; the values of < aij>
+and std( aij) increase proportionally in this
+study, where std( aij) is the standard devia-
+tion of interactions; see ( 32)]. Modeling spe-
+cies interactions as a random interaction
+network captures species heterogeneity with-
+out assuming any particular community struc-
+ture (16, 17, 23).
+Our simulations revealed a strong depen-
+dence of biodiversity (number of coexisting
+species) and dynamics on both the species
+pool size S (Fig. 1A) and interaction strength
+<aij> (Fig. 1B). As either of these parameters
+increase, communities experience a transi-
+tion from stable full coexistence (phase I: all
+species survive and reach stable abundances)
+to stable partial coexistence (phase II: some
+species go extinct, and the surviving ones reach
+stability) to persistent fluctuations in species
+abundances and biomass (phase III) [figs. S1
+to S3 and (32)]. The transition to unstable dy-
+namics (phase II to phase III) corresponds
+with the loss of linear stability of the equilib-
+rium, consistent with May ’s theory (fig. S4).
+These results agree with recent theory that
+derived analytically the existence of a phase
+transition from a distinct stable state (phases I
+and II) to persistent fluctuations (phase III)
+(21, 22).
+To address the ecological implications of
+these dynamical phases, we analyzed both the
+fraction of species that survive at equilibrium
+( F i g .1 ,Ca n dE ,a n df i g .S 5 )a n dt h ef r a c t i o no f
+communities that exhibit persistent fluctua-
+tions (Fig. 1, D and F). We found that the se-
+quence of dynamical phases is generic across
+the parameter space: Communities generally
+experience species extinctions before they lose
+stability as either of the control parameters
+increase. This sequence is both predicted by
+analytical expressions for the phase bounda-
+ries (Fig. 1, C to F) and robust to different
+choices of interaction strength distributions
+RESEARCH
+Hu et al., Science 378,8 5 –89 (2022) 7 October 2022 1o f5
+1Physics of Living Systems, Department of Physics,
+Massachusetts Institute of Technology, Cambridge, MA
+02139, USA. 2Department of Mechanical Engineering,
+Massachusetts Institute of Technology, Cambridge, MA
+02139, USA. 3CIRAD, UMR PHIM, 34090 Montpellier, France.
+4PHIM Plant Health Institute, University of Montpellier,
+CIRAD, INRAE, Institut Agro, IRD, 34090 Montpellier, France.
+5Department of Physics, Technion — Israel Institute of
+Technology, Haifa 3200003, Israel.
+*Corresponding author. Email: gore@mit.edu
+†Present address: Institute of Biology, University of Graz, A-8010
+Graz, Austria.
+Downloaded from https://www.science.org at Yale University on October 19, 2026
+--- PAGE 2 ---
+and modeling assumptions (figs. S6 and S7)
+(21). In particular, natural ecological com-
+munities display diverse interaction types,
+which affects the degree of symmetry in
+the interaction matrix (aij) (e.g., competition
+and mutualism may be symmetrical, whereas
+predation is antisymmetrical). We found
+that varying these properties of the interac-
+tion matrix does not qualitatively affect the
+dynamical phases (figs. S8 and S9). Other
+model choices— for example, considering pH-
+mediated interactions or the serial dilution
+of communities into fresh media (figs. S9
+to S12) ( 14)— further showed the robustness
+and generic nature of the dynamical phases.
+Therefore, it may be possible to predict the
+diversity and dynamics of ecological commu-
+nities from community-level features of the
+interaction network.
+To experimentally test the predicted phase
+transitions, we built synthetic communities
+using a library of 48 bacterial isolates from
+terrestrial environments [figs. S13 and S14
+and (32)]. After inoculation, we exposed com-
+munities to cycles of growth, dispersal from
+the pool, and dilution while monitoring com-
+munity composition and biomass at the end
+of each daily cycle [Fig. 2A and (32)]. Leverag-
+ing previous work ( 14, 33), we tested media
+conditions to tune the strength of bacterial
+interactions. We found that the probability of
+coexistence in pairwise coculture decreased
+with the concentration of supplemented glu-
+cose and urea. In this medium, an increase
+in the concentration of these nutrients there-
+fore increases the strength of competitive
+interactions (Fig. 2B and tables S1 to S3).
+As discussed in our previous work ( 14, 33),
+high nutrient concentrations lead to extensive
+modification of the media (e.g., pH) and hence
+stronger interactions. This experimental plat-
+form allows us to control the key parameters
+Hu et al., Science 378,8 5 –89 (2022) 7 October 2022 2o f5
+Fig. 1. Theory predicts that species pool size
+and interspecies interaction strength shape
+phases of community diversity and dynamics.
+(A) Representative time series of species abundance
+for the qualitatively different dynamics of com-
+munities with different species pool size S, under
+interaction strength < aij> = 0.3. Communities
+transition from stable full coexistence ( S= 4) to
+stable partial coexistence (S = 20) to persistent
+fluctuations ( S = 80). ( B) Increasing interaction
+strength while fixing the species pool size reveals
+analogous transitions. The values of < aij> and
+std(aij) increase proportionally in this study.
+(C and D) Mean fractions of species that survive in
+the community (C) and communities that exhibit
+persistent fluctuations (D). As interaction strength
+increases, communities lose species (dashed vertical
+line, transition from phase I to phase II) before
+losing stability (solid vertical line, transition from
+phase II to phase III). ( E and F) Mapping the
+survival fraction (E) and community fluctuation
+fraction (F) onto the phase space reveals that this
+sequence (phase I to phase II to phase III) of phase
+transitions is maintained as either of the control
+parameters increases. The gray dashed (solid) line
+shows the analytical solution for the survival
+(stability) boundary. The color maps depict the
+mean value over 1000 simulations ( 32).
+RESEARCH | REPORT
+Downloaded from https://www.science.org at Yale University on October 19, 2026
+--- PAGE 3 ---
+Hu et al., Science 378,8 5 –89 (2022) 7 October 2022 3o f5
+S species from a pool of
+48 bacterial isolates
+Dilution Dispersal
+10 daysInoculate 
+on day 0 
+A B
+16S rRNA 
+amplicon 
+sequencing
+Biomass
+Measurements
+C
+Growth
+ Size of species pool
+ Interaction strength
+S=24
+0 5 10 
+Time (days) 
+Biomass (OD)0 
+0.4 
+0.8 
+1.2 
+S=12S=6S=3
+Fluctuation Stable
+ 1 2  3 4
+S=12, High nutrient S=48 DE
+Fraction of ij  > 1
+Nutrient concentrations
+Low Medium High 
+Interaction strength 
+Low nutrient Medium nutrient High nutrient
+S=48
+5 6 7 8
+0 5 10 
+Time (days) 
+Relative abundance
+0.2 
+0.4 
+0.6 
+0.2 
+0 
+0.8 
+1 
+0 5 10 0 5 10 0 5 10 
+0 0.5 1 
+Time (days) 
+Relative abundance
+Low nutrient Medium nutrient High nutrient
+0.2 
+0.4 
+0.6 
+0 
+0.8 
+1 
+Relative abundance
+on day 10
+0 0.5 1 0 0.5 1 
+Replicate
+1 
+2
+3 
+Fig. 2. Increasing species pool size or interaction strength leads to loss of
+stability in microbial communities.(A) We used a library of 48 bacteria to
+g e n e r a t es p e c i e sp o o l so fd i f f e r e n ts i z e sand compositions. Cocultures underwent
+serial dilutions with additional dispersal from the pool. Community composition
+and total biomass were monitored through 16S sequencing and optical density
+(OD). ( B) In two-species cocultures, interaction strengths leading to the loss of
+coexistence (aij > 1) increase in frequency with nutrient concentration. Error bars
+represent SEM; n =3 0 .( C) Fluctuations in community biomass increase with
+either species pool size or interaction strength. Solid lines represent eight
+different species pool compositions (dashed lines represent replicates of the
+48-species community). Purple (orange) lines highlight stable (fluctuating)
+dynamics. (D) Under high nutrient concentration, half of the 12-species communities
+exhibit persistent fluctuations (top panels) in species abundances and the rest
+reached stability (bottom panels). (E) Time series (top panels) for the species
+abundances in 48-species communities. Stability was reached only under low
+nutrient concentration, and variability in end-point relative abundances increased
+with nutrient concentration (bottom panels) (fig. S15). Relative abundance
+plots show the amplicon sequence variant data of individual replicates.
+RESEARCH | REPORT
+Downloaded from https://www.science.org at Yale University on October 19, 2026
+--- PAGE 4 ---
+established by theory: species pool size and
+interaction strength.
+We experimentally mapped the phase space
+of community dynamics by exposing 63 spe-
+cies pools to three levels of interaction strength.
+Specifically, we tested 30 species pairs (S =2 ) ;
+eight different communities for each sizeS =3 ,
+6, 12, and 24; and one community of S =4 8
+(the full species library). The resulting bio-
+mass time series were relatively stable under
+low interaction streng th and small species
+pool size, whereas increasing these two var-
+iables progressively led to a higher fraction
+of communities exhibiting biomass fluctua-
+tions (Fig. 2C). Analyzing species abundances
+through 16S sequencing (Fig. 2, D and E), we
+found that biomass fluctuations were highly
+correlated with species abundance fluctua-
+tions (figs. S15 and S16). For example, for com-
+munities with 12 species in the pool and high
+nutrient concentration, four communities
+reached stable equilibria and the remaining
+four exhibited fluctuations in both biomass
+and species abundances until the end of the
+experiment (Fig. 2, C and D). Replicates with
+identical species pool composition exhibited
+highly reproducible dynamics (figs. S17 to S25),
+and the classification of stable and fluctuating
+communities was robust to different methods
+that analyzed biomass, species composition, and
+variations between replicates [figs. S15 and S16
+and (32)]. We also experimentally observed this
+transition toward unstable dynamics under dif-
+ferent carbon sources and dilution frequencies
+(fig. S27). Therefore, synthetic microbial com-
+munities lose stability as either species pool size
+(for S > 2) or interaction strength increases.
+To understand the relationship between spe-
+cies extinctions and loss of community stability,
+we analyzed species survival across these ex-
+periments. As expected, the fraction of sur-
+viving species decreased with an increase in
+either species pool size or interaction strength,
+as determined by nutrient concentration (Fig. 3A).
+For example, at medium interaction strength,
+83% (±3%) of species were able to survive in
+t h e3 0p a i r w i s e(S = 2) cocultures, whereas this
+frequency decreased to 36% (±7%) among the
+eight different combinations of six-species com-
+munities (S = 6; Fig. 3A). Despite the pronounced
+loss of species, none of these communities
+displayed persistent f luctuations (Fig. 3B).
+Such fluctuations arose with further increase
+of the species pool size, with half of the 24-
+species combinations displaying fluctuations
+(Fig. 3B). Notably, the species survival fraction
+displayed only a modest decrease entering the
+fluctuation regime, with 24% (±2%) of species
+surviving in the 24-species communities as
+compared with 36% (±7%) in the six-species
+communities (Fig. 3, A and B). Mapping these
+experimental results over the phase space (Fig.
+3, C and D) confirmed the theoretically pre-
+dicted (Fig. 1, E and F) sequence of transitions:
+Hu et al., Science 378,8 5 –89 (2022) 7 October 2022 4o f5
+Fig. 3. Species pool size and interaction strength determine the diversity and dynamics of experi-
+mental communities. (A) Fraction of surviving species decreases with either species pool size or interaction
+strength (nutrient concentration). The survival fraction decreases more slowly at high S and strong
+interaction strength. ( B) Fraction of fluctuating communities increases with either species pool size or
+interaction strength. ( C) Phase diagram for the fraction of species surviving in experimental communities.
+As communities cross the boundary of phase I (dashed white line), they experience species extinctions,
+with a fast decay in survival fraction through phase II and a relative maintenance of survival fraction through
+phase III. The solid white line indicates the stability boundary. ( D) Phase diagram for the fraction of
+fluctuating communities in experiments. Communities start exhibiting persistent fluctuations after crossing
+the boundary into phase III (solid gray line). The dashed gray line indicates the survival boundary.
+In (A) and (B), error bars represent SEM; n =8 .
+Fig. 4. Fluctuating communities are more diverse than stable communities under the same conditions.
+(A) As the average survival fraction (blue line) decreases with increasing species pool size S in simulations,
+more communities exhibit fluctuations in species abundances (orange data points). Whereas stable
+communities (purple data points) exhibit a steady decrease in species survival fraction with S, the loss of
+species is slower in fluctuating communities. Each data point represents an individual community. ( B)I n
+experiments under high nutrient concentration (also under lower nutrient concentration; fig. S28), fluctuating
+communities exhibit a higher survival fraction than stable communities. The survival fractions of 88%
+(±5%) of the fluctuating communities are above or equal to the mean, as compared with 14% (±6%) in
+the case of stable communities [ p < 0.01; ( 32)]. Error bars represent SEM; n =8 .
+RESEARCH | REPORT
+Downloaded from https://www.science.org at Yale University on October 19, 2026
+--- PAGE 5 ---
+Communities experience species extinctions
+before exhibiting persistent fluctuations, as
+either species pool size or interaction strength
+increases.
+Next, through analyzing species survival
+fraction across different species pool composi-
+tions, we addressed how fluctuations and diver-
+sity may influence each other. In simulations,
+the fraction of surviving species revealed a
+generic trend: For the same species pool size
+and interaction strength, fluctuating commu-
+nities were more diverse than stable commu-
+nities (Fig. 4A). This trend was also observed
+in experiments: Most fluctuating communities
+reached higher survival fractions than stable
+communities reached under the same con-
+ditions (Fig. 4B and fig. S28). For example,
+within the 12-species communities, fluctuating
+communities had on average 5 ± 1 species
+surviving, as compared with only 2 ± 1 species
+surviving in stable communities. Among the
+fluctuating communities, 88% (±5%) exhibited
+survival fractions above or equal to the mean,
+as compared with only 14% (±6%) among the
+stable communities [p <0 . 0 1 ;(32)]. Both ex-
+periments and simulations suggest that fluc-
+tuations are an emergent, diversity-dependent
+phenomenon, because the addition of spe-
+cies pools from stable communities often
+yielded larger, fluctuating communities (fig.
+S29). We also found numerically that fluctua-
+tions and high diversity disappeared together
+as we stopped dispersal or pinned the abun-
+dance of the most abundant species (fig. S1).
+Our results show that diversity and per-
+sistent fluctuations enhance each other, as
+theoretically demonstrated in previous work
+(25, 26).
+Our findings are consistent with two major
+ideas in theoretical ecology: May’ss u g g e s t i o n
+that complexity leads to instability ( 16)a n d
+Chesson’s argument that temporal fluctua-
+tions can help maintain diversity ( 34). The
+question of whether complex dynamics are in-
+herent to the ecological community — arising
+from species interactions— or driven by envi-
+ronmental factors has received considerable
+attention yet has seldom undergone a direct
+experimental test in many-species communities.
+Under laboratory conditions that minimize
+environmental stochasticity, and in agreement
+with recent theory (21, 23, 35), we found that
+community-level parameters representing
+species diversity and interactions are suf-
+ficient to predict the dynamical behaviors
+of complex ecological communities. These
+predictions are theoretically robust to vary-
+ing biological assumptions [e.g., intraspecific
+diversity and interspecies interaction mecha-
+nisms, including resource-explicit models (36)].
+Therefore, the emergent phases of biodiversity
+and dynamics that we observed in this study
+may occur in a wide range of ecological com-
+munities. Future work should study whether
+these phases generalize across spatiotemporal
+scales, environmental conditions, and orga-
+nism types to understand their prevalence
+and importance in shaping major ecological
+patterns ( 37, 38).
+REFERENCES AND NOTES
+1. R. M. May, Science 241, 1441–1449 (1988).
+2. J. J. Faith et al ., Science 341, 1237439 (2013).
+3. E. Benincà, B. Ballantine, S. P. Ellner, J. Huisman, Proc. Natl.
+Acad. Sci. U.S.A. 112, 6389 –6394 (2015).
+4. G. W. Luck, G. C. Daily, P. R. Ehrlich, Trends Ecol. Evol. 18,
+331–336 (2003).
+5. K. S. McCann, Nature 405, 228 –233 (2000).
+6. A. R. Ives, S. R. Carpenter, Science 317,5 8 –62 (2007).
+7. J. Friedman, L. M. Higgins, J. Gore, Nat. Ecol. Evol. 1, 109
+(2017).
+8. O. S. Venturelli et al ., Mol. Syst. Biol. 14, e8157 (2018).
+9. F. K. Balagaddé et al ., Mol. Syst. Biol. 4, 187 (2008).
+10. B. Blasius, L. Rudolf, G. Weithoff, U. Gaedke, G. F. Fussmann,
+Nature 577, 226 –230 (2020).
+11. G. F. Fussmann, S. P. Ellner, K. W. Shertzer, N. G. Hairston Jr.,
+Science 290, 1358 –1360 (2000).
+12. W. Shou, S. Ram, J. M. G. Vilar, Proc. Natl. Acad. Sci. U.S.A.
+104, 1877 –1882 (2007).
+13. E. Benincà et al ., Nature 451, 822 –825 (2008).
+14. C. Ratzke, J. Barrere, J. Gore, Nat. Ecol. Evol. 4, 376 –383
+(2020).
+15. J. E. Goldford et al ., Science 361, 469 –474 (2018).
+16. R. M. May, Nature 238, 413 –414 (1972).
+17. S. Allesina, S. Tang, Nature 483, 205 –208 (2012).
+18. U. Bastolla et al ., Nature 458, 1018 –1020 (2009).
+19. E. Thébault, C. Fontaine, Science 329, 853 –856 (2010).
+20. A. Mougi, M. Kondoh, Science 337, 349 –351 (2012).
+21. G. Bunin, Phys. Rev. E 95, 042414 (2017).
+22. M. Opper, S. Diederich, Phys. Rev. Lett. 69, 1616 –1619
+(1992).
+23. D. A. Kessler, N. M. Shnerb, Phys. Rev. E 91, 042705 (2015).
+24. J. Huisman, F. J. Weissing, Nature 402,4 0 7– 410
+(1999).
+25. M. T. Pearce, A. Agarwala, D. S. Fisher ,P r o c .N a t l .A c a d .S c i .U . S . A .
+117,1 4 5 7 2–14583 (2020).
+26. F. Roy, M. Barbier, G. Biroli, G. Bunin, PLOS Comput. Biol. 16,
+e1007827 (2020).
+27. J. C. Allen, W. M. Schaffer, D. Rosko, Nature 364, 229 –232
+(1993).
+28. R. V. Solé, D. Alonso, A. McKane, Philos. Trans. R. Soc. London
+Ser. B 357, 667 –671 (2002).
+2 9 . J .D .T o u b o u l ,A .C .S t a v e r ,S .A .L e v i n ,Proc. Natl. Acad. Sci. U.S.A.
+115,E 1 3 3 6–E1345 (2018).
+30. A. Hastings, C. L. Hom, S. Ellner, P. Turchin, H. C. J. Godfray,
+Annu. Rev. Ecol. Syst. 24,1 –33 (1993).
+31. D. S. Maynard, Z. R. Miller, S. Allesina, Nat. Ecol. Evol. 4,
+91–100 (2020).
+32. Materials and methods are available as supplementary
+materials.
+33. C. Ratzke, J. Gore, PLOS Biol. 16, e2004248 (2018).
+34. P. Chesson, Theor. Popul. Biol. 45, 227 –276 (1994).
+35. M. Barbier, J. F. Arnoldi, G. Bunin, M. Loreau, Proc. Natl. Acad.
+Sci. U.S.A. 115, 2156 –2161 (2018).
+36. I. Dalmedigos, G. Bunin, PLOS Comput. Biol. 16, e1008189
+(2020).
+37. J. D. O ’Sullivan, J. C. D. Terry, A. G. Rossberg, Nat. Commun.
+12, 3627 (2021).
+38. Y. Yonatan, G. Amit, J. Friedman, A. Bashan, Nat. Ecol. Evol. 6,
+693–700 (2022).
+39. J. Hu, D. R. Amor, M. Barbier, G. Bunin, J. Gore, Code from the
+manuscript “Emergent phases of ecological diversity and
+dynamics mapped in microcosms. ” Zenodo (2022);
+https://doi.org/10.5281/zenodo.7017202.
+ACKNOWLEDGMENTS
+We thank all the Gore Lab members for inspiring discussions.
+We thank M. Dal Bello at MIT for drawing the cartoons of
+bacterial cells. We also thank C. Ratzke, currently at the University
+of Tübingen, for the isolation of bacterial species, as well as
+the Eric Alm laboratory at MIT for sharing laboratory equipment.
+We thank the groups led by D. Fisher at Stanford, O. Hallatschek
+at UC Berkeley, and N. Shnerb and D. Kessler at Bar-Ilan
+University for valuable discussions. Funding: J.G. acknowledges
+support from the Alfred P. Sloan Foundation and Schmidt
+Polymath Award. G.B. acknowledges support from the Israel
+Science Foundation (ISF). D.R.A. acknowledges support from
+the Field of Excellence “Complexity in Life, Basic Research and
+Innovation ” at the University of Graz. Author contributions:
+J . H .a n dJ . G .c o n c e i v e dt h es t u d y .J . H .a n dD . R . A .p e r f o r m e dt h e
+experiments. J.H., M.B., and G.B. performed the theoretical
+modeling. All authors analyzed the data and wrote the
+manuscript. Competing interests: T h ea u t h o r sd e c l a r et h a t
+they have no competing interests. Data and materials
+availability: Isolates and communities are available upon
+request. All data are available in the supplementary materials.
+All codes used for simulation and analysis in this publication
+are available on GitHub (http s://github.com/Jiliang-Hu/
+Emergent-phases) and Zenodo ( 39). License information:
+Copyright © 2022 the authors, some rights reserved; exclusive
+licensee American Association f or the Advancement of Science.
+No claim to original US government works. https://www.
+science.org/about/science-lic enses-journal-article-reuse
+SUPPLEMENTARY MATERIALS
+science.org/doi/10.1126/science.abm7841
+Materials and Methods
+Figs. S1 to S31
+Tables S1 to S3
+References (40–47)
+MDAR Reproducibility Checklist
+Data S1
+View/request a protocol for this paper from Bio-protocol.
+Submitted 28 October 2021; accepted 24 August 2022
+10.1126/science.abm7841
+Hu et al., Science 378,8 5 –89 (2022) 7 October 2022 5o f5
+RESEARCH | REPORT
+Downloaded from https://www.science.org at Yale University on October 19, 2026
+--- PAGE 6 ---
+Emergent phases of ecological diversity and dynamics mapped in microcosms
+Jiliang Hu, Daniel R. Amor, Matthieu Barbier, Guy Bunin, and Jeff Gore
+Science 378 (6615), .  DOI: 10.1126/science.abm7841
+Predicting microbial community dynamics
+Ecological communities are complex, and their dynamics are difficult to predict. Hu et al. used experimental bacteria
+communities to show that species richness and the strength of species interactions drive community dynamics (see
+the Perspective by Huelsmann and Ackermann), as predicted by theory. By manipulating species pool size and
+nutrient availability (which affects species interactions), the authors found that more complex communities were less
+stable over time. Furthermore, communities showed distinct phases, shifting from full species coexistence to partial
+coexistence to dynamic fluctuations as species pool size or interaction strength increased. Communities that fluctuated
+maintained higher species richness, suggesting that diversity and stability promote one another. —BEL
+View the article online
+https://www.science.org/doi/10.1126/science.abm7841
+Permissions
+https://www.science.org/help/reprints-and-permissions
+Use of this article is subject to the Terms of service
+Science (ISSN 1095-9203) is published by the American Association for the Advancement of Science. 1200 New York Avenue NW,
+Washington, DC 20005. The title Science is a registered trademark of AAAS. 
+Copyright © 2022 The Authors, some rights reserved; exclusive licensee American Association for the Advancement of Science. No claim
+to original U.S. Government Works
+Downloaded from https://www.science.org at Yale University on October 19, 2026
