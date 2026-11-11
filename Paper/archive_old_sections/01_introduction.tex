@@ -1,0 +1,22 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Microbial communities in nature and industrial bioprocesses rarely exist in isolated steady-state chemostats. Instead, they are subjected to periodic boom-and-bust cycles driven by batch growth, substrate depletion, and periodic dilution or dispersal \citep{goldford2018emergent, barbier2020generic}. Laboratory serial dilution experiments have become the quintessential model system to study these non-equilibrium ecological dynamics under controlled conditions \citep{hu2022emergent, jin2023culturing, venturelli2018deciphering}. In a typical serial dilution regime, a defined or complex microbial inoculum is allowed to grow in a batch culture for an incubation period $\tau$ (typically 24 to 48 hours), after which a fixed fraction $1/D$ is transferred into fresh nutrient medium, repeating across multiple passages.
+
+Despite the conceptual simplicity of serial transfers, modeling and predicting the multi-passage trajectories of multispecies consortia remains a formidable challenge:
+\begin{enumerate}
+    \item \textbf{High Dimensionality and Overfitting:} Classical Generalized Lotka-Volterra (gLV) models describe inter-species interactions via an interaction matrix $A \in \mathbb{R}^{N \times N}$. For realistic communities of $N = 32$ to $50$ species, this entails learning $1000$ to $2500$ parameters, inevitably leading to severe overfitting and catastrophic error propagation over long multi-passage rollouts.
+    \item \textbf{Phenomenological vs. Physical Mechanisms:} gLV models treat interactions as direct species-species pairwise forces, failing to capture substrate exhaustion, metabolic niche partitioning, and resource-mediated cross-feeding \citep{macarthur1970species, posfai2017versatility, tilman1982resource}.
+    \item \textbf{Discontinuous vs. Continuous Coupling:} A serial dilution experiment consists of continuous physical growth and resource uptake within each passage, interrupted by discrete dilution and dispersal events at passage boundaries. Naive machine learning models often discretize passages as Markov steps, completely obscuring intra-passage growth kinetics, saturation limits, and transient phases.
+    \item \textbf{Simplex Normalization Artifacts:} Previous modeling efforts often normalized biomass vectors to the unit simplex at every transfer ($\sum_i x_i = 1$). While convenient for relative sequencing read counts, this unphysical operation severely alters the mathematical magnitude of nonlinear self-limitation terms ($-\alpha_i N_i^2$), artificially compressing biomass by several orders of magnitude and muting negative feedback mechanisms necessary for stable coexistence.
+\end{enumerate}
+
+To overcome these foundational limitations, we developed a unified \textbf{Physical Consumer-Resource Neural Ordinary Differential Equation (Neural ODE)} framework \citep{chen2018neural} specifically tailored to serial dilution ecology. By embedding low-dimensional latent resource niches ($K \ll N$) with non-negative metabolic fluxes, quadratic self-limitation, and authentic physical biomass propagation across dilution transfers, our framework accurately captures community assembly across four distinct empirical datasets:
+\begin{itemize}
+    \item \textbf{Gore et al. (Science 2022)}: 48 soil and gut isolates across 99 synthetic communities under 3 nutrient regimes with daily $1:30$ dilution and $10^{-6}$ regional dispersal \citep{hu2022emergent}.
+    \item \textbf{Pollard / Jin et al. (Nature Communications 2023)}: 50 human gut isolates cultivated across 5 spatial carrier microenvironments with $1:100$ daily dilution \citep{jin2023culturing}.
+    \item \textbf{German et al. (Rumen Enrichment)}: 32 core rumen microbiome taxa tracked under 6 high-pressure and methanogenic substrate regimes over 6 transfer cycles.
+    \item \textbf{Ophelia / Venturelli et al. (Molecular Systems Biology 2018)}: 12 synthetic gut species across 175 combinatorial designs subjected to $1:20$ serial transfers with dual-phase (mid-log and stationary) intra-passage sampling \citep{venturelli2018deciphering}.
+\end{itemize}
+
+In this paper, we present the unified mathematical model, describe how each experimental dataset was rigorously parameterized and modeled, report cross-dataset predictive accuracy gains over legacy baselines, and demonstrate long-term ecological stability and diversity retention.

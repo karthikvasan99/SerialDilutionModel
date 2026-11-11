@@ -285,31 +285,37 @@ class PurePhysicalConsumerResourceNeuralODE(nn.Module):
       5. Unnormalized Physical Biomass Propagation: Serial dilution divides true unnormalized
          biomass by the dilution factor (N_0 = N_tau / D + dispersal) without simplex resets.
     """
-    def __init__(self, num_species, num_latent_dims, num_conditions=1, default_dilution_factor=100.0, dispersal_rate=1e-6):
+    def __init__(self, num_species, num_latent_dims, num_conditions=1, default_dilution_factor=100.0, dispersal_rate=1e-6, max_crossfeed=0.5):
         super(PurePhysicalConsumerResourceNeuralODE, self).__init__()
         self.N = num_species
         self.K = num_latent_dims
         self.num_conditions = num_conditions
         self.default_dilution_factor = default_dilution_factor
         self.dispersal_rate = dispersal_rate
+        self.max_crossfeed = max_crossfeed
 
         # Unconstrained environmental baseline resources (R0 = softplus(a))
         self.a = nn.Parameter(torch.randn(num_conditions, num_latent_dims) * 0.5 + 2.0)
         # Metabolic traits Theta >= 0
         self.theta_raw = nn.Parameter(torch.randn(num_species, num_latent_dims) * 0.1)
-        # Cross-feeding W >= 0
-        self.w_raw = nn.Parameter(torch.randn(num_latent_dims, num_latent_dims) * 0.1)
+        # Cross-feeding W >= 0 (zero diagonal, row sums <= max_crossfeed)
+        self.w_raw = nn.Parameter(torch.randn(num_latent_dims, num_latent_dims) * 0.1 - 1.0)
         # Self-limitation alpha > 0
         self.alpha_raw = nn.Parameter(torch.randn(num_species) * 0.05 - 1.0)
         # Initial unnormalized biomass scale
-        self.b0_raw = nn.Parameter(torch.tensor(2.0))
+        self.b0_raw = nn.Parameter(torch.tensor(0.0))
 
     def get_params(self):
         Theta = F.softplus(self.theta_raw)
-        W = F.softplus(self.w_raw)
         alpha = F.softplus(self.alpha_raw)
         R0 = F.softplus(self.a)
-        B0 = F.softplus(self.b0_raw)
+        B0 = F.softplus(self.b0_raw) + 0.1
+        
+        W_sp = F.softplus(self.w_raw)
+        W_sp = W_sp * (1.0 - torch.eye(self.K, device=W_sp.device))
+        row_sums = W_sp.sum(dim=-1, keepdim=True)
+        scale = torch.clamp(self.max_crossfeed / torch.clamp(row_sums, min=1e-6), max=1.0)
+        W = W_sp * scale
         return Theta, W, alpha, R0, B0
 
     def ode_deriv(self, t, S, Theta, W, alpha):
@@ -320,9 +326,13 @@ class PurePhysicalConsumerResourceNeuralODE(nn.Module):
         growth = torch.matmul(R_t, Theta.t())
         dN_dt = N_t * growth - alpha * (N_t ** 2)
         
-        # dR/dt = - R * ((N @ Theta) @ W^T)
-        flux = torch.matmul(torch.matmul(N_t, Theta), W.t())
-        dR_dt = - R_t * flux
+        # Mass-conserving resource consumption and byproduct secretion
+        # flux_k = R_k * sum_j( N_j * Theta_jk )
+        # byproduct_k = sum_{l != k} flux_l * W_lk
+        # dR/dt = - flux + byproduct
+        flux = R_t * torch.matmul(N_t, Theta)
+        byproduct = torch.matmul(flux, W)
+        dR_dt = - flux + byproduct
         
         return torch.cat([dN_dt, dR_dt], dim=-1)
 

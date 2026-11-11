@@ -23,23 +23,39 @@ test_valid = [np.nan_to_num(test_mat[i], nan=0.0) for i in range(test_mat.shape[
               if not np.isnan(test_mat[i][0]).any() and np.sum(test_mat[i][0]) > 1e-4]
 val_tensor = torch.tensor(np.array(test_valid), dtype=torch.float32, device=device)
 
-# 2. Model Definition
+# 2. Model Definition with Physical Byproduct Secretion
 class OpheliaODEK(nn.Module):
-    def __init__(self, K=7):
+    def __init__(self, K=7, max_crossfeed=0.40):
         super().__init__()
         self.N, self.K = 12, K
+        self.max_crossfeed = max_crossfeed
         self.a = nn.Parameter(torch.randn(1, K))
         self.theta_raw = nn.Parameter(torch.randn(12, K))
         self.w_raw = nn.Parameter(torch.randn(K, K))
         self.alpha_raw = nn.Parameter(torch.randn(12))
+        self.log_c = nn.Parameter(torch.tensor(2.0))
+        
     def get_params(self):
-        return F.softplus(self.theta_raw), F.softplus(self.w_raw), F.softplus(self.alpha_raw), F.softplus(self.a)
-    def ode_deriv(self, t, S, Theta, W, alpha):
+        Theta = F.softplus(self.theta_raw)
+        alpha = F.softplus(self.alpha_raw)
+        R0 = F.softplus(self.a)
+        c = torch.exp(self.log_c)
+        
+        W_sp = F.softplus(self.w_raw)
+        W_sp = W_sp * (1.0 - torch.eye(self.K, device=W_sp.device))
+        row_sums = W_sp.sum(dim=-1, keepdim=True)
+        scale = torch.clamp(self.max_crossfeed / torch.clamp(row_sums, min=1e-6), max=1.0)
+        W = W_sp * scale
+        return Theta, W, alpha, R0, c
+        
+    def ode_deriv(self, t, S, Theta, W, alpha, c):
         N_t, R_t = torch.clamp(S[..., :12], min=0.0), torch.clamp(S[..., 12:], min=0.0)
-        return torch.cat([
-            N_t * torch.matmul(R_t, Theta.t()) - alpha * (N_t**2), 
-            - R_t * torch.matmul(torch.matmul(N_t, Theta), W.t())
-        ], dim=-1)
+        growth = torch.matmul(R_t, Theta.t())
+        dN = N_t * growth - alpha * (N_t**2)
+        flux = c * R_t * torch.matmul(N_t, Theta)
+        byproduct = torch.matmul(flux, W)
+        dR = - flux + byproduct
+        return torch.cat([dN, dR], dim=-1)
 
 model = OpheliaODEK(K=7).to(device)
 ckpt = torch.load('Data/Ophelia_Physical_ODE_12Strains.pth', weights_only=False)
@@ -49,14 +65,14 @@ model.eval()
 # 3. Simulate on Train and Held-Out Test Data
 t_span = torch.linspace(0.0, 5.0, 6, device=device)
 with torch.no_grad():
-    Theta, W, alpha, R0_table = model.get_params()
+    Theta, W, alpha, R0_table, c = model.get_params()
     
     # Train rollout
     N0_train = train_tensor[:, 0, :]
     batch_size_tr = N0_train.size(0)
     R0_batch_tr = R0_table[0].unsqueeze(0).expand(batch_size_tr, -1)
     S0_train = torch.cat([N0_train, R0_batch_tr], dim=-1)
-    S_t_train = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha), S0_train, t_span, method='euler', options={'step_size': 0.1})
+    S_t_train = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha, c), S0_train, t_span, method='euler', options={'step_size': 0.1})
     train_pred = torch.clamp(S_t_train[..., :12].permute(1, 0, 2), min=0.0)
     
     # Test rollout
@@ -64,7 +80,7 @@ with torch.no_grad():
     batch_size_val = N0_val.size(0)
     R0_batch_val = R0_table[0].unsqueeze(0).expand(batch_size_val, -1)
     S0_val = torch.cat([N0_val, R0_batch_val], dim=-1)
-    S_t_val = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha), S0_val, t_span, method='euler', options={'step_size': 0.1})
+    S_t_val = odeint(lambda t, S: model.ode_deriv(t, S, Theta, W, alpha, c), S0_val, t_span, method='euler', options={'step_size': 0.1})
     val_pred = torch.clamp(S_t_val[..., :12].permute(1, 0, 2), min=0.0)
 
 train_true_np = train_tensor.cpu().numpy()

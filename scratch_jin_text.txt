@@ -1,0 +1,1023 @@
+********************* PAGE 1 *********************
+Article https://doi.org/10.1038/s41467-023-39121-0
+Culturing of a complex gut microbial
+community in mucin-hydrogel carriers
+reveals strain- and gene-associated spatial
+organization
+Xiaofan Jin 1,5,F e i q i a oB .Y u2,5,J i aY a n2, Allison M. Weakley3,
+Veronika Dubinkina1, Xiandong Meng3 & Katherine S. Pollard 1,2,4
+Microbial community function depends on both taxonomic composition and
+spatial organization. While composition of the human gut microbiome has
+been deeply characterized, less is knowna b o u tt h eo r g a n i z a t i o no fm i c r o b e s
+b e t w e e nr e g i o n ss u c ha sl u m e na n dm u c o s aa n dt h em i c r o b i a lg e n e sr e g -
+ulating this organization. Using a deﬁned 117 strain community for which we
+generate high-quality genome assemblies, we model mucosa/lumen organi-
+zation with in vitro cultures incorporating mucin hydrogel carriers as surfaces
+for bacterial attachment. Metagenomictracking of carrier cultures reveals
+increased diversity and strain-speciﬁc spatial organization, with distinct strains
+enriched on carriers versus liquid supernatant, mirroring mucosa/lumen
+enrichment in vivo. A comprehensive search for microbial genes associated
+with this spatial organization identiﬁes candidates with known adhesion-
+related functions, as well as novel links. These ﬁndings demonstrate that car-
+rier cultures of deﬁned communities effectively recapitulate fundamental
+aspects of gut spatial organization, enabling identiﬁcation of key microbial
+strains and genes.
+Human gut microbiomes consist of diverse microbial taxa 1,2,w i t h
+typical complexity on the order of one hundred species or more in a
+single individual3. The spatial organization of gut microbes is linked to
+community function and host health 4–10. In particular, different taxa
+are enriched between mucosa and lumen11–16, with mucosal colonizing
+bacteria being especially well-positioned to regulate host-microbiome
+interactions and immunomodulation17–21. However, we still lack a high
+taxonomic-resolution view of ecological differences between lumen
+and mucosa, and accordingly possess a limited understanding of
+genetic factors underlying this spatial structure. As the human gut
+microbiome has dynamic within-species genetic structure 22–25,w e
+hypothesize that distinct spatial organization may (i) occur at the level
+of individual strains, and (ii) be associated with speciﬁc gene families
+and pathways that regulate mucosa versus lumen colonization.
+To test our hypotheses, we develop an integrated experimental-
+computational work ﬂow that compares lumen- and mucosal-like
+niches within a complex gut community. By using metagenomic
+sequencing, we are able to pro ﬁle microbes with high taxonomic
+resolution, enabling strain- and gene-level analysis. We use a synthetic
+117-strain community modeled closely after the recently published
+hCom2 community26, cultured in vitro with added mucin-agar carriers
+(i.e., carrier cultures) to provide a mucosal-like substrate for bacterial
+attachment distinct from the surrounding liquid supernatant 27,28.T o
+identify genetic correlates of carrier colonization, we implement a
+Received: 27 January 2023
+Accepted: 26 May 2023
+Check for updates
+1Gladstone Institutes, San Francisco, CA, USA.2Chan-Zuckerberg Biohub, San Francisco, CA, USA.3Sarafan ChEM-H Institute, Stanford University, Stanford,
+CA, USA. 4University of California San Francisco, San Francisco, CA, USA.5These authors contributed equally: Xiaofan Jin, Feiqiao B. Yu.
+e-mail: katherine.pollard@gladstone.ucsf.edu
+Nature Communications|         (2023) 14:3510 1
+1234567890():,;
+1234567890():,;
+********************* PAGE 2 *********************
+computational workﬂow that uses a comprehensive search across
+KEGG Orthology (KO) gene families29 to identify associations between
+gut spatial organization and underlying microbial genotypes, using
+phylogenetic regression to account for evolutionary relationships
+between taxa30–32.
+Our approach provides several key advantages: ﬁrst, by using an
+in vitro approach that allows mucin carrier and supernatant sub-
+populations to be independently sampled28— analogous to mucosa and
+l u m e ni nv i v o— we obtain information on spatial structure missing
+from stool sampling and traditional liquid culture. Independent sam-
+pling of the lumen and mucosal subpopulations is also possible using
+in vivo human gut biopsy, but the invasiveness of this approach limits
+sample sizes and longitudinal measurements33. In contrast, our in vitro
+carrier culture platform enables us to sample mucosal- and lumen-like
+community subpopulations across multiple passage timepoints, with
+multiple independent replicates. Second, using our deﬁned 117-strain
+community with high-quality genomes for each member allows us to
+emulate the bacterial complexity found in human guts, yet still accu-
+rately quantify abundance using metagenomic sequencing even
+between closely related strains. Strain-level measurements are critical
+for enabling gene-level analysis, as they allow genetic comparisons
+between closely related taxa. By comparison, earlier work with carriers
+used 16S sequencing of undeﬁned communities to produce measure-
+ments with more limited taxonomic resolution and did not seek to
+identify genes associated with carrier colonization28.
+We demonstrate that this approach yields detailed strain-level
+measurements of differential spatial organization, revealing taxa
+which are reproducibly enriched or depleted at steady state on mucin
+carriers relative to supernatant— we refer to this as carrier/supernatant
+enrichment, or carrier enrichment for short. We compare these results
+with no-carrier (i.e., liquid media only) cultures and cultures with plain-
+agar (i.e., no mucin) carriers to disentangle the speci ﬁc effects of
+added mucin versus hydrogel surface, revealing that the presence of
+carriers serves to increase community richness and mucin has some
+speciﬁc effects. Then, we identify numerous genes and biosynthetic
+gene clusters that distinguish carrier-enriched strains consistently
+across phylogenetic lineages, including genes related to cell adhesion
+and bioﬁlm formation whose presence differs between closely related
+strains with distinct carrier-enrichment pro ﬁles. By validating these
+results in vivo with biopsy data and showing that they are not driven by
+speciﬁc analysis methodologies, we demonstrate the relevance of our
+ﬂexible in vitro platform to microbial community structure in the
+human gut.
+Results
+Closed and nearly closed genomes enable strain-level metage-
+nomic proﬁling of complex-deﬁned microbial communities
+Starting from isolate cultures of 123 bacterial strains that are prevalent
+in the human gut microbiome (Fig.1a and Supplementary Data S1), we
+ﬁrst generate high-quality, contiguous genomes for all strains except 4
+that already have closed genomes. For the other 119 strains, we per-
+form hybrid assembly of long Nanopore (median 3.9 × 104 reads/strain)
+and short Illumina reads (median 1.7 × 10 6 reads/strain) (Supplemen-
+tary Fig. S1, “Methods”), successfully generating high-quality assem-
+blies with 81 fully closed single contig genomes, 20 2-contig genomes,
+and overall no genomes with more than 10 contigs. By contrast, the
+closest available NCBI genome (Fig. 1a) is more fragmented (78/123
+comprise more than 10 contigs) and less closely related to the strain in
+our de ﬁned community; 20/123 have >0.1% ANI difference to our
+strain, and 33/123 contain 100 or more differential KEGG Orthology
+(KO) gene families (see “Methods” and Supplementary Fig. S2). This
+reference database of closed and nearly closed genomes that are exact
+strain matches provides a critical resource for accurate strain and
+gene-level characterization of metagenomic data in this study and
+future studies. Next, isolate strains are combined into a single
+community using anaerobic automated liquid handling (see “In vitro
+culture of synthetic community with mucin carriers” and Supplemen-
+tary Fig. S3) and inoculated into cultures containing 0.5% mucin 1%
+agar carriers and MEGA media34 Cultures are serially passaged six times
+at 3-day intervals. (P1 to P6, see Fig.1b). As a control, we also culture in
+parallel the same inoculum with MEGA media only, i.e., liquid-only
+culture. We use metagenomic sequencing of carriers and supernatant
+sampled independently (1.2 × 107 read pairs per sample) at each pas-
+sage to quantify strain relative abundances (see “Read mapping and
+abundance estimation ” Supplementary Fig. S4). To analyze read
+libraries with high taxonomic resolution, we use NinjaMap26 with our
+custom genome database to generate strain-level abundances (Fig.1c
+and Supplementary Data S2). We observe a high correlation
+between these results and alternatively using Kraken2 35 with the
+UHGG database2 (median R2 = 0.987760 across samples, see Supple-
+mentary Fig. S5) or Kraken2 with our custom genome database
+(median R2 = 0.999442 across samples), validating our choice to use
+NinjaMap.
+Mucin carriers increase community richness and promote strain
+co-existence within in vitro cultures
+Next, we characterize differences that result from spatial structure
+introduced by the incorporation of mucin carriers. These experiments
+use an inoculum with 117 of the 123 strains; 6 strains fail to grow from
+glycerol stocks as isolates (Supplementary Fig. S7; detection cutoff
+0.0001% relative abundance, 1% horizontal coverage). In liquid-media-
+only cultures without carriers, this richness falls to a median of 55
+detected strains by the 4 late passages (passages P3-P6, corresponding
+to days 9 –18). By contrast, carrier cultures seeded with the same
+inoculum stabilize to a median of 75 and 78 detectable strains on
+carriers and supernatant, respectively (Fig. 1d). This signiﬁcantly ele-
+vated richness (P <1 −5, see Supplementary Fig. S6) approaches that of
+in vivo results using fecal samples from germ-free mice orally gavaged
+with hCom2 (median 85/119 detected strains across 19 mice) 26,s u g -
+gesting cultures with carriers provide a closer analog to in vivo con-
+ditions than do liquid-only cultures. Increased richness is particularly
+noticeable in Firmicutes, Firmicutes_A, and Bacteroidota (see Supple-
+mentary Fig. S6), while total abundance is higher for Firmicutes and
+Firmicutes_A, but lower in Bacteroidota (Fig.1e).
+Beyond phylum-level effects, abundance shifts also occur at the
+strain level. Addition of carriers increases abundance for a diverse set
+of strains including Bacteroides caccae ATCC-43185, Lactobacillus
+ruminis ATCC-25644,Coprococcus comesATCC-27758 (which displays
+extremely sticky/slime phenotype in pure culture), two strains in
+family Mariniﬁlaceae ( Butyricimonas virosa DSM-23226, Odoribacter
+splanchnicus DSM-20712), and both sulfur reducing bacteria (Desulfo-
+vibrio pigerATCC-29098 andBilophila wadsworthia ATCC-49260from
+phylum Desulfobacterota). Some taxa are largely unaffected by car-
+riers, such as three Bi ﬁdobacterium strains, while few taxa are nega-
+tively affected by carriers, with three closely related Veillonella strains
+being notable exceptions (see Supplementary Fig. S8). These strain-
+level abundance shifts do not always align with corresponding phylum-
+level shifts, emphasizing the value of our highly resolved taxonomic
+measurements.
+One of the most striking abundance shifts revealed by strain-level
+analysis is the co-existence of closely related strains with the addition of
+carriers. In liquid-only culture, Bacteroides dorei DSM-17855 out-
+competes two closely related (ANI > 99%) strains,Bacteroides dorei 5-1-
+36-D4 and Bacteroides sp. 9-1-42FAA (Fig. 1f). By contrast, these three
+strains coexist stably in culture when carriers are present. Other
+examples can be found between two closely related (ANI ~80%) Firmi-
+cutes_A strains:Subdoligranulum sp. 4-3-54A2FAAand Subdoligranulum
+variabile DSM-15176 (Fig. 1g), and between two closely related (ANI
+~80%) Firmicutes_C strains: Acidaminococcus fermentans DSM-
+20731and Acidaminococcus intestini D21 (Fig. 1h). These observations
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 2
+********************* PAGE 4 *********************
+followed by recovery such as Butyricimonas virosa DSM-23226 and
+Anaerotruncus colihominis DSM-17241 (Fig. 1c and Supplementary
+Figs. S7 and S8). In these strains, abundances are still actively
+increasing even by the ﬁnal passage P6 (18 days after initial inocula-
+tion), despite overall community richness stabilizing past passage 3.
+These temporal changes are also dependent on culture condition. For
+instance, while Alistipes onderdonkii DSM-19147 increases in cultures
+with mucin carriers, cultures without carriers are predominated by its
+close relative Alistipes shahii WAL 8301 .C o n v e r s e l y ,Alistipes shahii
+WAL 8301 decreases over time in mucin-carrier cultures. Overall, these
+results demonstrate that distinct temporal abundance phenotypes
+exist even between closely related microbial taxa, with multiple time-
+scales deﬁned by early and late colonizers.
+Strains exhibit distinct enrichment proﬁles between carrier and
+supernatant communities
+We next characterize spatial organization within carrier cultures by
+comparing subpopulations sampled from carrier and supernatant in
+the same culture tube, testing our hypothesis that strain-level spatial
+differences occur within gut communities. First, we identify the 86
+“top prevalent strains ” that are abundantly observed (greater than
+0.01% relative abundance) in at least 10% of passaged samples (see
+“Read mapping and abundance estimation ”). Then, we quantify a
+carrier-enrichment score— deﬁned as the log-fold change in abundance
+between paired carrier and supernatant samples (i.e., derived from the
+same culture tube) — for each strain and each passage (Fig. 2aa n d
+Supplementary Data S3). We also calculate a single aggregate, log-
+carrier-enrichment score for each strain using mean-over-standard
+deviation normalization across late passage replicate measurements
+(see “Hydrogel carrier-enrichment calculations” and Supplementary
+Data S3). These scores re ﬂect the preference of each strain to grow
+attached on carriers versus in the liquid supernatant, with positive
+scores indicating carrier preference.
+Aggregating at phylum level, we observe enrichment toward
+mucin carriers in Desulfobacterota, Firmicutes (primarily Bacillus-like),
+and Firmicutes_A (primarily Clostridia-like), and enrichment toward
+supernatant in Actinobacteriota, Bacteroidota, and Firmicutes_C (pri-
+marily Negativicutes-like), with no obvious time-dependent signal
+(Fig. 2b). At strain level, weﬁnd a diverse range of enrichment proﬁles
+over time (Fig. 2a), including several strains with opposite enrichment
+relative to their phylum. For instance, Bacteroides caccae ATCC-43185
+prefers carriers, while Clostridiales bacterium VE-202-14from phylum
+Firmicutes_A prefers supernatant. Moreover, closely related strains
+can exhibit different enrichment phenotypes:Bacteroides dorei 5-1-36-
+D4 and DSM-17855exhibit similar abundance in supernatant and carrier
+(log enrichment scores ≈ 0), but Bacteroides sp. 9-1-42FAA displays
+consistent enrichment toward supernatant (log enrichment scores <0,
+see Fig. 2c). Subdoligranulum variabile DSM-15176 and Acid-
+aminococcus fermentans DSM-20731 associate with mucin carriers
+more than their respective counterparts, Subdoligranulum sp. 4-3-
+54A2FAA (Fig. 2d) and Acidaminococcus intestini D21 (Fig. 2e). These
+ﬁndings support our hypothesis that distinct strain-level spatial orga-
+nization occurs within gut communities.
+As an external validation, we compare our in vitro carrier-
+enrichment results against an in vivo dataset 15 with paired mucosal
+and lumen samples (see “Comparison with in vivo dataset” and Sup-
+plementary Data S6). Weﬁnd our in vitro carrier-enrichment scores are
+similar to in vivo mucosal-enrichment scores when comparing our
+strains to the corresponding species from the in vivo data (Supple-
+mentary Fig. S12 and Supplementary Data S7). We also observe general
+agreement at phylum level: Bacteroidota is enriched toward super-
+natant and lumen, while Firmicutes_A and Firmicutes are enriched
+toward carrier and mucosa. However, discrepancies also exist, as
+Actinobacteriota is enriched toward supernatant in vitro but mucosa
+in vivo (Supplementary Fig. S12). These results suggest that our
+experimental platform provides a close — though not exact — approx-
+imation of in vivo structure.
+Growth rate estimates using peak-to-trough ratio analysis
+T oe x p l o r ei fg r o w t hr a t ed i f f e r e n c e sb e t w e e nc a r r i e ra n ds u p e r n a t a n t
+conditions may be driving observed abundance enrichments, we apply
+the peak-to-trough ratio (PTR) method 36,37 to coverage from our
+metagenomic sequencing in order to estimate growth rates across
+strains, timepoints and culture conditions (Supplementary Fig. S11). In
+the strains for which read depth is suf ﬁcient to make a PTR estimate,
+most PTR values are close to 1, suggesting the culture mostly reaches
+stationary phase by the time of sampling (3 days after each passage),
+though there are some exceptions such asMitsuokella multicida DSM-
+20544 and Lactobacillus ruminis ATCC-25644which consistently exhibit
+higher ratios than 1, indicative of active growth. However, we observe
+no strains with consistent differences in PTR values between cultures
+sampled from the mucin carriers compared with corresponding
+supernatant. This indicates that observed mucin-carrier strain enrich-
+ment/depletion largely cannot be attributed to growth rate differences
+between conditions.
+Phylogenetic regression predicts genes associated with mucosal
+colonization
+We next test for statistical associations between carrier enrichment
+and underlying microbial genotypes, evaluating our hypothesis that
+key microbial genes may regulate spatial organization in the gut. Using
+kofamscan29 to comprehensively search all genomes against all
+deﬁned KO families (Supplementary Data S4), we generate a genotype
+matrix consisting of 9857 KOs detected in the 86 top prevalent strains.
+Each entry in this 86 × 9857 matrix corresponds to maximum
+kofamscan/hmmer bitscore hit for a particular KO in a particular
+genome (Fig.3a)— higher scores reﬂect gene presence. We then test for
+each of the 9857 KOs whether its genotype pattern across the 86 top
+prevalent strains is signi ﬁcantly associated with the corresponding
+pattern of carrier-enrichment scores (phenotype). We perform
+Fig. 1 | Cultures incorporating hydrogel carriers exhibit stable, diverse com-
+munities with the co-existence of closely related strains. aWe generate high-
+quality genomes for each strain in a 123-member microbial community, repre-
+sentative of taxa in the human gut. De novo-generated genomes are more con-
+tiguous than closest previously available NCBI genomes, and represent exact
+matches to our strains. Six strains fail to grow, yielding a ﬁnal 117-member com-
+munity. b We use this 117-member community to inoculate cultures incorporating
+mucin carriers as well as non-carrier controls. We passage (P) each culture 6 times
+(3 days between passages), independently sampling bacterial DNA from carrier,
+supernatant, and no-carrier control at each timepoint for metagenomic sequen-
+cing. c We use NinjaMap to estimate relative abundances from metagenomic
+sequencing data. Here, we plot median abundance of each strain at each passage
+timepoint, across experimental conditions.d Number of detected strains after
+culture stabilization (~P3 and later) is higher in carrier versus no-carrier cultures,
+indicating enhanced community richness. Gray dashed line indicates median
+number of strains detected (85) using same threshold with the 119-member hCom2
+community in mice26. e Addition of carriers leads to broad taxonomic shifts in
+community composition relative to no-carrier control, visualized here at the phy-
+lum level. f Strain-resolved abundance patterns of threeB. dorei strains (ANI > 99%)
+in our community demonstrates stable co-existence enabled by addition of car-
+riers, compared with dominance of a singleB. dorei strain without carriers.g Strain-
+resolved abundance patterns of two Subdoligranulumstrains (ANI ~80%) in our
+community demonstrates stable co-existence enabled by addition of carriers.
+Subdoligranulum variabile DSM-15176in particular also exhibits increasing abun-
+dance over passage timepoints.h Strain-resolved abundance patterns of two
+Acidaminococcusstrains (ANI ~80%) demonstrates more stable co-existence when
+cultured in the presence of carriers.
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 4
+********************* PAGE 6 *********************
+signiﬁcance tests using phylogenetic regression with phylolm 31 to
+account for evolutionary relationships between strains (see“Phyloge-
+netic regression”).
+Our approach identiﬁes 244 KO families signi ﬁcantly associated
+with increased enrichment on mucin carriers relative to supernatant,
+applying Benjamini/Hochberg false discovery rate (FDR) correction
+at a threshold of FDR<0.01 to account for multiple hypothesis testing
+(Fig. 3b, see also “Phylogenetic regression ” and Supplementary
+Data S8). Out of these KOs, we highlight several illustrative examples
+whose genotype patterns align with differential carrier enrichment in
+the B. dorei, Subdoligranulum and Acidaminococcus strains featured
+in Fig. 2c–e. From the three B. dorei strains, we ﬁnd two KO gene
+families in particular– K00441 (coenzyme F420 hydrogenase subunit
+beta [EC:1.12.98.1], Figs. 3ca n d 4a) and K08217 (MFS transporter,
+DHA3 family, macrolide ef ﬂux protein, Fig. 4b)— which have strong
+homology hits in Bacteroides dorei 5-1-36-D4 and DSM-17855, but not
+in Bacteroides sp. 9-1-42FAA . Mapping the K00441 coenzyme F420
+hydrogenase hits to their genomic loci in 5-1-36-D4 and DSM-17855,
+we ﬁnd the gene resides in the midst of lipo/exopolysaccharide (LPS/
+EPS) biosynthesis gene clusters (Fig. 3c). To address whether this
+coenzyme F420 hydrogenase EPS/LPS cluster colocalization is spe-
+ciﬁct o B. dorei or appears more generally in microbial genomes, we
+perform gene neighborhood analysis across all 123 strain genomes to
+search for KOs enriched within 10 kilobases (kb) of K00441 anno-
+tated genes. We ﬁnd 107 hits (see “Gene neighborhood enrichment
+test” and Supplementary Data S5), which are dominated by KOs with
+LPS/EPS biosynthesis functions, including numerous glycosyl-
+transferase, epimerase, sugar-reductase, polysaccharide membrane
+transporter genes, suggesting a previously uncharacterized link
+between coenzyme F420 hydrogenase and microbial LPS/EPS
+production.
+Beside K00441 and K08217 inB. dorei, we also note a strong hit to
+a DEAD box helicase gene family – K14440, SWI/SNF-related matrix-
+associated actin-dependent regulator of chromatin subfamily A-like
+protein 1 [EC:3.6.4.12] — in Subdoligranulum variabile DSM-15176
+(Fig. 4c) and a membrane protease gene family — K14743, membrane-
+anchored mycosin MYCP [EC:3.4.21.-]— in Acidaminococcus fermentans
+DSM-20731 (Fig. 4d) which are absent in their less carrier-enriched
+relatives. Intriguingly, LPS/EPS biosynthesis38–42, membrane transpor-
+ters/efﬂux pumps43–49,m e m b r a n ep r o t e a s e s50–55,a n dD E A Db o xh e l i -
+case gene regulators40,56–59 all have known links to bio ﬁlm formation
+and adhesion. Aggregating all 244 carrier-associated KOs by KEGG
+BRITE gene categories, we identify several BRITE categories enriched
+for signi ﬁcant KOs, representing antibiotic resistance genes, glyco-
+syltransferases (E.C. 2.4), phosphotransferases (E.C. 2.7), transcrip-
+tional regulators, and proteases (Supplementary Data S11), further
+supporting the importance of these gene functions in surface/mucosal
+colonization.
+Testing for clade-speci ﬁc effects using within-phylum phyloge-
+netic regression, we ﬁnd K14440 and K14743 to be among the most
+signiﬁcant hits in Firmicutes/Firmicutes_A/Firmicutes_C, while
+K00441, K14743 and K08217 are among the most signi ﬁcant hits for
+Bacteroidota (Supplementary Data S9). As an external validation, we
+repeat our workﬂow using the Suez et al. in vivo dataset15 to identify a
+list of KOs associated with mucosal enrichment (Supplementary
+Data S10), and ﬁnd statistically signi ﬁcant overlap between
+genes associated with carrier enrichment in vitro and genes
+associated with mucosal enrichment in vivo, ( log − odds
+0.0 1.0
+     86 most 
+prevalent strains
+normalized hmmer/kofamscan bitscore
+9857 KO gene families
+phylum
+ab
+c
+log carrier enrichment 5 0 5
+model coefficients
+10 26
+10 21
+10 16
+10 11
+10 6
+10 1
+p-values
+K08217
+K00441
+K14743
+K14440
+Coenzyme F420 hydrogenase/dehydrogenase,
+beta subunit C-terminal domain (K00441 [EC:1.12.98.1])
+adaptor
+ATP-related
+DNA-binding
+mobile/transposon
+unknown
+membrane/transport
+other enzyme
+polysaccharide-related
+RNA/RNA-related
+4 0 4
+mean / st. dev.
+Bacteroides-dorei DSM-17855
+Bacteroides-dorei 5-1-36-D4
+Bacteroides-sp 9-1-42FAA
+Fig. 3 | Phylogenetic regression identiﬁes genes associated with mucin-carrier
+enrichment. a Phylogenetic regression identiﬁes signiﬁcant associations between
+log-carrier-enrichment score (red/blue indicates positive/negative carrier enrich-
+ment, respectively) and gene presence–absence patterns (lighter/darker shades of
+gray indicate gene presence/absence, respectively) across the 80 top prevalent
+strains detected in passaged samples. We use this model to test a total of 9857
+KEGG KO gene families determined using kofamscan29, accounting for phyloge-
+netic relatedness between strains assuming Brownian motion along evolutionary
+branches. b Volcano plot of two-sided phylogenetic linear regression model using
+Brownian Motion model for covariance, where each dot represents one KEGG KO—
+horizontal line at FDR=0.01. Horizontal axis is clipped at 0.1 and 99.9 percentiles,
+highlighted gene families colored in red. c Bacteroides dorei 5-1-36-D4and DSM-
+17855 both harbor a coenzyme F420 dehydrogenase gene (KEGG KO K00441)
+colocalized amongst LPS/EPS-related gene clusters— these features are collectively
+missing from the corresponding region in the Bacteroides sp. 9-1-42FAAgenome.
+Plotted genome coordinates:Bacteroides dorei 5-1-36-D44619828-4663627bp,
+Bacteroides dorei DSM-178554750505-4793496bp, andBacteroides sp. 9-1-42FAA
+4767641-4780151bp.
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 6
+********************* PAGE 7 *********************
+ratio = 3.99, 95% CI 2.89–5.65, P < 2.2 × 10−16, two-sided Fisher ’s exact
+test, Supplementary Fig. S13). Thus, we con ﬁrm that measurements
+from our in vitro synthetic community cultures are suf ﬁciently
+detailed to inform a computational gene-level analysis of gut spatial
+organization, revealing that genes related to bio ﬁlm formation and
+adhesion likely play key roles in modulating the physical structure of
+gut microbial communities.
+Strain enrichment on carriers is associated with the presence of
+lipo/exopolysaccharide biosynthesis gene clusters
+To explore mechanisms of community structure beyond individual
+genes, we next investigate carrier enrichment of biosynthetic gene
+clusters (BGCs). We use deepBGC 60 t os e a r c hf o rB G C sa c r o s so u r
+strain genomes, annotate BGCs based on their KEGG KO presence, and
+apply hierarchical clustering to categorize 1103 detected BGCs into 256
+groups with similar KO co-occurrence patterns (Fig. 5a and Supple-
+mentary Data S12). We then map the presence/absence of each of these
+256 BGC groups against the 86 top prevalent strains in our experiment
+(Supplementary Fig. S14), and apply phylogenetic regression to test for
+associations between carrier enrichment and BGC groups.
+Our approach yields a total of 7/256 signi ﬁcant BGC groups
+positively associated with carrier enrichment (Fig.5b), the three largest
+of which consist of 18 or more BGC representatives (BGC-group 157—
+see Fig. 5c, BGC-group 120, and BGC-group 69). Filtering for the most
+common KEGG KOs in each of these BGC groups, we discover that
+BGC-group 157 and BGC-group 120 consist of likely EPS-related gene
+clusters, typiﬁed by glycosyltransferase, epimerase and other EPS-
+related KOs (Fig. 5d and Supplementary Data S13). BGC-group 69
+consists largely of gene clusters populated by membrane transporter
+genes. KOs in other carrier-enriched BGC groups include more
+polysaccharide-related genes (BGC groups 198, 186, 161) and AraC
+transcriptional regulator genes (BGC-group 34). Theseﬁndings at the
+BGC level further reinforce our KO-level results, showing that
+membrane-related functions such as LPS/EPS and transporters, as well
+as key gene regulators, likely contribute to spatial organization in our
+in vitro model of the human gut.
+Reductionist comparison withplain-agar carriers reveals
+strain-speciﬁc effects of mucin
+Our in vitro approach allows precise control over the culture envir-
+onment, enabling a reductionist comparison to disentangle the spe-
+ciﬁc contributions of adding a hydrogel surface from the effects of the
+mucin. To explore this, we grow our inoculum in cultures with 1% agar
+carriers (plain-agar, i.e., no mucin). These comparisons allow us to
+distinctly measure the differences that arise from (i) introducing a
+hydrogel surface, and (ii) introducing mucin into the hydrogel. Using
+PCA visualization (Supplementary Fig. S9), we demonstrate that cul-
+tures from the ﬁve different culture conditions (liquid-only, mucin-
+agar carrier/supernatant, and plain-agar carrier/supernatant) all exhi-
+bit distinct community proﬁles (Supplementary Fig. S7).
+We observe that similar to mucin-agar, plain-agar carrier culture
+also exhibits overall enhanced richness compared with liquid-only
+culture (Supplementary Fig. S6). This suggests that increased richness
+results largely— but not entirely — from having a physical surface to
+colonize rather than the nutrients provided by mucin. These results are
+reminiscent of similar effects in bacterial bio ﬁlms, where increased
+diversity has been attributed to expanded spatial niches and reduced
+competition61–63. Moreover, by comparing carrier/supernatant enrich-
+ment scores between mucin-agar and plain-agar conditions (Supple-
+mentary Fig. S10), weﬁnd overall correlation across strains as expected
+(enrichment on plain-agar carriers is a good predictor of enrichment
+on mucin-agar carriers), but with several notable exceptions, such as
+Akkermansia muciniphila ATCC-BAA-835 , Eubacterium ventriosum
+ATCC-27560 and Bacteroides caccae ATCC-43185, which exhibit higher
+than expected mucin-agar enrichment compared to plain-agar. At
+phylum level, weﬁnd that Desulfobacterota is enriched on mucin-agar
+carriers, but not enriched on plain-agar carriers. Similar patterns are
+observed when quantifying mucin-agar-carrier/plain-agar-carrier-
+enrichment scores (Supplementary Data S3). Applying the phyloge-
+netic regression approach discussed earlier, we use these mucin-agar-
+carrier/plain-agar-carrier-enrichment scores to search for and
+categorize genes associated with elevated mucin-speciﬁc abundance,
+identifying phosphotransferases (E.C. 2.7) and oxidoreductases (E.C.
+1.2) among mucin enriched gene categories (Supplementary Data S14
+and S15). Thus, by using an in vitro approach, we are able to disen-
+tangle the effects of adding a hydrogel surface versus adding mucin
+and identify key taxa and genes.
+Discussion
+Applying in vitro mucin-carrier culture with our deﬁned community of
+human gut strains, we present here the ﬁrst strain-resolved measure-
+ments of spatial structure within the context of a complex gut
+microbial community. We a priori generate a database of high-quality
+reference genomes, generating 118 new genomes, 81 of which are fully
+closed— this approach enables high taxonomic-resolution abundance
+measurements using metagenomic sequencing, while recapitulating
+abc
+-3 -2 -1 01 0.0 0.4 0.8
+K00441
+B. eggerthii DSM-20697
+B. stercoris ATCC-43183
+B. uniformis ATCC-8492
+B. dorei sp. 9-1-42FAA
+B. dorei DSM-17855
+B. dorei 5-1-36-D4
+P. buccalis
+ATCC-35310
+P. buccae D17
+log carrier
+enrichment
+   normalized
+hmmer bitscore
+-3 -2 -1 01 0.6 1.2
+K08217
+B. fragilis 3-1-12
+B. fragilis 2-1-16
+B. thetaiotaomicron VPI-5482
+B. thetaiotaomicron 1-1-6
+log carrier
+enrichment
+   normalized
+hmmer bitscore
+-2.50.0 2.5 0.0 0.2 0.4 0.6
+K14743
+Clostridium sp. D5
+Clostridales bact. VE202-27
+A. fermentans DSM-20731
+A. intestini D21
+L. ruminis ATCC-25644
+log carrier
+enrichment
+   normalized
+hmmer bitscore
+0.00 0.50
+K14440
+-2.50.0 2.5
+log carrier
+enrichment
+   normalized
+hmmer bitscore
+Blautia-sp-KLE-1732
+S. sp. 4-3-54A2FAA
+S. variabile DSM-15176
+C. sporogenes ATCC-15579
+S. moorei DSM-22971
+d
+B. dorei sp. 9-1-42FAA
+B. dorei DSM-17855
+B. dorei 5-1-36-D4
+Fig. 4 | Phylolm-identiﬁed gene families have presence patterns that align with
+differential carrier enrichment. aComparison of carrier-enrichment pattern (left)
+with gene presence pattern (right) of K00441 coenzyme F420 hydrogenase subunit
+beta [EC:1.12.98.1], across family Bacteroidaceae strains.b Comparison of carrier-
+enrichment pattern (left) with gene presence pattern (right) of K08217 MFS
+transporter,DHA3 family, macrolide efﬂux protein, across family Bacteroidaceae
+strains. c Comparison of carrier-enrichment pattern (left) with gene presence
+pattern (right) of K14743 membrane-anchored mycosinMYCP [EC:3.4.21.-], across
+phylum Firmicutes_A, Firmicutes_C, and Firmicutes strains.d Comparison of
+carrier-enrichment pattern (left) with gene presence pattern (right) of K14440SWI/
+SNF-related matrix-associated actin-dependent regulator of chromatin subfamily
+A-like protein 1 [EC:5.6.2.-], across phylum Firmicutes_A, Firmicutes_C, and Firmi-
+cutes strains.
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 7
+********************* PAGE 8 *********************
+aspects of spatial structure and taxonomic complexity in the gut
+microbiome. These measurements show with high taxonomic resolu-
+tion how a complex gut microbial community is spatially organized
+upon introduction of carriers, demonstrating that carriers enhance
+community richness to a level similar to in vivo observations, including
+instances of co-existence between closely related strains. Weﬁnd clear
+enrichment signalswithin carrier cultures where certain strains prefer
+to grow on the carriers versus in the supernatant, or vice versa. Carrier-
+enrichment phenotypes can differ signiﬁcantly even between closely
+related strains, supporting our hypothesis that spatial organization in
+the gut occurs at strain level and trends would be missed at coarser
+taxonomic resolution.
+While an in vitro approach can never fully realistically recapitulate
+all aspects of the in vivo gut environment, our choice of in vitro culture
+offers two key capabilities that are less feasible in vivo. First,
+we are able to distinctly sample hydrogel-attached and liquid phase
+culture fractions with frequent longitudinal measurements. These
+measurements reveal the existence of distinct temporal abundance
+phenotypes exist even between closely related microbial taxa, with
+multiple timescales deﬁned by early and late colonizers. Second, we
+are able to control the culture environment in a tunable manner, in
+particular with respect to the hydrogel surface. Our observation that
+the addition of mucin to the hydrogels (compared with plain-agar
+hydrogel carriers) shifts carrier-enrichment proﬁl e sa c r o s st h ec o m -
+munity aligns with earlier work demonstrating that mucin is capable of
+modulating bioﬁlm formation in bacteria64.
+Combined with high-quality reference genomes, our shotgun
+metagenomic measurements enable estimates of relative growth rates
+using the PTR method36,37. We do not observe consistent differences in
+PTR scores between cultures sampled from the mucin carriers com-
+pared with the surrounding liquid phase, suggesting that observed
+mucin-carrier strain enrichment/depletion cannot be attributed over-
+all to growth rate differences be tween conditions. We therefore
+hypothesize that differences in attachment to the hydrogel surface
+may also play a key role.
+An additional beneﬁt of strain-resolved shotgun metagenomics is
+that we can identify gene families that speciﬁcally occur in strains with
+carrier-enrichment (or depletion) phenotypes. We do so using phylo-
+genetic regression, a rigorous statistical approach that adjusts for
+evolutionary relationships between strains. This analysis identi ﬁes
+several gene families related to microbial adhesion and bio ﬁlm for-
+mation, including ef ﬂux pumps (e.g., K08217) that are known to
+mediate collective bioﬁlm phenotypes such as quorum sensing and
+antibiotic resistance 43–49, and membrane proteases (e.g., K14743)
+which can enhance motility / colonization on surfaces50–55.W ea l s oﬁnd
+genes involved in biosynthesis of LPS/EPS which are known to mediate
+bacterial adhesion38–42, such as glycosyltransferase and epimerase
+genes, as well as a particular gene family K00441 (coenzyme F420
+hydrogenase subunit beta [EC:1.12.98.1]) for which we report sig-
+niﬁcant genomic colocalization with other known LPS/EPS genes,
+suggesting a previously uncharacterized functional link. We also ﬁnd
+several groups of biosynthetic gene clusters containing membrane
+transporters and LPS/EPS genes associated with carrier enrichment.
+Beyond membrane-associated functions, our analysis also highlights
+regulatory genes such as SWI/SNF DEAD box helicases (K14440).
+Intriguingly, such genes have not only been shown to be involved in
+bioﬁlm formation40,56–59, but also speciﬁcally drive expression of efﬂux
+pumps and LPS/EPS genes56. We speculate that in mucosa-associated
+-3 -2 -1 0 1
+a c
+d
+B. ovatus ATCC-8483
+B. sp. D2
+B. sp. 2-1-22
+log carrier
+enrichment
+B. thetaiotaomicron VPI-5482
+B. thetaiotaomicron 1-1-6
+community
+ genomes1103 BGCs detected with deepBGC
+256 BGC groups determined
+using hierarchical clustering
+b
+BGC group 157
+presentabsent
+1.0 0.5 0.0 0.5
+model coefficients
+10 9
+10 3
+p-values
+BGC group 157
+KO frequency in BGC group
+0/31 31/31
+B. finegoldii DSM-17565
+B. caccae ATCC-43185
+B. cellulosilyticus DSM-14838
+B. intestinalis DSM-17393
+1,988,000 1,992,000 1,996,000 2,000,000 2,004,000 2,008,000 2,012,000 2,016,000 2,020,000
+aspT - aspartate-alanine
+antiporter (K07085*)
+formate--tetrahydrofolate
+ligase (K01938*)
+aspD - aspartate
+4-decarboxylase (K09758*)
+oligosaccharide
+flippase family protein
+undecaprenyl-phosphate glucose
+phosphotransferase (K13656,
+K03606, K20997, K19428,
+K13012*, K15915*, K16566*)
+UDP-glucose/GDP-mannose
+dehydrogenase family
+protein (K00066, K02472*)
+hypothetical protein
+serine hydroxymethylt
+ransferase (K00600*)
+Clostripain family protein
+polysaccharide pyruvyl
+transferase family
+protein (K16710*)
+glycosyltransferas
+e family 4 protein
+glycoside hydrolase
+family 99-like domain-
+containing protein
+glycosyltransferase family
+4 protein (K00754*, K17249)
+gmd - GDP-mannose
+4,6-dehydratase
+(K01711, K15856*)
+rfbB - dTDP-glucose
+4,6-dehydratase (K01710,
+K01784*, K08679,
+K12454*, K15856*,
+K01709, K00091, K00067)
+NAD-dependent epimerase
+(K08679, K01784*, K02473,
+K15856*, K12454*, K19997,
+K02377, K00067)
+SDR family
+oxidoreductase (K05281*)Coenzyme F420 hydrogena
+se/dehydrogenase, beta
+subunit C-terminal
+domain (K00441*)
+tyrosine-type DNA
+invertase cluster 3b
+pyrB - aspartate ca
+rbamoyltransferase
+(K00609*, K00611*)
+AraC family transcriptional
+regulator (K18954*,
+K02508*, K02099*, K20968*)
+AraC family transcriptional
+regulator (K18954*,
+K02508*, K02099*, K20968*)
+rfbA - glucose-1-phosphate
+thymidylyltransferase RfbA
+rfbD - dTDP-4-dehydrorhamnose
+reductase (K00067*, K23987)
+polysaccharide
+biosynthesis/export
+family protein (K01991*)
+DUF4373 domain-
+containing protein
+PorT family protein
+WecB/TagA/CpsF family
+glycosyltransferase
+(K02852*, K13660*)
+rfbC - dTDP-4-dehydrorhamnose
+3,5-epimerase (K01790*,
+K16438)
+flavin reductase
+family protein
+UpxY family transcription
+antiterminator (K05785*,
+K02601*)
+occludin
+aspartate carbamoyltransferase
+regulatory subunit (K00610*)
+DUF4119 domain-
+containing protein
+DUF2693 domain-
+containing protein
+Fig. 5 | Strain enrichment on mucin carriers is associated with exopoly-
+saccharide gene clusters. a Schematic of approach used to generate and group
+BGCs across strains using deepBGC and hierarchical clustering.b Volcano plot of
+phylogenetic linear regression model using Brownian Motion model for covar-
+iance, each dot represents one BGC-group, horizontal line at FDR = 0.01 cutoff. Top
+hit BGC-group 157 highlighted in green. c Comparison of carrier-enrichment
+pattern (left) with presence pattern (right) of BGC-group 157 across strains in family
+Bacteroidaceae.d Example of a representative gene cluster in BGC-group 157 from
+the Bacteroidesstrain with the highest carrier-enrichment score (Bacteroides-sp.2-1-
+22_cluster_1_1984776-2023109.1). Gene label colors reﬂect frequency of KO family
+among all BGCs in group— in cases where a gene maps to multiple KOs, * marks
+mapped KO with highest frequency in BGC group.
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 8
+********************* PAGE 9 *********************
+taxa, key regulator genes act as master switches for a host of bacterial
+functions that alter outer membrane composition to enhance bio-
+physical interactions with the mucosal surface and thus increase
+mucosal colonizationﬁtness, leading to global spatial organization of
+these taxa towards the mucosa (Fig. 6).
+We conclude by noting several limitations to our work and point
+to areas for further exploration. First, as mentioned above, our in vitro
+approach is unable to recapitulate all aspects of the in vivo gut envir-
+onment, such as oxygenation gradients present at the luminal
+boundary, or effects of the host immune system. While existing tra-
+ditional fecal sampling techniques do not attempt to resolve mucosal
+versus lumenal bacteria, recent ﬁndings that fecal pellets may retain
+mucosal/lumen structure found in the gut 65 suggest a direction for
+future work that uses more careful sampling to obtain in vivo spatially
+resolved, longitudinal measurements of gut communities. Second, our
+gene-level analysis only shows statistical associations — not causal
+mechanisms— between genotypes and carrier enrichment, meaning
+hits should be cautiously interpreted as potential genetic factors
+deserving of follow-up investigation. Synthetic biology in genetically
+tractable gut strains can be used to test our predictions by altering the
+expression of identi ﬁed gene families using gene knockout, knock-
+down or knockin experiments 66–68. Third, while our in vitro results
+generally parallel those from earlier in vivo work15,26,w ed o ﬁnd a few
+discrepancies (e.g., carrier depletion of Actinobacteriota), meaning
+our current platform provides a close but still imperfect replica of the
+in vivo gut environment. More realistic culture conditions can be
+explored, potentially through modiﬁcation of media conditions (e.g.,
+the addition of bile acids, different carbon sources). Fourth, our cur-
+rent approach based on metagenomic sequencing provides accurate
+quantiﬁcation of strain and gene abundance, but it does not assay gene
+expression or spatial localization on carriers. Future work using gut
+microbial metatranscriptomic analysis 69,70 and multiplexed FISH
+imaging71–73 can greatly complement current capabilities and mitigate
+these shortcomings. Fifth, it remains unclear how strain-strain inter-
+actions affect structure. Follow-on studies with our platform that
+incorporate strain dropout can address these questions. Finally, in
+addition to strains from healthy Western guts, future work should
+incorporate taxa found in dysbiotic and non-Western guts to explore
+how spatial structure varies between healthy and diseased states,
+and across global populations. Ultimately we believe the platform
+presented here has the potential to transform the standard for
+in vitro investigation of gut microbiota, in a manner that recognizes
+the important interplay between spatial structure and strain-level
+ecology.
+Methods
+Hybrid assembly of microbial isolates
+Strains are cultured in isolation until stationary phase, followed by
+DNA extraction using phenol chloroform. DNA is sequenced using
+both Oxford Nanopore long-read and Illumina short-read sequencing,
+followed by hybrid assembly using custom bioinformatic work ﬂow
+(Supplementary Fig. S1) built using Unicycler 74,L R S c a f75,a n dT G S -
+GapCloser76— workﬂow is available as docker images, see Software
+availability below.
+Community phylogeny
+Phylogenetic tree structure of the community is generated using
+GTDB-tk77, using our genome assemblies as input.
+Genome annotation and gene classiﬁcation
+Genomes are annotated using NCBI PGAP 78. Predicted protein
+sequences are then mapped using kofamscan 29 to the to KEGG
+Orthology database.
+Mucin-carrier preparation
+Mucin carriers— also previously referred to as microcosms — are pre-
+pared based on described protocols27,79 using a solution of 0.5% por-
+cine mucin (Sigma M2378) and 1% agar (BD 214030). Mucin-agar
+solution is autoclaved and poured over K1 bioﬁlm carriers (Evolution
+Aqua MEDIAK1), and then allowed to solidify. Mucin-agar embedded
+carriers are then extracted using tweezers. Mucin free agar-only car-
+riers are prepared using 1% agar solution.
+In vitro culture of synthetic community with mucin carriers
+To construct the full in vitro synthetic community, weﬁrst culture each
+strain in isolation in 1.8 mL of its preferred media in a 96-well deep-well
+plate (Supplementary Data S1). Because of the large range of growth
+rates and stationary phase cell densities, strains are inoculated in a
+staggered fashion with slow growers inoculated 3 days prior and fast
+growers inoculated 1 day before community assembly. Fastidious
+growers are cultured in 10 mL and concentrated to increase ﬁnal cell
+density. Individual isolate cultures are sequenced to verify purity. On
+the day of community assembly, cell density for each strain is esti-
+mated using OD measured on a plate reader (BioTek Epoch). Using this
+measurement, each strain is normalized to a maximum OD of 0.3 using
+liquid handling robotics. Cultures are pelleted and washed with PBS,
+and then combined to form a mixture of 117 strains (epMotion 5073).
+Strains are combined in an anaerobic environment equipped with
+automated liquid handling in order to reduce potential cross con-
+tamination and other human errors when concurrently handling many
+strains (Supplementary Fig. S3).
+Following assembly of our bacterial community, the mixture is
+used to inoculate cultures in 15-mL tubes comprising MEGA media 34
+and 5 carriers each. Cultures are left to grow at 37 °C in anaerobic
+conditions for 3 days without agitation, at which point they are pas-
+saged. Passaging consists of transferring a single carrier from the old
+culture tube to a new culture tube. This process is repeatedﬁve times
+for a total of six passages. For each subsequent passage, the previously
+transferred-in carrier is discarded prior to transferring of a carrier to
+the next culture— due to the shape of the tubes and size of the carriers,
+the carriers are unable to move around other, which means the vertical
+stacking order of the carriers does not change and the previously
+transferred carrier remains at the top. After cultures are grown for
+three days, this top carrier (which came from the previous passage) is
+discarded, the next carrier underneath is transferred to the sub-
+sequent culture passage, while three of the remaining carriers are
+harvested for DNA isolation, with one backup carrier. For liquid-only
+cultures, inoculating loops (Fisherbrand 01-189-165) are used for pas-
+saging. Supernatant and carrier samples are saved and frozen at each
+passage point, prior to DNA isolation.
+For each condition, we culture the community in biological tri-
+plicate cultures (i.e., three separate culture tubes). Each culture tube is
+sampled with technical triplicates— for carrier samples, we pick three
+carriers out of each culture tube to store at −80 °C prior to DNA
+efflux pump
+transporters
+mucosal
+ surface
+membrane 
+proteasesEPS/LPS
+adhesins
+ master
+regulator 
+  genes
+Fig. 6 | Schema for how mucosal-associated genes may regulate spatial struc-
+ture. Depiction of proposed framework where in mucosa-associated taxa, reg-
+ulatory genes serve as master switches for microbial functions that increase
+mucosal colonizationﬁtness such as LPS/EPS, membrane transporters/efﬂux
+pumps, and proteases.
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 9
+********************* PAGE 10 *********************
+extraction, while for supernatant and liquid-only cultures, we take
+three separate 1-mL aliquots from each tube, pellet, then store at
+−80 °C prior to DNA extraction. This yields a total of nine read libraries
+for each passage and experimental condition. The initial inoculum
+communities are sampled in duplicate, each sample sequenced three
+times each. Experiments were carried out at CZ Biohub Lokey Facility
+at Stanford University.
+DNA extraction, library prep, and sequencing
+DNA is extracted from supernatant and carriers using ZymoBIOMICS
+96 DNA Kit and bead beating with 0.1-mm glass beads (Benchmark
+Scientiﬁc D1031-01). Extracted DNA from each sample is quantiﬁed in
+384-well plates on a ﬂuorescent plate reader (BioTek Neo2) using the
+Quant-iT PicoGreen assay (ThermoFisher). To generate input DNA for
+our high-throughput and low-volume Nextera XT library preparation
+process, DNA samples are normalized to at maximum of 0.2 ng/µLi na
+384-well plate using a low-volume cherry-picking liquid handler (SPT).
+Library preparation is done in 384-well plates using a low-volume 16-
+channel liquid handler (SPT) and follows the chemistry of the Nextera
+XT process but in a total volume of 4 µL in order to reduce library
+preparation cost. Libraries are quanti ﬁed again using the Quant-iT
+PicoGreen assay and normalized. After pooling and cleaning using
+Ampure XP beads (Beckman), libraries are sequenced on a Novaseq
+6000 (Illumina) to a mean depth of 1.2 × 107 read pairs per sample. In
+addition to DNA derived from microbial communities, we also
+sequenced all input strains used to construct the community to ensure
+strain purity and identity.
+Read mapping and abundance estimation
+Read mapping is performed with NinjaMap as previously described26,
+using our de novo-generated genomes as reference database. Brieﬂy,
+reads are aligned to genome sequences, with only perfect unique
+matches considered in the ﬁrst round. Ambiguous reads are held in
+escrow for the ﬁrst round, and subsequently assigned in a statistically
+weighted manner determined by initial abundance estimates from the
+ﬁrst round of alignment. This generates relative abundance and hor-
+izontal genome coverage estimates for each strain in each sample ’s
+read library. We consider a strain present in a sample if it exceeds a 1%
+horizontal coverage and 0.0001% relative abundance cutoff. Out of all
+270 passage samples (6 passages × 5 experimental conditions— mucin-
+agar carriers, mucin-agar supernatant, plain-agar carriers, plain-agar
+supernatant, no-carriers– × 9 replicates), we use a stricter prevalence
+cutoff of 10% presence at 0.01% abundance (i.e., present in 27 or more
+samples) to focus on the top prevalent strains (total of 86 strains). For
+downstream abundance-related analysis, we collapse technical (i.e.,
+within tube) triplicates to their median abundance measurements
+while considering biological (different culture tubes) triplicate mea-
+surements separately. Supplementary Data S2 lists relative abundance
+and horizontal coverage across strains, passages, replicates and
+experimental conditions.
+Hydrogel carrier-enrichment calculations
+For each strain, and passage, carrier-enrichment scores are calculated
+as log ratio of carrier to supernatant abundance, for three biological
+replicates, replacing zeros with half-minimum nonzero value prior to
+log-transform. For each strain, a single aggregate enrichment score is
+generated by taking mean over standard deviation of 12 log ratio
+scores in the late passages (P3-6, 4 passages × 3 biological replicates).
+Supplementary Data S3 lists enrichment scores per strain.
+Gene neighborhood enrichment test
+Based on results from kofamscan for each gene in each genome, a gene
+is annotated with a KO-label if it exhibits overlap greater than
+0.5 × coverage with the KO’s pHMM model, as well as a bitscore greater
+than 0.5 × the KO’s bitscore threshold. We count the frequency of all
+annotated KOs within 10 kb of K00441-labeled genes across the full
+community genome database. To generate P value estimate of this
+measured frequency, we compare it against a null distribution gener-
+ated by 1000 random gene order permutations. In each of these 1000
+permutations, we randomly reassign gene labels within each of the 123
+genomes prior to conducting frequency counts.P < 0.01 indicates 990
+or more times out of 1000, the actual co-occurence of a particular KO
+within 10 kb of K00441 is greater than random.
+Phylogenetic regression
+For each KO family, and each strain, we determine the maximum
+hmmer bitscore hit to the KO’s pHMM out of all the strain’s proteins.
+Aggregating across KOs and strains, this yields a strain-by-KO geno-
+type matrix, where each entry is the highest bitscore value — higher
+bitscores indicate gene presence. We then test for association
+between this genotype and carrier-enrichment score (phenotype).
+While such genotype-phenotype tests are in many ways similar to
+those conducted in genome association studies (GWAS), the appli-
+cation of ordinary least squares (OLS) regression, often used in
+GWAS, is not appropriate here due to phylogenetic relationships
+between strains. These relationships mean that assumptions of
+independence between measurements inherent to OLS are violated.
+We conﬁrm the presence of a non-star phylogeny between strains by
+generating a phylogenetic tree based on strain genomes, using
+bac120 multiple sequence alignment with GTDB-tk 77 (Fig. 1a).
+Therefore, to account for this phylogenetic relatedness, for each KO
+we apply phylogenetic regression to test for signi ﬁcant association
+between mucosal-enrichment scores and maximum hmmer bitscore
+(standard scaled) across strains. We implement this test using the R
+package phylolm31, assuming a Brownian motion model along evo-
+lutionary branches, using the bac120 phylogenetic tree as input. This
+generates effect size estimates and P values for every KO. We ﬁlter
+KOs for signi ﬁcance with Benjamini-Hochberg false discovery rate
+(FDR) correction to account for multiple hypothesis testing, applying
+a FDR<0.01 cutoff. In addition to running phylogenetic regression
+across all 86 top prevalent strains, we also run these models across
+subsets of these strains grouped by phylum to search for clade-
+speciﬁc hits. For this analysis, we group Firmicutes, Firmicutes_A,
+Firmicutes_C phyla into a single clade.
+C o m p a r i s o nw i t hi nv i v od a t a s e t
+We analyze from the Suez et al. 15 dataset all read libraries from
+untreated (i.e., naive) individuals, for whom lumen and mucosal reads
+were available from cecum, descending colon, and terminal ileum, i.e.,
+a total of 6 read libraries per individual. Weﬁrst use Kneaddata (part of
+the Biobakery suite80) to perform host (i.e., human) ﬁltering of read
+sequences, resulting in 13 individuals for which all 6 libraries exceed a
+read depth of 104 reads (Supplementary Data S6). For these 13 indivi-
+duals, we obtain abundance estimates at all 6 sites by mapping reads to
+UHGG database using Kraken2 2,35. We then calculate normalized
+mucosal-enrichment scores for each species de ﬁned as log ratio of
+mucosal to lumen abundance. Score are normalized by taking
+mean-over-standard deviation across all individuals and sites (13
+individuals × 3 sites— cecum, descending colon and terminal ileum— for
+39 total measurements). We determine gene presence –absence for
+t h e s es p e c i e s ,a c r o s sK O s ,b yu s i n gk o f a m s c a nt os e a r c ht h eU H G G
+pangenome database 2, and then apply phylogenetic regression
+as described above to test for associations between gene
+presence–absence and mucosal-enrichment score across UHGG spe-
+cies. The regression uses enrichment scores from 676 species detected
+with greater than 0.01% relative abundance in at least 10% of in vivo
+read libraries, which contain a total of 12,822 detected KEGG KO gene
+families (Supplementary Data S7 and S10).
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 10

@@ -27,16 +27,17 @@ from Pollard_Train_ODE_50_Extended_v2 import prepare_data
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 class PurePhysicalPollardODE(nn.Module):
-    def __init__(self, N=50, K=5, num_conditions=5):
+    def __init__(self, N=50, K=5, num_conditions=5, max_crossfeed=0.5):
         super().__init__()
         self.N = N
         self.K = K
+        self.max_crossfeed = max_crossfeed
         # Freely learned positive initial resources per condition (no artificial scaling constraint)
         self.a = nn.Parameter(torch.randn(num_conditions, K) * 0.5 + 2.0)
         # Trait matrix Theta >= 0
         self.theta_raw = nn.Parameter(torch.randn(N, K) * 0.1)
         # Cross-feeding byproduct matrix W >= 0 (mass conservation)
-        self.w_raw = nn.Parameter(torch.randn(K, K) * 0.1)
+        self.w_raw = nn.Parameter(torch.randn(K, K) * 0.1 - 1.0)
         # Intraspecific self-limitation alpha > 0
         self.alpha_raw = nn.Parameter(torch.randn(N) * 0.05 - 1.0)
         # Initial unnormalized biomass scale
@@ -44,10 +45,15 @@ class PurePhysicalPollardODE(nn.Module):
         
     def get_params(self):
         Theta = F.softplus(self.theta_raw)
-        W = F.softplus(self.w_raw)
         alpha = F.softplus(self.alpha_raw)
         R0 = F.softplus(self.a)
         B0 = F.softplus(self.b0_raw)
+        
+        W_sp = F.softplus(self.w_raw)
+        W_sp = W_sp * (1.0 - torch.eye(self.K, device=W_sp.device))
+        row_sums = W_sp.sum(dim=-1, keepdim=True)
+        scale = torch.clamp(self.max_crossfeed / torch.clamp(row_sums, min=1e-6), max=1.0)
+        W = W_sp * scale
         return Theta, W, alpha, R0, B0
 
     def ode_deriv(self, t, S, Theta, W, alpha):
@@ -58,9 +64,10 @@ class PurePhysicalPollardODE(nn.Module):
         growth = torch.matmul(R_t, Theta.t())
         dN_dt = N_t * growth - alpha * (N_t ** 2)
         
-        # Mass-conserving resource depletion & metabolic cross-feeding
-        flux = torch.matmul(torch.matmul(N_t, Theta), W.t())
-        dR_dt = - R_t * flux
+        # Mass-conserving resource consumption and byproduct secretion
+        flux = R_t * torch.matmul(N_t, Theta)
+        byproduct = torch.matmul(flux, W)
+        dR_dt = - flux + byproduct
         return torch.cat([dN_dt, dR_dt], dim=-1)
 
 

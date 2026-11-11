@@ -3,3 +3,17 @@ __pycache__/
 *.class
 .ipynb_checkpoints/
 .DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+texput.log

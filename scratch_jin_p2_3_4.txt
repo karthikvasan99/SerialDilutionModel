@@ -1,0 +1,111 @@
+=== PAGE 2 ===
+computational workﬂow that uses a comprehensive search across
+KEGG Orthology (KO) gene families29 to identify associations between
+gut spatial organization and underlying microbial genotypes, using
+phylogenetic regression to account for evolutionary relationships
+between taxa30–32.
+Our approach provides several key advantages: ﬁrst, by using an
+in vitro approach that allows mucin carrier and supernatant sub-
+populations to be independently sampled28— analogous to mucosa and
+l u m e ni nv i v o— we obtain information on spatial structure missing
+from stool sampling and traditional liquid culture. Independent sam-
+pling of the lumen and mucosal subpopulations is also possible using
+in vivo human gut biopsy, but the invasiveness of this approach limits
+sample sizes and longitudinal measurements33. In contrast, our in vitro
+carrier culture platform enables us to sample mucosal- and lumen-like
+community subpopulations across multiple passage timepoints, with
+multiple independent replicates. Second, using our deﬁned 117-strain
+community with high-quality genomes for each member allows us to
+emulate the bacterial complexity found in human guts, yet still accu-
+rately quantify abundance using metagenomic sequencing even
+between closely related strains. Strain-level measurements are critical
+for enabling gene-level analysis, as they allow genetic comparisons
+between closely related taxa. By comparison, earlier work with carriers
+used 16S sequencing of undeﬁned communities to produce measure-
+ments with more limited taxonomic resolution and did not seek to
+identify genes associated with carrier colonization28.
+We demonstrate that this approach yields detailed strain-level
+measurements of differential spatial organization, revealing taxa
+which are reproducibly enriched or depleted at steady state on mucin
+carriers relative to supernatant— we refer to this as carrier/supernatant
+enrichment, or carrier enrichment for short. We compare these results
+with no-carrier (i.e., liquid media only) cultures and cultures with plain-
+agar (i.e., no mucin) carriers to disentangle the speci ﬁc effects of
+added mucin versus hydrogel surface, revealing that the presence of
+carriers serves to increase community richness and mucin has some
+speciﬁc effects. Then, we identify numerous genes and biosynthetic
+gene clusters that distinguish carrier-enriched strains consistently
+across phylogenetic lineages, including genes related to cell adhesion
+and bioﬁlm formation whose presence differs between closely related
+strains with distinct carrier-enrichment pro ﬁles. By validating these
+results in vivo with biopsy data and showing that they are not driven by
+speciﬁc analysis methodologies, we demonstrate the relevance of our
+ﬂexible in vitro platform to microbial community structure in the
+human gut.
+Results
+Closed and nearly closed genomes enable strain-level metage-
+nomic proﬁling of complex-deﬁned microbial communities
+Starting from isolate cultures of 123 bacterial strains that a
+=== PAGE 3 ===
+of co-existence (see Supplementary Fig. S8 for additional examples)
+concur with increased richness detected in carrier cultures.
+Strains exhibit distinct temporal abundance dynamics
+depending on culture conditions
+In addition to clear differences between conditions, the frequent
+longitudinal sampling enabled by our in vitro approach also reveals
+distinct changes in community composition over time. Weﬁnd that for
+many strains, their relative abundance drops with time (Fig. 1c), in
+alignment with ourﬁnding that overall community richness decreases
+toward later passages. However, we also observe with our mucin-
+carrier cultures a subset of strains that exhibit increasing abundance
+such as Alistipes onderdonkii DSM-19147and Subdoligranulum sp. DSM-
+15176, as well as strains who undergo an initial drop in abundance,
+Article https://doi.org/10.1038/s41467-023-39121-0
+Nature Communications|         (2023) 14:3510 3
+=== PAGE 4 ===
+followed by recovery such as Butyricimonas virosa DSM-23226 and
+Anaerotruncus colihominis DSM-17241 (Fig. 1c and Supplementary
+Figs. S7 and S8). In these strains, abundances are still actively
+increasing even by the ﬁnal passage P6 (18 days after initial inocula-
+tion), despite overall community richness stabilizing past passage 3.
+These temporal changes are also dependent on culture condition. For
+instance, while Alistipes onderdonkii DSM-19147 increases in cultures
+with mucin carriers, cultures without carriers are predominated by its
+close relative Alistipes shahii WAL 8301 .C o n v e r s e l y ,Alistipes shahii
+WAL 8301 decreases over time in mucin-carrier cultures. Overall, these
+results demonstrate that distinct temporal abundance phenotypes
+exist even between closely related microbial taxa, with multiple time-
+scales deﬁned by early and late colonizers.
+Strains exhibit distinct enrichment proﬁles between carrier and
+supernatant communities
+We next characterize spatial organization within carrier cultures by
+comparing subpopulations sampled from carrier and supernatant in
+the same culture tube, testing our hypothesis that strain-level spatial
+differences occur within gut communities. First, we identify the 86
+“top prevalent strains ” that are abundantly observed (greater than
+0.01% relative abundance) in at least 10% of passaged samples (see
+“Read mapping and abundance estimation ”). Then, we quantify a
+carrier-enrichment score— deﬁned as the log-fold change in abundance
+between paired carrier and supernatant samples (i.e., derived from the
+same culture tube) — for each strain and each passage (Fig. 2aa n d
+Supplementary Data S3). We also calculate a single aggregate, log-
+carrier-enrichment score for each strain using mean-over-standard
+deviation normalization across late passage replicate measurements
+(see “Hydrogel carrier-enrichment calculations” and Supplementary
+Data S3). These scores re ﬂect the preference of each strain to grow
+attached on carriers versus in the liquid supernatant, with positive
+scores indicating carrier preference.
+Aggregating at phylum level, we observe enrichment toward
+mucin carriers in Desulfobacterota, Firmicutes (primarily Bacillus-like),
+and Firmicutes_A (primarily Clostridia-like), and enrichment toward
+supernatant in Actinobacteriota, Bacteroidota, and Firmicutes_C (pri-
+marily Negativicutes-like), with no obvious time-dependent signal
+(Fig. 2b). At strain level, weﬁnd a diverse range of enrichment proﬁles
+over time (Fig. 2a), including several strains with opposite enrichment
+relative to their phylum. For instance, Bacteroides caccae ATCC-43185
+prefers carriers, while Clostridiales bacterium VE-202-14from phylum
+Firmicutes_A prefers supernatant. Moreover, closely related strains
+can exhibit different enrichment phenotypes:Bacteroides dorei 5-1-36-
+D4 and DSM-17855exhibit similar abundance in supernatant and carrier
+(log enrichment scores ≈ 0), but Bacteroides sp. 9-1-42FAA displays
+consistent enrichment t

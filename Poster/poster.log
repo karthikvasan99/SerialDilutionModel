@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  27 OCT 2026 11:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  6 NOV 2026 11:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1354,19 +1354,20 @@ File: figures/Ophelia_Test_Scatter.png Graphic file (type png)
 Package pdftex.def Info: figures/Ophelia_Test_Scatter.png  used on input line 2
 51.
 (pdftex.def)             Requested size: 1041.38145pt x 427.27554pt.
-<figures/Pollard_Universal_Matrices.png, id=23, 982.872pt x 780.516pt>
-File: figures/Pollard_Universal_Matrices.png Graphic file (type png)
-<use figures/Pollard_Universal_Matrices.png>
-Package pdftex.def Info: figures/Pollard_Universal_Matrices.png  used on input 
-line 251.
-(pdftex.def)             Requested size: 999.73318pt x 793.94823pt.
-<figures/German_Prescriptive_Biotech_Search.png, id=24, 1066.7052pt x 425.6703p
+<figures/Pollard_Coupled_Biofilm_Universality.png, id=23, 1026.234pt x 975.645p
 t>
+File: figures/Pollard_Coupled_Biofilm_Universality.png Graphic file (type png)
+<use figures/Pollard_Coupled_Biofilm_Universality.png>
+Package pdftex.def Info: figures/Pollard_Coupled_Biofilm_Universality.png  used
+ on input line 251.
+(pdftex.def)             Requested size: 833.10834pt x 792.06947pt.
+<figures/German_Prescriptive_Biotech_Search.png, id=24, 846.2817pt x 402.303pt>
+
 File: figures/German_Prescriptive_Biotech_Search.png Graphic file (type png)
 <use figures/German_Prescriptive_Biotech_Search.png>
 Package pdftex.def Info: figures/German_Prescriptive_Biotech_Search.png  used o
 n input line 251.
-(pdftex.def)             Requested size: 916.42076pt x 365.69908pt.
+(pdftex.def)             Requested size: 999.73318pt x 475.26588pt.
 <figures/Gore_Oscillation_Combined_Panel.png, id=25, 1101.1539pt x 386.8854pt>
 File: figures/Gore_Oscillation_Combined_Panel.png Graphic file (type png)
 <use figures/Gore_Oscillation_Combined_Panel.png>
@@ -1392,9 +1393,9 @@ c/dvips/lm/lm-ec.enc}
 dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/sha
 re/texmf/fonts/enc/dvips/lm/lm-ts1.enc} <./logos/logo.png> <./figures/attributi
 on_and_qr.png> <./Serial dilution.png> <./gLV_image.png> <./CRM.png> <./NN_LSTM
--Cell_v2.pdf> <./figures/Ophelia_Test_Scatter.png> <./figures/Pollard_Universal
-_Matrices.png> <./figures/German_Prescriptive_Biotech_Search.png> <./figures/Go
-re_Oscillation_Combined_Panel.png>]
+-Cell_v2.pdf> <./figures/Ophelia_Test_Scatter.png> <./figures/Pollard_Coupled_B
+iofilm_Universality.png> <./figures/German_Prescriptive_Biotech_Search.png> <./
+figures/Gore_Oscillation_Combined_Panel.png>]
 \tf@nav=\write6
 \openout6 = `poster.nav'.
 
@@ -1404,7 +1405,8 @@ re_Oscillation_Combined_Panel.png>]
 \tf@snm=\write8
 \openout8 = `poster.snm'.
 
- (./poster.aux)
+
+(./poster.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -1414,7 +1416,7 @@ Package rerunfilecheck Info: File `poster.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  36656 strings out of 467533
- 858755 string characters out of 5422139
+ 858825 string characters out of 5422139
  1458987 words of memory out of 5000000
  64824 multiletter control sequences out of 15000+600000
  763026 words of font info for 161 fonts, out of 8000000 for 9000
@@ -1427,7 +1429,7 @@ are/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/
 lm/lmss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/
 texmf/fonts/type1/public/lm/lmsso17.pfb></usr/share/texmf/fonts/type1/public/lm
 /lmsy10.pfb>
-Output written on poster.pdf (1 page, 3632465 bytes).
+Output written on poster.pdf (1 page, 3751189 bytes).
 PDF statistics:
  106 PDF objects out of 1000 (max. 8388607)
  55 compressed objects within 1 object stream

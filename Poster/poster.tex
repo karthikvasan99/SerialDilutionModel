@@ -169,14 +169,14 @@
   % 5. UNIVERSALITY: POLLARD
   \begin{block}{Parameters of the model are interpretable}
     \begin{itemize}
-      \item Human gut communities of 50 diverse isolates propagated through 100 serial dilution cycles across 5 spatial environments, including liquid broth and structured hydrogel beads.
-      \item Multi-passage abundance profiles tracking community succession, spatial sheltering of slow-growing taxa, and long-term taxonomic retention.
-      \item Invariant uptake traits $\mathbf{\Theta}$ and cross-feeding networks $\mathbf{W}$ generalize across well-mixed and structured phases without phase-specific parameter re-tuning.
+      \item 50 diverse gut isolates propagated across serial dilution cycles in hydrogel carrier beads and supernatants.
+      \item Coupled biofilm-planktonic Neural ODE simultaneously predicts continuous biomass exchange and community succession ($R^2 \approx 0.88$).
+      \item Invariant uptake traits $\mathbf{\Theta}$, cross-feeding $\mathbf{W}$, and spatial adherence traits outperform shuffled and uncoupled null models.
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.96\linewidth]{figures/Pollard_Universal_Matrices.png}
+      \includegraphics[width=0.80\linewidth]{figures/Pollard_Coupled_Biofilm_Universality.png}
     \end{figure}
   \end{block}
 
@@ -193,13 +193,13 @@
   \begin{block}{Model prescribes therapeutic interventions}
     \begin{itemize}
       \item Bovine rumen inocula from distinct donors (BRRS and OSU) cultivated in pressurized bioreactors under $\mathrm{H_2:CO_2}$ (5 bar and 30 bar) with MeOH or TMA.
-      \item Trained on all OSU conditions and 30 bar BRRS data; predicted 5 bar BRRS regimes to evaluate cross-donor and cross-pressure generalization.
+      \item Trained strictly on all Cow OSU conditions with zero recipient host data; predicted 5 bar BRRS regimes to evaluate pure cross-host generalization.
       \item Naive cross-host therapeutic intervention fails to enrich the target microbe; our model predicts +TMA at 5 bar rescues enrichment, confirmed in wet-lab validation (23\% observed).
     \end{itemize}
 
     \begin{figure}
       \centering
-      \includegraphics[width=0.88\linewidth]{figures/German_Prescriptive_Biotech_Search.png}
+      \includegraphics[width=0.96\linewidth]{figures/German_Prescriptive_Biotech_Search.png}
     \end{figure}
     \vspace{-1ex}
     \par{\scriptsize\textit{Data contributors:} Bela Haifa Khairunisa, Niel Baxter, Dwi Susanti, and Germ\'an Plata (BiomEdit Inc.); Christian Heryakusuma, Colin Short, and Biswarup Mukhopadhyay (Virginia Tech).}
