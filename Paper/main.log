@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  10 NOV 2026 16:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  12 NOV 2026 09:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -498,7 +498,13 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 (./sections/01_introduction.tex) (./sections/02_model.tex)
 (./sections/03_datasets.tex) (./sections/04_results.tex
-<figures/Figure1_Ophelia_ThreePanel_Publication.png, id=32, 1196.0685pt x 368.5
+Underfull \vbox (badness 6961) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+<figures/Figure1_Ophelia_ThreePanel_Publication.png, id=56, 1196.0685pt x 368.5
 77pt>
 File: figures/Figure1_Ophelia_ThreePanel_Publication.png Graphic file (type png
 )
@@ -506,59 +512,53 @@ File: figures/Figure1_Ophelia_ThreePanel_Publication.png Graphic file (type png
 Package pdftex.def Info: figures/Figure1_Ophelia_ThreePanel_Publication.png  us
 ed on input line 22.
 (pdftex.def)             Requested size: 505.89pt x 155.89233pt.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-
-]
 Underfull \hbox (badness 1824) in paragraph at lines 36--36
 \OT1/cmr/bx/n/12 (+20) liquid par-ti-tion-ing with uni-ver-sal
  []
 
-<figures/Pollard_Coupled_Biofilm_Simultaneous_Fit.png, id=67, 1589.94pt x 375.8
-04pt>
-File: figures/Pollard_Coupled_Biofilm_Simultaneous_Fit.png Graphic file (type p
-ng)
-<use figures/Pollard_Coupled_Biofilm_Simultaneous_Fit.png>
-Package pdftex.def Info: figures/Pollard_Coupled_Biofilm_Simultaneous_Fit.png  
-used on input line 45.
-(pdftex.def)             Requested size: 505.89pt x 119.57161pt.
-[2 <./figures/Figure1_Ophelia_ThreePanel_Publication.png>]
-Overfull \hbox (46.20561pt too wide) detected at line 54
-[]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+<figures/Figure2_Pollard_Universality_Bimodality_Tradeoff.png, id=65, 1214.136p
+t x 939.51pt>
+File: figures/Figure2_Pollard_Universality_Bimodality_Tradeoff.png Graphic file
+ (type png)
+<use figures/Figure2_Pollard_Universality_Bimodality_Tradeoff.png>
+Package pdftex.def Info: figures/Figure2_Pollard_Universality_Bimodality_Tradeo
+ff.png  used on input line 45.
+(pdftex.def)             Requested size: 505.89pt x 391.45198pt.
+ [2]
+Underfull \hbox (badness 1946) in paragraph at lines 65--66
+\OT1/cmr/m/n/10 (+20) ($\OML/cmm/m/it/10 c[] \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/1
+0 (+20) 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 50\OML/cmm/m/it/10 ; \OT1/cmr/
+m/n/10 (+20) 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 85\OMS/cmsy/m/n/10 g$\OT1
+/cmr/m/n/10 (+20) ), and car-ry-over regimes ($\OML/cmm/m/it/10 ^^Q \OMS/cmsy/m
+/n/10 2
  []
 
-<figures/Pollard_Coupled_Biofilm_Adhesion_Ratio_Bimodal_Histogram.png, id=77, 1
-156.32pt x 794.97pt>
-File: figures/Pollard_Coupled_Biofilm_Adhesion_Ratio_Bimodal_Histogram.png Grap
-hic file (type png)
-<use figures/Pollard_Coupled_Biofilm_Adhesion_Ratio_Bimodal_Histogram.png>
-Package pdftex.def Info: figures/Pollard_Coupled_Biofilm_Adhesion_Ratio_Bimodal
-_Histogram.png  used on input line 63.
-(pdftex.def)             Requested size: 505.89pt x 347.79852pt.
 
-Underfull \hbox (badness 3668) in paragraph at lines 77--77
+Underfull \vbox (badness 5050) has occurred while \output is active []
+
+ [3{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./figures/Figu
+re1_Ophelia_ThreePanel_Publication.png>]
+Underfull \hbox (badness 3668) in paragraph at lines 78--78
 []\OT1/cmr/bx/n/12 (+20) Physical-metabolic de-cou-pling ex-
  []
 
-<figures/Pollard_Coupled_Biofilm_Adhesion_vs_Metabolic_Tradeoff_ErrorBars.png, 
-id=82, 939.51pt x 686.565pt>
-File: figures/Pollard_Coupled_Biofilm_Adhesion_vs_Metabolic_Tradeoff_ErrorBars.
-png Graphic file (type png)
-<use figures/Pollard_Coupled_Biofilm_Adhesion_vs_Metabolic_Tradeoff_ErrorBars.p
-ng>
-Package pdftex.def Info: figures/Pollard_Coupled_Biofilm_Adhesion_vs_Metabolic_
-Tradeoff_ErrorBars.png  used on input line 88.
-(pdftex.def)             Requested size: 430.00958pt x 314.23135pt.
-[3{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-<figures/German_Theta_TMA_Niche_Competition.png, id=99, 1073.4504pt x 860.4948p
+<figures/German_Theta_TMA_Niche_Competition.png, id=95, 1073.4504pt x 860.4948p
 t>
 File: figures/German_Theta_TMA_Niche_Competition.png Graphic file (type png)
 <use figures/German_Theta_TMA_Niche_Competition.png>
 Package pdftex.def Info: figures/German_Theta_TMA_Niche_Competition.png  used o
-n input line 112.
+n input line 108.
 (pdftex.def)             Requested size: 505.89pt x 405.5224pt.
- [4 <./figures/Pollard_Coupled_Biofilm_Simultaneous_Fit.png>]
-<figures/German_CrossHost_Transfer_Biotech.png, id=112, 846.2817pt x 402.303pt>
+[4]
+Underfull \hbox (badness 1484) in paragraph at lines 125--126
+[]\OT1/cmr/m/n/10 (+20) In Cow OSU, the res-i-dent com-mu-nity al-
+ []
+
+<figures/German_CrossHost_Transfer_Biotech.png, id=108, 846.2817pt x 402.303pt>
 
 File: figures/German_CrossHost_Transfer_Biotech.png Graphic file (type png)
 <use figures/German_CrossHost_Transfer_Biotech.png>
@@ -575,12 +575,9 @@ Underfull \hbox (badness 1389) in paragraph at lines 137--34
 \OT1/cmr/m/n/10 (+20) dimensional la-tent re-source co-or-di-nates, our model
  []
 
-(./main.bbl [5 <./figures/Pollard_Coupled_Biofilm_Adhesion_Ratio_Bimodal_Histog
-ram.png>]) [6
-
- <./figures/Pollard_Coupled_Biofilm_Adhesion_vs_Metabolic_Tradeoff_ErrorBars.pn
-g>] [7 <./figures/German_Theta_TMA_Niche_Competition.png>]
-[8 <./figures/German_CrossHost_Transfer_Biotech.png>] (./main.aux)
+(./main.bbl) [5] [6 <./figures/Figure2_Pollard_Universality_Bimodality_Tradeoff
+.png>] [7 <./figures/German_Theta_TMA_Niche_Competition.png>] [8 <./figures/Ger
+man_CrossHost_Transfer_Biotech.png>] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -589,13 +586,13 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 883C42A2986895D89F8F04E0D902A559;3003.
  ) 
 Here is how much of TeX's memory you used:
- 13110 strings out of 467533
- 202479 string characters out of 5422139
- 687005 words of memory out of 5000000
- 41640 multiletter control sequences out of 15000+600000
- 642055 words of font info for 161 fonts, out of 8000000 for 9000
+ 13116 strings out of 467533
+ 201579 string characters out of 5422139
+ 694858 words of memory out of 5000000
+ 41625 multiletter control sequences out of 15000+600000
+ 642991 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,1477b,590s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,3024b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -609,10 +606,10 @@ cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (8 pages, 5063977 bytes).
+Output written on main.pdf (8 pages, 3108162 bytes).
 PDF statistics:
- 209 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
- 37 named destinations out of 1000 (max. 500000)
- 32839 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 207 PDF objects out of 1000 (max. 8388607)
+ 158 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 32829 words of extra memory for PDF output out of 35830 (max. 10000000)
 
