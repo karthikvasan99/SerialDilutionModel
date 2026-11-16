@@ -53,12 +53,13 @@ In natural mammalian niches, gut microbiota do not inhabit well-mixed liquid cul
 
 We formalized this modular adaptation by explicitly coupling two spatial compartments—the hydrogel carrier biofilm ($c$) and the surrounding liquid supernatant ($s$)—via biophysical exchange kinetics:
 \begin{align}
-\frac{dN_i^{(c)}}{dt} &= N_i^{(c)} \sum_{k=1}^K R_k^{(c)} \Theta_{ik}^{(c)} - \alpha_i (N_i^{(c)})^2 \nonumber \\
+\frac{dN_i^{(c)}}{dt} &= N_i^{(c)} \sum_{k=1}^K R_k(t) \Theta_{ik}^{(c)} - \alpha_i (N_i^{(c)})^2 \nonumber \\
 &\quad + k_{\text{attach}, i} N_i^{(s)} - k_{\text{shed}, i} N_i^{(c)}, \label{eq:coupled_c} \\
-\frac{dN_i^{(s)}}{dt} &= N_i^{(s)} \sum_{k=1}^K R_k^{(s)} \Theta_{ik}^{(s)} - \alpha_i (N_i^{(s)})^2 \nonumber \\
-&\quad - k_{\text{attach}, i} N_i^{(s)} + k_{\text{shed}, i} N_i^{(c)}, \label{eq:coupled_s}
+\frac{dN_i^{(s)}}{dt} &= N_i^{(s)} \sum_{k=1}^K R_k(t) \Theta_{ik}^{(s)} - \alpha_i (N_i^{(s)})^2 \nonumber \\
+&\quad - k_{\text{attach}, i} N_i^{(s)} + k_{\text{shed}, i} N_i^{(c)}, \label{eq:coupled_s} \\
+\frac{dR_k}{dt} &= - J_k(t) + \sum_{l=1}^K J_l(t) W_{lk}, \label{eq:coupled_r}
 \end{align}
-where $k_{\text{attach}, i}$ and $k_{\text{shed}, i}$ denote strain-specific attachment and shedding rate constants ($\text{day}^{-1}$), and the resources $R_k^{(c)}$ and $R_k^{(s)}$ follow corresponding local depletion and byproduct generation dynamics.
+where $J_k(t) = R_k(t) \sum_{j=1}^N \left( \Theta_{jk}^{(c)} N_j^{(c)} + \Theta_{jk}^{(s)} N_j^{(s)} \right)$ is the total consumption flux of resource $k$ across both compartments, and $k_{\text{attach}, i}$ and $k_{\text{shed}, i}$ denote strain-specific attachment and shedding rate constants ($\text{day}^{-1}$).
 
 We tested whether metabolic resource utilization is an intrinsic, conserved property of each bacterial genome by enforcing \textbf{parameter universality}: the metabolic consumption affinities $\mathbf{\Theta}^{(c)}, \mathbf{\Theta}^{(s)}$ and byproduct matrix $W$ (Figure~\ref{fig:pollard_unified}a) were constrained to be identical across all three experimental conditions, requiring all environmental variation to be mediated solely by physical boundary conditions ($k_{\text{attach}}, k_{\text{shed}}$ and carrier presence). Furthermore, to prevent unphysical parameter compensation, liquid carryover between passages was fixed strictly to the experimental dilution ratio ($\eta = 1/30 \approx 0.0333$).
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  12 NOV 2026 09:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.9.9)  12 NOV 2026 15:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -529,7 +529,7 @@ Package pdftex.def Info: figures/Figure2_Pollard_Universality_Bimodality_Tradeo
 ff.png  used on input line 45.
 (pdftex.def)             Requested size: 505.89pt x 391.45198pt.
  [2]
-Underfull \hbox (badness 1946) in paragraph at lines 65--66
+Underfull \hbox (badness 1946) in paragraph at lines 66--67
 \OT1/cmr/m/n/10 (+20) ($\OML/cmm/m/it/10 c[] \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/1
 0 (+20) 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 50\OML/cmm/m/it/10 ; \OT1/cmr/
 m/n/10 (+20) 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 (+20) 85\OMS/cmsy/m/n/10 g$\OT1
@@ -542,19 +542,19 @@ Underfull \vbox (badness 5050) has occurred while \output is active []
 
  [3{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./figures/Figu
 re1_Ophelia_ThreePanel_Publication.png>]
-Underfull \hbox (badness 3668) in paragraph at lines 78--78
+Underfull \hbox (badness 3668) in paragraph at lines 79--79
 []\OT1/cmr/bx/n/12 (+20) Physical-metabolic de-cou-pling ex-
  []
 
-<figures/German_Theta_TMA_Niche_Competition.png, id=95, 1073.4504pt x 860.4948p
+<figures/German_Theta_TMA_Niche_Competition.png, id=96, 1073.4504pt x 860.4948p
 t>
 File: figures/German_Theta_TMA_Niche_Competition.png Graphic file (type png)
 <use figures/German_Theta_TMA_Niche_Competition.png>
 Package pdftex.def Info: figures/German_Theta_TMA_Niche_Competition.png  used o
-n input line 108.
+n input line 109.
 (pdftex.def)             Requested size: 505.89pt x 405.5224pt.
 [4]
-Underfull \hbox (badness 1484) in paragraph at lines 125--126
+Underfull \hbox (badness 1484) in paragraph at lines 126--127
 []\OT1/cmr/m/n/10 (+20) In Cow OSU, the res-i-dent com-mu-nity al-
  []
 
@@ -563,15 +563,15 @@ Underfull \hbox (badness 1484) in paragraph at lines 125--126
 File: figures/German_CrossHost_Transfer_Biotech.png Graphic file (type png)
 <use figures/German_CrossHost_Transfer_Biotech.png>
 Package pdftex.def Info: figures/German_CrossHost_Transfer_Biotech.png  used on
- input line 132.
+ input line 133.
 (pdftex.def)             Requested size: 430.00958pt x 204.42288pt.
 ) (./sections/05_discussion.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 137--34
+Underfull \hbox (badness 10000) in paragraph at lines 138--34
 []\OT1/cmr/m/n/10 (+20) By pro-ject-ing com-plex mi-cro-biomes into low-
  []
 
 
-Underfull \hbox (badness 1389) in paragraph at lines 137--34
+Underfull \hbox (badness 1389) in paragraph at lines 138--34
 \OT1/cmr/m/n/10 (+20) dimensional la-tent re-source co-or-di-nates, our model
  []
 
@@ -586,10 +586,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 883C42A2986895D89F8F04E0D902A559;3003.
  ) 
 Here is how much of TeX's memory you used:
- 13116 strings out of 467533
- 201579 string characters out of 5422139
- 694858 words of memory out of 5000000
- 41625 multiletter control sequences out of 15000+600000
+ 13118 strings out of 467533
+ 201603 string characters out of 5422139
+ 696005 words of memory out of 5000000
+ 41626 multiletter control sequences out of 15000+600000
  642991 words of font info for 171 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,3024b,585s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -606,10 +606,10 @@ cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (8 pages, 3108162 bytes).
+Output written on main.pdf (8 pages, 3109044 bytes).
 PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 158 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
+ 208 PDF objects out of 1000 (max. 8388607)
+ 159 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
  32829 words of extra memory for PDF output out of 35830 (max. 10000000)
 
