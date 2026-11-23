@@ -1,63 +1,121 @@
-\begin{thebibliography}{8}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem[Venturelli et~al.(2018)Venturelli, Carr, Fisher, Hsu, Lau, Bowen,
-  Hromada, Northen, and Arkin]{venturelli2018deciphering}
-Ophelia~S Venturelli, Alex~V Carr, Garth Fisher, Ryan~H Hsu, Rebecca Lau,
-  Benjamin~P Bowen, Susan Hromada, Trent Northen, and Adam~P Arkin.
-\newblock Deciphering microbial interactions in synthetic human gut microbiome
-  communities.
-\newblock \emph{Molecular systems biology}, 14\penalty0 (6):\penalty0
-  MSB178157, 2018.
+\bibitem{venturelli2018deciphering}
+\bibinfo{author}{Venturelli, O.~S.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Molecular systems biology}}
+  \textbf{\bibinfo{volume}{14}}, \bibinfo{pages}{MSB178157}
+  (\bibinfo{year}{2018}).
 
-\bibitem[May(1972)]{may1972will}
-Robert~M. May.
-\newblock Will a large complex system be stable?
-\newblock \emph{Nature}, 238\penalty0 (5364):\penalty0 413--414, 1972.
+\bibitem{goldford2018emergent}
+\bibinfo{author}{Goldford, J.~E.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{361}},
+  \bibinfo{pages}{469--474} (\bibinfo{year}{2018}).
 
-\bibitem[Barbier et~al.(2020)Barbier, Arnoldi, Bunin, and
-  Loreau]{barbier2020generic}
-Matthieu Barbier, Jean-Fran{\c{c}}ois Arnoldi, Guy Bunin, and Michel Loreau.
-\newblock Generic assembly patterns in complex ecological communities.
-\newblock \emph{Physical Review Research}, 2\penalty0 (2):\penalty0 023201,
-  2020.
+\bibitem{stein2013ecological}
+\bibinfo{author}{Stein, R.~R.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{PLOS Computational Biology}}
+  \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{e1003388}
+  (\bibinfo{year}{2013}).
 
-\bibitem[Goldford et~al.(2018)Goldford, Lu, Baji{\'c}, Estrela, Tikhonov,
-  Sanchez-Gorostiaga, Segr{\`e}, Mehta, and Sanchez]{goldford2018emergent}
-Joshua~E. Goldford, Nanxi Lu, Djordje Baji{\'c}, Sylvie Estrela, Mikhail
-  Tikhonov, Alicia Sanchez-Gorostiaga, Daniel Segr{\`e}, Pankaj Mehta, and
-  Alvaro Sanchez.
-\newblock Emergent simplicity in microbial community assembly.
-\newblock \emph{Science}, 361\penalty0 (6401):\penalty0 469--474, 2018.
+\bibitem{bucci2016mdsine}
+\bibinfo{author}{Bucci, V.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Genome Biology}}
+  \textbf{\bibinfo{volume}{17}}, \bibinfo{pages}{121} (\bibinfo{year}{2016}).
 
-\bibitem[MacArthur(1970)]{macarthur1970species}
-Robert MacArthur.
-\newblock Species packing and competitive equilibrium for many species.
-\newblock \emph{Theoretical Population Biology}, 1\penalty0 (1):\penalty0
-  1--11, 1970.
+\bibitem{gibson2025mdsine2}
+\bibinfo{author}{Gibson, T.~E.}, \bibinfo{author}{Kim, Y.-K.},
+  \bibinfo{author}{Acharya, S.}, \bibinfo{author}{Kaplan, D.~L.} \&
+  \bibinfo{author}{Gerber, G.~K.}
+\newblock \emph{\bibinfo{journal}{Nature Microbiology}}
+  \textbf{\bibinfo{volume}{10}}, \bibinfo{pages}{2550--2564}
+  (\bibinfo{year}{2025}).
 
-\bibitem[Tilman(1982)]{tilman1982resource}
-David Tilman.
-\newblock \emph{Resource Competition and Community Structure}.
-\newblock Princeton University Press, 1982.
+\bibitem{harcombe2014metabolic}
+\bibinfo{author}{Harcombe, W.~R.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Cell Reports}} \textbf{\bibinfo{volume}{7}},
+  \bibinfo{pages}{1104--1115} (\bibinfo{year}{2014}).
 
-\bibitem[Jin et~al.(2023)Jin, Yu, Yan, Weakley, Dubinkina, Meng, and
-  Pollard]{jin2023culturing}
-Xiaofan Jin, Feiqiao~B Yu, Jia Yan, Allison~M Weakley, Veronika Dubinkina,
-  Xiandong Meng, and Katherine~S Pollard.
-\newblock Culturing of a complex gut microbial community in mucin-hydrogel
-  carriers reveals strain-and gene-associated spatial organization.
-\newblock \emph{Nature Communications}, 14\penalty0 (1):\penalty0 3510, 2023.
+\bibitem{friedman2017community}
+\bibinfo{author}{Friedman, J.}, \bibinfo{author}{Higgins, L.~M.} \&
+  \bibinfo{author}{Gore, J.}
+\newblock \emph{\bibinfo{journal}{Nature Ecology \& Evolution}}
+  \textbf{\bibinfo{volume}{1}}, \bibinfo{pages}{0109} (\bibinfo{year}{2017}).
 
-\bibitem[Srinivasan et~al.(2026)Srinivasan, Plata, and
-  Dixit]{srinivasan2026low}
-Karthik Srinivasan, Germ{\'a}n Plata, and Purushottam~D. Dixit.
-\newblock Low-dimensional coexistence in complex microbial ecosystems.
-\newblock \emph{PRX Life}, 4\penalty0 (3):\penalty0 033026, 2026.
-\newblock \doi{10.1103/rtht-q5dr}.
+\bibitem{hu2022emergent}
+\bibinfo{author}{Hu, J.}, \bibinfo{author}{Amor, D.~R.},
+  \bibinfo{author}{Barbier, M.}, \bibinfo{author}{Bunin, G.} \&
+  \bibinfo{author}{Gore, J.}
+\newblock \emph{\bibinfo{journal}{Science}} \textbf{\bibinfo{volume}{378}},
+  \bibinfo{pages}{85--89} (\bibinfo{year}{2022}).
+
+\bibitem{ho2022competition}
+\bibinfo{author}{Ho, P.-Y.}, \bibinfo{author}{Good, B.~H.} \&
+  \bibinfo{author}{Huang, K.~C.}
+\newblock \emph{\bibinfo{journal}{eLife}} \textbf{\bibinfo{volume}{11}},
+  \bibinfo{pages}{e71550} (\bibinfo{year}{2022}).
+
+\bibitem{macarthur1970species}
+\bibinfo{author}{MacArthur, R.}
+\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{1}}, \bibinfo{pages}{1--11} (\bibinfo{year}{1970}).
+
+\bibitem{tilman1982resource}
+\bibinfo{author}{Tilman, D.}
+\newblock \emph{\bibinfo{title}{Resource Competition and Community Structure}}
+  (\bibinfo{publisher}{Princeton University Press}, \bibinfo{year}{1982}).
+
+\bibitem{marsland2019available}
+\bibinfo{author}{Marsland, R.}, \bibinfo{author}{Cui, W.},
+  \bibinfo{author}{Goldford, J.}, \bibinfo{author}{Sanchez, A.} \&
+  \bibinfo{author}{Mehta, P.}
+\newblock \emph{\bibinfo{journal}{PLOS Computational Biology}}
+  \textbf{\bibinfo{volume}{15}}, \bibinfo{pages}{e1006887}
+  (\bibinfo{year}{2019}).
+
+\bibitem{liao2020modeling}
+\bibinfo{author}{Liao, C.-C.}, \bibinfo{author}{Wang, T.},
+  \bibinfo{author}{Maslov, S.} \& \bibinfo{author}{Xavier, J.~B.}
+\newblock \emph{\bibinfo{journal}{PLOS Computational Biology}}
+  \textbf{\bibinfo{volume}{16}}, \bibinfo{pages}{e1008135}
+  (\bibinfo{year}{2020}).
+
+\bibitem{srinivasan2026low}
+\bibinfo{author}{Srinivasan, K.}, \bibinfo{author}{Plata, G.} \&
+  \bibinfo{author}{Dixit, P.~D.}
+\newblock \emph{\bibinfo{journal}{PRX Life}} \textbf{\bibinfo{volume}{4}},
+  \bibinfo{pages}{033026} (\bibinfo{year}{2026}).
+
+\bibitem{chen2018neural}
+\bibinfo{author}{Chen, R.~T.}, \bibinfo{author}{Rubanova, Y.},
+  \bibinfo{author}{Bettencourt, J.} \& \bibinfo{author}{Duvenaud, D.~K.}
+\newblock \emph{\bibinfo{journal}{Advances in Neural Information Processing
+  Systems}} \textbf{\bibinfo{volume}{31}} (\bibinfo{year}{2018}).
+
+\bibitem{cheng2022design}
+\bibinfo{author}{Cheng, A.~G.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Cell}} \textbf{\bibinfo{volume}{185}},
+  \bibinfo{pages}{4253--4268} (\bibinfo{year}{2022}).
+
+\bibitem{jin2023culturing}
+\bibinfo{author}{Jin, X.} \emph{et~al.}
+\newblock \emph{\bibinfo{journal}{Nature Communications}}
+  \textbf{\bibinfo{volume}{14}}, \bibinfo{pages}{3510} (\bibinfo{year}{2023}).
+
+\bibitem{barbier2020generic}
+\bibinfo{author}{Barbier, M.}, \bibinfo{author}{Arnoldi, J.-F.},
+  \bibinfo{author}{Bunin, G.} \& \bibinfo{author}{Loreau, M.}
+\newblock \emph{\bibinfo{journal}{Physical Review Research}}
+  \textbf{\bibinfo{volume}{2}}, \bibinfo{pages}{023201} (\bibinfo{year}{2020}).
+
+\bibitem{chesson1990macarthur}
+\bibinfo{author}{Chesson, P.}
+\newblock \emph{\bibinfo{journal}{Theoretical Population Biology}}
+  \textbf{\bibinfo{volume}{37}}, \bibinfo{pages}{26--38}
+  (\bibinfo{year}{1990}).
 
 \end{thebibliography}

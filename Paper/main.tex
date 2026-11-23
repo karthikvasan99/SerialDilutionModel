@@ -7,32 +7,36 @@
 \usepackage{tabularx}
 \usepackage{microtype}
 \usepackage{authblk}
-\usepackage[numbers,sort&compress]{natbib}
+\usepackage[super,sort&compress]{natbib}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 
-\title{\textbf{A Unified Physical Consumer-Resource Neural ODE Framework for Microbial Serial Dilution Ecology Across Diverse Microbiomes}}
+\title{\textbf{Latent low-dimensional consumer-resource dynamics predict microbial assembly and interventions}}
 
-\author[1]{Karthik}
-\author[1,2]{Computational Microbial Ecology Group}
-\affil[1]{Serial Dilution Modeling Project}
-\affil[2]{Department of Computational Biology \& Ecology}
-\date{\today}
+\author[1]{Karthik Srinivasan}
+\author[2]{Germ\'an Plata}
+\author[1]{Purushottam Dixit}
+\affil[1]{Department of Biomedical Engineering, Yale University, New Haven, CT, USA}
+\affil[2]{Computational Sciences, BiomEdit, LLC, Fishers, IN, USA}
+\date{}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-% Abstract intentionally left blank
+Predicting multispecies microbial community assembly and responses to environmental interventions remains a fundamental challenge in microbiome engineering. Here, we present a latent, low-dimensional consumer-resource model that projects multispecies interactions onto effective metabolic resource coordinates. Across diverse synthetic gut and livestock microbiomes, our framework accurately forecasts combinatorial assembly, enables zero-shot generalization across structured microenvironments, and predicts host-specific intervention outcomes.
 \end{abstract}
 
 \input{sections/01_introduction.tex}
-\input{sections/02_model.tex}
-\input{sections/03_datasets.tex}
+%\input{sections/02_model.tex}
+%\input{sections/03_datasets.tex}
 \input{sections/04_results.tex}
 \input{sections/05_discussion.tex}
+\input{sections/methods.tex}
 
-\bibliographystyle{unsrtnat}
+\bibliographystyle{naturemag_brief}
 \bibliography{references}
+
+\input{sections/appendix.tex}
 
 \end{document}

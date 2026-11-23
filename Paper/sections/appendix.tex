@@ -1,0 +1,82 @@
+\clearpage
+\onecolumn
+\section*{Supplementary Information: Appendix and Extended Discussion}
+\label{sec:appendix}
+
+\subsection*{Supplementary Note 1: Assessing Latent Parameter Invariance Across Environmental Contexts}
+\label{note:invariance}
+
+A central premise of the low-dimensional Consumer-Resource Model (CRM) presented in this work is that multispecies microbial assembly can be projected onto a coarse-grained latent metabolic resource space ($K \ll S$). In our analyses across combinatorial gut consortia (Venturelli et al.) and spatial microenvironments (Jin et al.), holding the consumption affinity matrix $\mathbf{\Theta} \in \mathbb{R}^{S \times K}$ and byproduct cross-feeding stoichiometry $W \in \mathbb{R}^{K \times K}$ constant across conditions yielded robust predictive accuracy, enabling out-of-sample combinatorial forecasting and zero-shot transfer onto unseen physical carriers. 
+
+However, whether such latent metabolic parameters can be treated as strictly \textit{invariant} across radically different environmental, nutritional, and physiological regimes is a critical open question in ecological modeling that warrants explicit investigation:
+
+\begin{enumerate}
+    \item \textbf{Phenotypic and Transcriptional Plasticity:} Microorganisms are not static chemical reaction networks with fixed kinetic coefficients. Under changing nutrient regimes, bacteria actively rewire their metabolic networks via hierarchical catabolite repression (e.g., CRP-cAMP in Proteobacteria, CcpA in Firmicutes), diauxic switches, and stringent response signaling. While a single low-dimensional representation $\mathbf{\Theta}_i$ captures the average effective resource utilization under a given background macro-environment, introducing a consortium into fundamentally distinct chemical milieus (e.g., switching from sugar-rich broth to mucin glycans or lipid-rich regimes) may induce transcriptional reprogramming that alters effective uptake affinities.
+    
+    \item \textbf{Context-Dependent Latent Resource Projections:} The latent axes $k \in \{1, \dots, K\}$ do not correspond to individual molecular species; rather, they represent composite biochemical niches or orthogonal resource pools emergent from the physical environment. Consequently, when the background nutrient composition changes drastically, the physical interpretation of the latent coordinate system may rotate. Testing whether latent coordinates remain stable across disparate media will require systematic multi-environment benchmarks where communities are profiled across defined, systematically perturbed nutrient gradients.
+    
+    \item \textbf{Hierarchical and Contextual Parameter Formulations:} To rigorously address potential parameter drift without abandoning parameter efficiency, future extensions could formulate $\mathbf{\Theta}$ hierarchically:
+    \begin{equation}
+    \mathbf{\Theta}_{i}^{(e)} = \mathbf{\Theta}_{i}^{(\text{core})} + \Delta \mathbf{\Theta}_{i}^{(e)},
+    \end{equation}
+    where $\mathbf{\Theta}_{i}^{(\text{core})}$ represents the genome-encoded baseline metabolic archetype for species $i$, and $\Delta \mathbf{\Theta}_{i}^{(e)}$ parameterizes condition-specific physiological adjustments constrained by an empirical sparsity or shrinkage prior ($\|\Delta \mathbf{\Theta}_{i}^{(e)}\|_2 \ll \|\mathbf{\Theta}_{i}^{(\text{core})}\|_2$). This architecture would allow models to quantify the exact degree of biological invariance across conditions while preventing overfitting.
+    
+    \item \textbf{Experimental Validation of Invariance Boundaries:} High-throughput automated culturing paired with metabolomic (LC-MS) and transcriptomic (RNA-seq) profiling will be crucial to empirically demarcate the boundaries of parameter invariance. By measuring intracellular pathway fluxes alongside community abundance trajectories, future studies can directly correlate changes in inferred latent traits with differential expression of specific transporter and enzyme regulons.
+\end{enumerate}
+
+
+\subsection*{Supplementary Note 2: Metacommunity Formulation of Spatial Microenvironments}
+\label{note:metacommunity}
+
+In Section~\ref{subsec:pollard}, our analysis of the Jin et al. dataset formalizes spatial partitioning within the theoretical framework of **metacommunity ecology**. A metacommunity consists of a network of discrete local habitat patches linked by the dispersal or migration of multiple interacting species. 
+
+In the serial dilution experiments analyzed:
+\begin{itemize}
+    \item **Patch Heterogeneity:** Each culture vessel constitutes a two-patch metacommunity comprising:
+    \begin{enumerate}
+        \item A sessile, surface-associated habitat: the porous hydrogel carrier beads ($c$), providing high surface area for attachment and localized nutrient retention.
+        \item A well-mixed, planktonic habitat: the surrounding liquid supernatant ($s$), characterized by rapid convective transport and high dilution risk.
+    \end{enumerate}
+    \item **Dispersal and Asymmetric Washout:** Species persistence is governed by the interplay between local consumer-resource growth within each patch and bidirectional dispersal kinetics ($k_{\text{attach}, i}$ from liquid to carrier; $k_{\text{shed}, i}$ from carrier to liquid). Crucially, the physical serial passaging imposes asymmetric source-sink dynamics: liquid supernatant is diluted $1:30$ into fresh broth, whereas hydrogel beads are transferred with $20\%$ retention via manual tweezers. This establishes a physical "lifeboat" mechanism in the carrier patch that shields adherent strains from planktonic washout mortality.
+    \item **Generalization to Novel Metacommunities:** By estimating species-level dispersal rates ($k_{\text{attach}}, k_{\text{shed}}$) and conserved metabolic traits ($\mathbf{\Theta}$) on liquid and mucin-carrier patches, the model demonstrates the capacity to predict community assembly zero-shot when transferred into an entirely unobserved metacommunity environment (Plain Agar), confirming that coupled CRM dynamics capture generalizable metacommunity principles.
+\end{itemize}
+
+
+\subsection*{Supplementary Note 3: Reconciling Low-Dimensional Consumer-Resource Kinetics with Long-Term Biodiversity Maintenance ($K \ll S$)}
+\label{note:coexistence}
+
+A central theoretical paradox in applying low-dimensional consumer-resource models to complex microbiomes is the classical competitive exclusion principle: at steady state, $K$ limiting resources cannot support more than $K$ coexisting consumer species ($S \le K$)~\cite{macarthur1970species,tilman1982resource}. Yet, longitudinal serial dilution experiments routinely demonstrate the stable, long-term coexistence of dozens to hundreds of taxa over multiple passages in simple media, typically stabilizing within 6--7 dilution cycles~\cite{goldford2018emergent,jin2023culturing}.
+
+To understand why standard consumer-resource models suffer from catastrophic diversity collapse when $K \ll S$, consider the classical MacArthur-Chesson timescale separation mapping~\cite{macarthur1970species,chesson1990macarthur}. When the turnover of resources is fast relative to microbial growth rates, resource concentrations equilibrate rapidly to their quasi-steady-state values:
+\begin{equation}
+R_k^*(t) \approx \frac{R_{0, k}}{1 + c \sum_{j=1}^S N_j(t) \Theta_{jk}}.
+\end{equation}
+In the linear regime, Taylor expanding $R_k^*$ around zero consumer density yields an equivalent Generalized Lotka-Volterra (gLV) dynamical system:
+\begin{equation}
+\frac{dN_i}{dt} \approx N_i \left( r_i - \sum_{j=1}^S \alpha_{ij} N_j \right),
+\end{equation}
+where the effective interspecies competition matrix is given by the metabolic niche overlap:
+\begin{equation}
+\alpha_{ij} = \sum_{k=1}^K \frac{\Theta_{ik} \Theta_{jk}}{c_k}.
+\label{eq:niche_overlap}
+\end{equation}
+
+Equation~(\ref{eq:niche_overlap}) exposes the fundamental vulnerability of unaugmented consumer-resource models:
+\begin{enumerate}
+    \item \textbf{Rank-Deficient Interaction Matrix:} The $S \times S$ interaction matrix $\mathbf{A} = [\alpha_{ij}]$ is generated by the outer product of the $S \times K$ consumption affinity matrix $\mathbf{\Theta}$, giving $\operatorname{rank}(\mathbf{A}) \le K$. Consequently, $\mathbf{A}$ possesses at least $S - K$ zero eigenvalues.
+    \item \textbf{Weak Intraspecific Competition:} Intraspecific self-limitation is given by $\alpha_{ii} = \sum_{k=1}^K \Theta_{ik}^2 / c_k$. For species with similar metabolic preferences ($\mathbf{\theta}_i \approx \mathbf{\theta}_j$), interspecific competition is nearly identical to intraspecific competition ($\alpha_{ij} \approx \alpha_{ii}$). Without diagonal dominance ($\alpha_{ii} > \alpha_{ij}$), any slight fitness asymmetry causes competitive exclusion, reducing the surviving community to at most $K$ taxa.
+\end{enumerate}
+
+In empirical microbial communities, stable coexistence is maintained by physical and ecological mechanisms that operate beyond pure nutrient exploitation, including density-dependent physical crowding, self-shading, accumulation of toxic autologous metabolic byproducts, and localized bacteriophage or host immune predation~\cite{barbier2020generic}. 
+
+To reconcile a compact, low-dimensional latent space ($K=3\text{--}4$) with sustained biodiversity ($S=50$ or $S=81$), our framework explicitly introduces non-linear intraspecific self-limitation:
+\begin{equation}
+\frac{dN_i}{dt} = N_i(t) \sum_{k=1}^K R_k(t) \Theta_{ik} - \alpha_i N_i(t)^2.
+\end{equation}
+In the effective gLV mapping, this augments the diagonal terms of the interaction matrix:
+\begin{equation}
+\tilde{\alpha}_{ii} = \alpha_{ii} + \alpha_i, \quad \tilde{\alpha}_{ij} = \alpha_{ij} \quad (i \ne j),
+\end{equation}
+which strictly enforces diagonal dominance ($\tilde{\alpha}_{ii} > \tilde{\alpha}_{ij}$). 
+
+When simulated over extended horizons (e.g., beyond 50--100 serial dilution cycles), the unaugmented model ($\alpha_i = 0$) exhibits a slow, progressive diversity collapse, asymptotically purging taxa until only $K$ survivors remain. In contrast, the model augmented with intraspecific self-limitation stabilizes rapidly by passage 5--6, preserving observed community richness and Shannon diversity across indefinite serial passaging cycles without requiring $K \ge S$.

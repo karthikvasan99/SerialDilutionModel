@@ -1,0 +1,90 @@
+\section*{Methods}
+\label{sec:methods}
+
+\subsection*{Low-dimensional consumer-resource dynamical model}
+Multispecies population dynamics within each growth cycle are modeled via coarse-grained MacArthur consumer-resource kinetics~\cite{macarthur1970species,tilman1982resource} augmented with intraspecific self-limitation:
+\begin{align}
+\frac{dN_i}{dt} &= N_i(t) \sum_{k=1}^K R_k(t) \Theta_{ik} - \alpha_i N_i(t)^2, \label{eq:methods_crm_N} \\
+\frac{dR_k}{dt} &= - c \, R_k(t) \sum_{i=1}^S N_i(t) \Theta_{ik} \nonumber \\
+&\quad + \sum_{l=1}^K \left( c \, R_l(t) \sum_{i=1}^S N_i(t) \Theta_{il} \right) W_{lk}, \label{eq:methods_crm_R}
+\end{align}
+where $N_i(t) \ge 0$ denotes the biomass or optical density ($\text{OD}_{600}$) of species $i \in \{1, \dots, S\}$, $R_k(t) \ge 0$ represents the concentration of effective latent resource $k \in \{1, \dots, K\}$ with $K \ll S$, $\Theta_{ik} \ge 0$ is the metabolic consumption affinity matrix, $\alpha_i > 0$ parameterizes intraspecific crowding, $c > 0$ is the base uptake rate constant, and $W_{lk} \ge 0$ represents the stoichiometric byproduct cross-feeding matrix. To enforce physical mass conservation, byproduct synthesis satisfies $\sum_{k=1}^K W_{lk} \le c_w$, where $c_w \in (0, 1)$ sets an upper bound on cross-feeding yield. Non-negativity of all parameters is strictly guaranteed during optimization via softplus parameterizations: $\mathbf{\Theta} = \text{softplus}(\mathbf{\Theta}_{\text{raw}})$, $\alpha = \text{softplus}(\alpha_{\text{raw}})$, and $W = \text{softplus}(W_{\text{raw}})$.
+
+\subsection*{Spatial metacommunity model with biophysical exchange}
+To model structured microenvironments (Jin et al.~\cite{jin2023culturing}), each culture vessel is formulated as a two-patch metacommunity consisting of the hydrogel carrier biofilm ($c$) and the surrounding liquid supernatant ($s$), coupled through reversible attachment and shedding kinetics:
+\begin{align}
+\frac{dN_i^{(c)}}{dt} &= N_i^{(c)} \sum_{k=1}^K R_k(t) \Theta_{ik} - \alpha_i (N_i^{(c)})^2 \nonumber \\
+&\quad + k_{\text{attach}, i} N_i^{(s)} - k_{\text{shed}, i} N_i^{(c)}, \label{eq:methods_coupled_c} \\
+\frac{dN_i^{(s)}}{dt} &= N_i^{(s)} \sum_{k=1}^K R_k(t) \Theta_{ik} - \alpha_i (N_i^{(s)})^2 \nonumber \\
+&\quad - k_{\text{attach}, i} N_i^{(s)} + k_{\text{shed}, i} N_i^{(c)}, \label{eq:methods_coupled_s} \\
+\frac{dR_k}{dt} &= - J_k(t) + \sum_{l=1}^K J_l(t) W_{lk}, \label{eq:methods_coupled_r}
+\end{align}
+where
+\begin{equation}
+J_k(t) = R_k(t) \sum_{j=1}^S \Theta_{jk} \left( N_j^{(c)} + N_j^{(s)} \right)
+\label{eq:methods_flux}
+\end{equation}
+is the total consumption flux of latent resource $k$, and $k_{\text{attach}, i}, k_{\text{shed}, i} \ge 0$ are strain-specific attachment and shedding rate constants ($\text{day}^{-1}$). Crucially, the metabolic affinity matrix $\mathbf{\Theta} \in \mathbb{R}^{S \times K}$ and cross-feeding matrix $W \in \mathbb{R}^{K \times K}$ are constrained to be strictly identical across both spatial compartments and all experimental regimes.
+
+\subsection*{Serial transfer mechanics and discrete dilution maps}
+At the end of each passage duration $\tau$, serial passaging is implemented via discrete transfer maps reflecting the experimental physical protocol:
+\begin{itemize}
+    \item \textbf{Liquid No Carrier cultures:} Dilution is performed with an inoculating loop, corresponding to a $1:100$ dilution factor:
+    \begin{equation}
+    N_i(0)^{(m+1)} = \frac{1}{100} N_i(\tau)^{(m)}, \quad R_k(0)^{(m+1)} = R_{0, k}.
+    \end{equation}
+    \item \textbf{Carrier cultures (Plain Agar and Mucin Agar):} Hydrogel beads are transferred manually with tweezers (1 in 5 beads transferred, yielding a $20\%$ physical carrier retention ratio), accompanied by droplet liquid carryover ($\eta = 1/30$):
+    \begin{align}
+    N_i^{(c)}(0)^{(m+1)} &= 0.20 \cdot N_i^{(c)}(\tau)^{(m)}, \\
+    N_i^{(s)}(0)^{(m+1)} &= \frac{1}{30} \cdot N_i^{(s)}(\tau)^{(m)}, \\
+    R_k(0)^{(m+1)} &= R_{0, k},
+    \end{align}
+    where $R_{0, k}$ resets to the fresh media capacity at each passage.
+\end{itemize}
+
+\subsection*{Neural ODE integration and scheduled teacher forcing}
+Dynamic trajectories were integrated using adaptive-step Dormand-Prince or fixed-step Euler Neural ODE solvers via \texttt{torchdiffeq}~\cite{chen2018neural}. To stabilize multi-passage integration against numerical stiffness and gradient explosion, models were trained using scheduled teacher forcing:
+\begin{equation}
+N_{\text{in}}^{(m+1)} = \beta_{\text{tf}} \cdot N_{\text{obs}}^{(m)} + (1 - \beta_{\text{tf}}) \cdot N_{\text{pred}}^{(m)}(\tau),
+\end{equation}
+where the teacher forcing ratio $\beta_{\text{tf}}$ anneals linearly from $1.0$ (one-step rollouts) to $0.0$ (fully autonomous multi-passage simulation) over the first $80\%$ of training epochs.
+
+\subsection*{Model selection and cross-validation protocols}
+Model hyperparameters were selected via systematic cross-validation evaluating discrete Kullback-Leibler (KL) divergence on the relative abundance probability simplex $\Delta^{S-1}$:
+\begin{equation}
+\mathcal{L}_{\text{KL}}(y, \hat{y}) = \sum_{i=1}^S y_i \log \left( \frac{y_i + \epsilon}{\hat{y}_i + \epsilon} \right),
+\end{equation}
+with numerical regularizer $\epsilon = 10^{-6}$.
+\begin{itemize}
+    \item \textbf{Combinatorial gut dataset (Venturelli et al.):} Systematic 5-fold cross-validation was conducted within the 102 training communities across $K \in \{2, \dots, 8\}$ and $c_w \in \{0.20, 0.40, 0.60, 0.80\}$. Held-out validation KL divergence reached a global minimum at $K=3$ and $c_w = 0.20$ ($0.2193 \pm 0.0085$ nats).
+    \item \textbf{Leave-pair-out benchmark:} 66 independent models were trained, each strictly withholding all communities containing a specific species pair $(i, j)$ from the training set, and evaluated on the held-out co-cultures.
+    \item \textbf{Structured microenvironment dataset (Jin et al.):} 3-fold leave-one-vessel-out cross-validation was conducted across No Carrier and Mucin Agar, identifying the optimal configuration at $K=4$, $c_w = 0.75$, and learned initial biomass scalar $b_0 = 1.565$. Zero-shot out-of-distribution transfer was evaluated strictly on the unobserved Plain Agar regime across all 6 passages without fine-tuning.
+\end{itemize}
+
+\subsection*{Factorial contrast displacement vectors at 5 bar}
+To characterize the latent metabolic resource space in the German dataset (Plata et al.) without pressure confounds, factorial contrast displacement vectors were calculated strictly under the 5-bar isobaric regime from the learned initial resource capacities $R_0 \in \mathbb{R}^3$:
+\begin{align}
+\Delta R_{\text{MeOH, 5b}} &= R_0^{\text{MeOH, 5b}} - R_0^{\text{NoAdd, 5b}} \nonumber \\
+&= [0.205,\, 1.315,\, -0.873], \label{eq:methods_delta_meoh} \\
+\Delta R_{\text{TMA, 5b}}  &= R_0^{\text{TMA, 5b}}  - R_0^{\text{NoAdd, 5b}} \nonumber \\
+&= [0.082,\, -0.859,\, 1.559]. \label{eq:methods_delta_tma}
+\end{align}
+Normalized direction vectors were defined as $v_c = \Delta R_c / \|\Delta R_c\|_2$. The resulting subspace angle between the chemical axes was $\theta = \arccos(v_{\text{MeOH}} \cdot v_{\text{TMA}}) = 150.7^\circ$ ($\cos \theta = -0.8724$).
+
+\subsection*{Localized competitive pressure}
+Localized competitive pressure ($C_i$) exerted on strain $i$ by the resident background community along its preferred resource axes is quantified as:
+\begin{equation}
+C_i(t) = \sum_{j \ne i} \left( \sum_{k=1}^K \Theta_{ik} \Theta_{jk} R_k(t) \right) N_j(t).
+\label{eq:methods_competitive_pressure}
+\end{equation}
+Competitive pressure values across passages $T_1 \to T_6$ were standardized to $z$-scores relative to the global distribution across conditions to assess competitive barriers versus niche release.
+
+\subsection*{Experimental datasets}
+\begin{itemize}
+    \item \textbf{Venturelli et al.~\cite{venturelli2018deciphering}:} 12 human gut isolates cultured anaerobically across 175 combinatorial consortia (monocultures, pairs, dropouts, and 12-species communities) sampled longitudinally at $t \in \{12, 24, 36, 48, 60\}$\,h in batch culture.
+    \item \textbf{Jin et al.~\cite{jin2023culturing}:} The defined 104-member synthetic human gut community hCom2~\cite{cheng2022design,jin2023culturing} serially passaged over 6 dilution cycles (18 days; 3 days per cycle) in triplicate biological vessels across No Carrier (liquid broth), Plain Agar (inert 1\% agarose beads), and Mucin Agar (0.5\% porcine gastric mucin in 1\% agarose beads). Taxa were filtered via quality control to retain the $S=50$ prevalent, persistently colonizing core strains detected across cycles. Technical spatial sub-samples ($a, b, c$) were averaged to define continuous biological replicate trajectories.
+    \item \textbf{Plata et al. (BiomEdit rumen dataset):} Rumen fluid communities derived from dairy cattle donors Cow OSU and Cow BRRS cultured under 5 bar $\mathrm{H_2:CO_2}$ syngas base medium supplemented with Methanol ($10\,\text{mM}$) or Trimethylamine ($10\,\text{mM}$) over 6 longitudinal serial passages. Core resident taxa were filtered using quality-control criteria to retain $S=81$ prevalent bacterial and archaeal taxa meeting longitudinal detection thresholds.
+\end{itemize}
+
+\subsection*{Data and code availability}
+All preprocessed datasets and analysis scripts are available in the project repository. Neural ODE implementations were executed using PyTorch 2.x and \texttt{torchdiffeq}.
