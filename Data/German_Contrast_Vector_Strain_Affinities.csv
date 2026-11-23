@@ -1,0 +1,82 @@
+Strain_Index,Strain_Name,Raw_Theta_R0,Raw_Theta_R1,Raw_Theta_R2,Projected_Affinity_MeOH_5b,Projected_Affinity_TMA_5b,Chemical_Preference_MeOH_minus_TMA_5b,Self_Limitation_Alpha
+0,Archaea|Euryarchaeota|Methanomicrobia|Methanomicrobiales|Methanomicrobiaceae|Methanomicrobium|Methanomicrobium sp.,0.04991761,2.452377,2.3755586,0.7299465,0.8975041,-0.1675576,0.13423324
+1,Bacteria|Synergistetes|Synergistia|Synergistales|Synergistaceae|Pyramidobacter|Pyramidobacter sp. CG50-2,0.44027478,1.6909572,1.4172506,0.6766209,0.4443205,0.2323004,0.07354755
+2,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus henryi,0.792584,1.3719211,1.1066356,0.62872195,0.34260768,0.28611428,0.06871999
+3,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Bacteroidaceae|Bacteroides|Bacteroides pyogenes,0.3397382,2.0100656,2.027506,0.59267616,0.8196427,-0.22696656,0.06957347
+4,Bacteria|Synergistetes|Synergistia|Synergistales|Synergistaceae||Synergistaceae bacterium UBA1704,0.4186273,1.7454269,1.4515724,0.7000171,0.44708085,0.25293624,0.07511607
+5,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|||Bacteroidales bacterium WCE2008,0.35713622,2.2991087,1.748663,0.9866536,0.4370929,0.5495607,0.07303271
+6,Bacteria|Firmicutes|Erysipelotrichia|Erysipelotrichales|Coprobacillaceae|Kandleria|Kandleria vitulina,1.8824486,0.056510672,0.05038543,0.26144293,0.10297308,0.15846986,0.071056165
+7,Bacteria|Firmicutes|Clostridia|Eubacteriales|Lachnospiraceae|Lachnoclostridium|[Clostridium] aminophilum,0.84948057,1.4027084,0.71090966,0.87850034,-0.015814006,0.89431435,0.06871337
+8,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus vicugnae,1.2181855,0.2736206,1.7746062,-0.5902572,1.4761751,-2.0664322,0.06999188
+9,Bacteria|Firmicutes|Erysipelotrichia|Erysipelotrichales|Coprobacillaceae|Kandleria|Kandleria sp.,1.8115088,0.13603087,0.1316863,0.27342692,0.13249128,0.14093564,0.061385617
+10,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Bacteroidaceae|Bacteroides|Bacteroides heparinolyticus,0.34656644,1.8786702,1.6400468,0.69747174,0.54438883,0.1530829,0.0631921
+11,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|||Bacteroidales bacterium Bact_12,0.23669228,1.7463349,1.6081305,0.5914857,0.5752712,0.01621449,0.072470434
+12,Bacteria|Firmicutes|Clostridia|Eubacteriales|Lachnospiraceae||Lachnospiraceae bacterium JC7,1.3274014,0.6093616,0.38015586,0.46592158,0.09938522,0.36653638,0.07275363
+13,Bacteria|Firmicutes|Clostridia|Eubacteriales|Eubacteriaceae|Eubacterium|Eubacterium sp. AB3007,1.4339613,0.7947086,0.78456527,0.41100764,0.36863315,0.04237449,0.06983741
+14,Bacteria|Firmicutes|Negativicutes|Veillonellales|Veillonellaceae|Megasphaera|Megasphaera elsdenii,1.8749653,0.14543788,0.5402139,0.065334976,0.48823237,-0.4228974,0.0674094
+15,Archaea|Euryarchaeota|Methanobacteria|Methanobacteriales|Methanobacteriaceae|Methanobrevibacter|Methanobrevibacter thaueri,0.5681008,1.4672128,1.0370075,0.71673584,0.22546071,0.49127513,0.06825654
+16,Bacteria|Actinobacteria|Coriobacteriia|Eggerthellales|Eggerthellaceae|Denitrobacterium|Denitrobacterium detoxificans,0.43374437,1.772064,1.8332474,0.5146632,0.76880866,-0.25414544,0.0683546
+17,Bacteria|Synergistetes|Synergistia|Synergistales|Synergistaceae|Pyramidobacter|uncultured Pyramidobacter sp.,0.70484334,1.3890401,1.1024393,0.63387024,0.3266639,0.30720633,0.06650943
+18,Bacteria|Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Escherichia|Escherichia coli,0.65674716,1.5195563,1.2026131,0.68058085,0.3491398,0.33144104,0.06357844
+19,Bacteria|Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Escherichia|Escherichia sp. S69_ASV_4,0.64243096,1.5221947,1.2242569,0.66904825,0.36614573,0.30290252,0.06574545
+20,Bacteria|Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Shigella|Shigella boydii,0.7927618,1.3322366,1.0513194,0.6262909,0.31336737,0.31292355,0.06618074
+21,Bacteria|Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Shigella|Shigella sp.,0.7904197,1.3548406,1.0652432,0.6370299,0.31453776,0.32249212,0.067275696
+22,Bacteria|Firmicutes|Negativicutes|Veillonellales|Veillonellaceae|Megasphaera|Megasphaera elsdenii CAG:570,1.9141574,0.09783541,0.51987857,0.042201787,0.49519777,-0.452996,0.068654925
+23,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium sporogenes,1.4181693,0.6582045,0.940112,0.21088701,0.5698223,-0.3589353,0.069865026
+24,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium lundense,1.3184634,0.78834736,1.0350897,0.25349367,0.5855708,-0.33207715,0.06438636
+25,Bacteria|Synergistetes|Synergistia|Synergistales|Synergistaceae|Pyramidobacter|Pyramidobacter porci,0.6097099,1.5283132,1.2127011,0.6762276,0.35158807,0.32463956,0.07295095
+26,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. UBA4344,1.4734453,0.07117963,1.0961934,-0.35261714,0.99203724,-1.3446543,0.06849055
+27,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae||Prevotellaceae bacterium UBA7028,1.4045454,1.0638934,0.7988119,0.6218203,0.24991024,0.37191004,0.067949034
+28,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium botulinum,1.3584651,0.7659214,0.9804927,0.27005565,0.55045784,-0.28040218,0.068088725
+29,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Schwartzia|Schwartzia succinivorans,0.9796113,0.9736504,1.1726893,0.28751016,0.6010531,-0.31354296,0.07221805
+30,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium combesii,1.352137,0.7709525,0.98166645,0.27275413,0.5487683,-0.27601415,0.06768121
+31,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. 45,1.8254764,0.2747964,0.13994956,0.38534832,0.07342656,0.31192178,0.06920249
+32,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. KCJ4932,1.8298277,0.2828836,0.11635541,0.4055296,0.04908506,0.35644454,0.067722924
+33,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus equinus,1.7125016,0.40763202,0.35832164,0.36080226,0.19521263,0.16558963,0.07603355
+34,Bacteria|Firmicutes|Negativicutes|Veillonellales|Veillonellaceae|Megasphaera|Megasphaera sp.,1.8917882,0.14854813,0.4877059,0.098866135,0.44156885,-0.34270272,0.06499256
+35,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. CNU 77-61,1.7511541,0.20327502,0.2655236,0.24782006,0.21437332,0.033446744,0.06774819
+36,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus gallolyticus,1.0861393,0.9859395,1.0134683,0.3986966,0.46071672,-0.062020123,0.06331531
+37,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. CNU G2,1.7888247,0.35719356,0.20378791,0.4137007,0.087850355,0.32585034,0.06836266
+38,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|||Bacteroidales bacterium UBA1178,0.36495802,0.359988,0.5415203,0.047462583,0.31677997,-0.2693174,0.07237184
+39,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Anaerovibrio|Anaerovibrio lipolyticus,1.5166829,0.39112028,0.5616704,0.21043032,0.3721016,-0.16167128,0.06484666
+40,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Anaerovibrio|Anaerovibrio sp. RM50,1.6726395,0.22060789,0.44306192,0.15467042,0.35772765,-0.20305723,0.065073036
+41,Archaea|Candidatus Thermoplasmatota|Thermoplasmata||||Thermoplasmata archaeon,0.40477705,2.5449908,1.3706626,1.403241,-0.00999558,1.4132366,0.06897429
+42,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. P6B1,1.5975674,1.0623231,0.5586848,0.777061,0.049441904,0.72761905,0.06652785
+43,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. P6B4,1.5887998,1.0661516,0.5767609,0.76918244,0.06300664,0.7061758,0.065500475
+44,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus sp. HSISB1,1.1910475,0.55596894,1.4295409,-0.17122972,1.0368859,-1.2081156,0.06833905
+45,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Anaerovibrio|Anaerovibrio sp. JC8,1.5112174,0.73014945,0.22741306,0.6731536,-0.08408053,0.7572341,0.071241975
+46,Archaea|Euryarchaeota|Methanobacteria|Methanobacteriales|Methanobacteriaceae|Methanobrevibacter|Methanobrevibacter olleyae,0.39468613,2.478859,1.2317033,1.4235052,-0.100118876,1.5236241,0.06646216
+47,Archaea|Euryarchaeota|Methanobacteria|Methanobacteriales|Methanobacteriaceae|Methanobrevibacter|Methanobrevibacter sp. UBA189,0.5500307,2.2852013,1.0422118,1.3874149,-0.1653645,1.5527794,0.07300691
+48,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|Streptococcus lutetiensis,1.9209743,0.09270354,0.3156785,0.15082192,0.31935364,-0.16853172,0.065130696
+49,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|||Bacteroidales bacterium UBA3856,0.9273504,1.5163761,1.2557759,0.6836417,0.4095646,0.27407706,0.06805998
+50,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Candidatus Methanomethylophilaceae||Candidatus Methanomethylophilaceae archaeon,1.1406476,1.6479268,0.6488793,1.1526189,-0.17503077,1.3276496,0.06806934
+51,Archaea|Euryarchaeota|Methanomicrobia|Methanomicrobiales|||methanogenic archaeon mixed culture ISO4-G1,1.126754,1.7239867,0.63633513,1.2205532,-0.22332704,1.4438802,0.06844418
+52,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. RM4,2.0605054,0.44735754,0.19214006,0.52956736,0.046605058,0.4829623,0.06352375
+53,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Anaerovibrio|Anaerovibrio sp.,1.3341551,0.71750087,0.7143583,0.37286538,0.33988982,0.032975554,0.06990524
+54,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. MA2016,1.3093668,1.1683223,0.7671066,0.7132361,0.16744834,0.54578775,0.0670705
+55,Bacteria|Firmicutes|Bacilli|Lactobacillales|Streptococcaceae|Streptococcus|uncultured Streptococcus sp.,0.9519806,1.1355592,1.2931356,0.35167652,0.6270578,-0.27538127,0.06651129
+56,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae||Methanomassiliicoccaceae archaeon,0.6443397,2.152617,1.0760051,1.2714787,-0.06753522,1.3390138,0.06704057
+57,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Anaerovibrio|uncultured Anaerovibrio sp.,1.5358715,0.5015588,0.44590273,0.36763698,0.21843863,0.14919835,0.06689716
+58,Bacteria|Firmicutes|Clostridia|Eubacteriales|Peptostreptococcaceae|Peptostreptococcus|Peptostreptococcus sp. D1,0.44861507,2.2702434,1.040232,1.3630835,-0.16452307,1.5276065,0.06374919
+59,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae||uncultured Methanomassiliicoccaceae bacterium,0.94151914,2.0239406,0.7324472,1.3918307,-0.2924078,1.6842384,0.0718752
+60,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae||Methanomassiliicoccaceae archaeon UBA113,1.6954638,0.739453,0.6454622,0.4753074,0.28556803,0.18973938,0.068803705
+61,Archaea|Euryarchaeota|Methanomicrobia|Methanomicrobiales|||methanogenic archaeon,0.22131823,2.241235,1.6749691,0.96176136,0.3943255,0.56743586,0.07015474
+62,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Candidatus Methanomethylophilaceae|Candidatus Methanomethylophilus|Candidatus Methanomethylophilus sp.,0.21298727,2.4108303,1.5105691,1.1909726,0.16832638,1.0226462,0.06868201
+63,Bacteria|Synergistetes|Synergistia|Synergistales|Synergistaceae|Pyramidobacter|Pyramidobacter sp. C12-8,0.93525493,1.5053747,0.6293683,1.0190892,-0.13273996,1.1518292,0.07036248
+64,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium sp. KNHs214,2.0265715,0.19895837,0.17752083,0.32797635,0.15207684,0.1758995,0.07264091
+65,Archaea|Euryarchaeota|Methanomicrobia|Methanosarcinales|Methanosarcinaceae||Methanosarcinaceae archaeon,0.6552103,1.4575902,1.0629194,0.7057913,0.25675625,0.44903505,0.0630701
+66,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Haloimpatiens|Haloimpatiens massiliensis,2.0180726,0.14775173,0.071851246,0.34252158,0.083948724,0.25857285,0.0651264
+67,Bacteria|Firmicutes|Bacilli|Bacillales|||Bacillales bacterium UBA3221,1.7939913,0.97221434,0.7721131,0.610857,0.28859907,0.32225794,0.066223584
+68,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. khp7,1.778912,0.22027816,0.21848533,0.29123852,0.16629393,0.12494458,0.07082397
+69,Bacteria|Spirochaetes|Spirochaetia|Spirochaetales|Treponemataceae|Treponema|Treponema rectale,1.7042462,0.9357165,0.6816323,0.61876464,0.22294477,0.39581987,0.07145871
+70,Archaea|Candidatus Thermoplasmatota|Thermoplasmata||||methanogenic archaeon ISO4-H5,0.17890994,2.6760154,1.0601733,1.6526883,-0.35514343,2.0078316,0.06699351
+71,Bacteria|Firmicutes|Negativicutes|Selenomonadales|Selenomonadaceae|Selenomonas|Selenomonas sp. ND2010,2.0173516,0.1541825,0.27465585,0.23652482,0.25822458,-0.021699756,0.06722842
+72,Bacteria|Firmicutes|Clostridia|Eubacteriales|Clostridiaceae|Clostridium|Clostridium cochlearium,2.2407475,0.06896214,0.16150202,0.25692922,0.21056874,0.046360478,0.06410876
+73,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. FD3004,1.6059686,0.50156665,0.33418614,0.4379341,0.12391484,0.31401926,0.066087075
+74,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae||Methanomassiliicoccaceae archaeon UBA71,2.5676308,0.04574199,0.09498226,0.31631207,0.17853874,0.13777333,0.06705169
+75,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|||Methanomassiliicoccales archaeon,1.9892298,0.39210233,0.45956075,0.328083,0.3039309,0.0241521,0.068075776
+76,Bacteria|Proteobacteria|Gammaproteobacteria|Enterobacterales|Enterobacteriaceae|Escherichia|Escherichia sp. DSM 109009,2.2368324,0.055065464,0.15490416,0.24856131,0.21132082,0.03724049,0.06825772
+77,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae||Methanomassiliicoccaceae archaeon UBA537,2.0179563,0.0673107,0.7834838,-0.11421421,0.74526995,-0.8594842,0.06796349
+78,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. kh1p2,0.78297263,1.6023114,1.2673551,0.7297053,0.37163597,0.3580693,0.069519565
+79,Bacteria|Bacteroidetes|Bacteroidia|Bacteroidales|Prevotellaceae|Prevotella|Prevotella sp. khp1,1.8178624,0.67051333,0.25204983,0.64985216,-0.019729331,0.6695815,0.069991134
+80,Archaea|Candidatus Thermoplasmatota|Thermoplasmata|Methanomassiliicoccales|Methanomassiliicoccaceae|Candidatus Methanogranum|Candidatus Methanogranum sp. U3.2.1,1.7653921,0.081267335,1.0375237,-0.27451718,0.9492096,-1.2237267,0.06262797
