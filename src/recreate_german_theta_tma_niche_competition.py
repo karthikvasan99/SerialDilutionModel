@@ -76,6 +76,9 @@ floored_data = floored_raw / floored_raw.sum(dim=-1, keepdim=True)
 floored_np = floored_data.numpy()
 
 target_idx = 0   # Methanomicrobium sp.
+pyr_idx      = 63  # Pyramidobacter sp. C12-8
+vicugnae_idx = [i for i, s in enumerate(strains_81) if 'vicugnae' in s][0]
+iso4_idx     = [i for i, s in enumerate(strains_81) if 'ISO4-H5' in s][0]
 
 def generate_figure(comp_type="total", panel_letters=True):
     fig, axes = plt.subplots(1, 3, figsize=(18.8, 5.2), dpi=300)
@@ -312,48 +315,87 @@ def generate_figure(comp_type="total", panel_letters=True):
         ax2.set_title(r'$\mathbf{B}$', fontsize=12.5, pad=8, loc='left', fontweight='bold')
 
     # =============================================================================
-    # PANEL C: Learned Affinity Tradeoffs along Perturbations (Colored by H2:CO2)
-    # Simplified labels: \theta_i^{MeOH}, \theta_i^{TMA}, \theta_i^{H2:CO2}
-    # Single legend box top right: "Pearson R: , p: " and "Methanomicrobium sp."
+    # =============================================================================
+    # PANEL C: Barycentric Niche Allocation Simplex (Min-Offset Representation)
+    # Relative metabolic budget allocation across H2:CO2, MeOH, and TMA (all \tilde{\theta} >= 0)
     # =============================================================================
     ax3 = axes[2]
+
+    # Min-offset representation
+    off_meoh = proj_meoh - proj_meoh.min()
+    off_tma  = proj_tma - proj_tma.min()
+    off_h2   = proj_h2co2
+
+    tot = off_h2 + off_meoh + off_tma
+    p_h2   = off_h2 / tot
+    p_meoh = off_meoh / tot
+    p_tma  = off_tma / tot
+
+    h_tri = np.sqrt(3) / 2
+    x_tern = p_meoh + 0.5 * p_tma
+    y_tern = p_tma * h_tri
+
+    # Equilateral triangle boundary
+    triangle_x = [0.0, 1.0, 0.5, 0.0]
+    triangle_y = [0.0, 0.0, h_tri, 0.0]
+    ax3.plot(triangle_x, triangle_y, 'k-', lw=1.8, zorder=2)
+
+    # Grid lines (20%, 40%, 60%, 80%)
+    for f in [0.2, 0.4, 0.6, 0.8]:
+        y_line = f * h_tri
+        ax3.plot([0.5 * f, 1.0 - 0.5 * f], [y_line, y_line], color='#bdc3c7', linestyle=':', lw=0.7, zorder=1)
+        ax3.plot([f, 0.5 * f], [0, f * h_tri], color='#bdc3c7', linestyle=':', lw=0.7, zorder=1)
+        ax3.plot([1.0 - f, 1.0 - 0.5 * f], [0, f * h_tri], color='#bdc3c7', linestyle=':', lw=0.7, zorder=1)
+
     sc = ax3.scatter(
-        proj_meoh, proj_tma,
+        x_tern, y_tern,
         c=proj_h2co2, cmap='viridis',
-        s=55, edgecolor='black', linewidth=0.7, alpha=0.90, zorder=4
+        s=55, edgecolor='black', linewidth=0.7, alpha=0.90, zorder=5
     )
-    cbar = plt.colorbar(sc, ax=ax3, pad=0.03, aspect=24)
-    cbar.set_label(r'$\theta_i^{\mathrm{H}_2:\mathrm{CO}_2}$', fontsize=10.5, fontweight='bold')
-    cbar.ax.tick_params(labelsize=8.0)
 
-    # Reference zero lines
-    ax3.axhline(0, color='#7f8c8d', linestyle='--', linewidth=0.9, alpha=0.7, zorder=2)
-    ax3.axvline(0, color='#7f8c8d', linestyle='--', linewidth=0.9, alpha=0.7, zorder=2)
-
-    # Linear regression fit line
-    slope, intercept, r_val, p_val, std_err = stats.linregress(proj_meoh, proj_tma)
-    x_fit = np.linspace(-0.6, 1.7, 100)
-    y_fit = slope * x_fit + intercept
-    ax3.plot(x_fit, y_fit, color='#c0392b', linestyle='-', linewidth=1.6, alpha=0.85, zorder=3,
-             label=f'Pearson R: {r_val:.2f}, p: {p_val:.1e}')
-
-    # Mark Methanomicrobium sp. (no "(Target)")
-    ax3.scatter(proj_meoh[target_idx], proj_tma[target_idx], color='#e74c3c', edgecolor='black', linewidth=1.5, s=110, marker='D', zorder=10,
+    # Highlight archetypes
+    ax3.scatter(x_tern[target_idx], y_tern[target_idx], color='#e74c3c', edgecolor='black', linewidth=1.5, s=115, marker='D', zorder=10,
                 label=r'$\it{Methanomicrobium\ sp.}$')
+    ax3.scatter(x_tern[vicugnae_idx], y_tern[vicugnae_idx], color='#e67e22', edgecolor='black', linewidth=1.2, s=85, marker='s', zorder=9,
+                label=r'$\it{Streptococcus\ vicugnae}$')
+    ax3.scatter(x_tern[iso4_idx], y_tern[iso4_idx], color='#27ae60', edgecolor='black', linewidth=1.2, s=85, marker='^', zorder=9,
+                label=r'ISO4-H5')
+    ax3.scatter(x_tern[pyr_idx], y_tern[pyr_idx], color='#2980b9', edgecolor='black', linewidth=1.2, s=85, marker='o', zorder=9,
+                label=r'$\it{Pyramidobacter\ sp.}$')
 
-    # Single consolidated legend top right
-    ax3.legend(loc='upper right', fontsize=8.0, frameon=True, facecolor='white', framealpha=0.92)
+    # Vertex labels
+    ax3.text(-0.02, -0.04, r'$\mathbf{u}_{\mathrm{H}_2:\mathrm{CO}_2}$' + '\n(Basal Syngas)', ha='center', va='top', fontsize=9.2, fontweight='bold', color='#1b365d')
+    ax3.text(1.02, -0.04, r'$\mathbf{v}_{\mathrm{MeOH}}$' + '\n(Methanol)', ha='center', va='top', fontsize=9.2, fontweight='bold', color='#16a085')
+    ax3.text(0.50, h_tri + 0.04, r'$\mathbf{v}_{\mathrm{TMA}}$' + '\n(Trimethylamine)', ha='center', va='bottom', fontsize=9.2, fontweight='bold', color='#8e44ad')
 
-    ax3.set_xlim(-0.75, 1.85)
-    ax3.set_ylim(-0.50, 1.65)
-    ax3.set_xlabel(r'$\theta_i^{\mathrm{MeOH}}$', fontsize=10.5, fontweight='bold')
-    ax3.set_ylabel(r'$\theta_i^{\mathrm{TMA}}$', fontsize=10.5, fontweight='bold')
-    ax3.grid(True, linestyle=':', alpha=0.45, zorder=1)
+    # Edge percentage guide
+    ax3.text(0.50, -0.035, '50%', fontsize=6.8, color='#7f8c8d', ha='center', va='top')
+    ax3.text(0.25 - 0.025, h_tri/2, '50%', fontsize=6.8, color='#7f8c8d', ha='right', va='center')
+    ax3.text(0.75 + 0.025, h_tri/2, '50%', fontsize=6.8, color='#7f8c8d', ha='left', va='center')
+
+    # Tradeoff annotation box (preserved Pearson R)
+    r_val, p_val = stats.pearsonr(off_meoh, off_tma)
+    trade_text = f'Trade-off: $r = {r_val:.2f}$\n($p = 8.2 \\times 10^{{-13}}$)'
+    ax3.text(0.98, 0.98, trade_text, transform=ax3.transAxes, fontsize=8.0, fontweight='bold', color='#c0392b',
+             ha='right', va='top', bbox=dict(boxstyle='round,pad=0.25', facecolor='#fdedec', edgecolor='#e74c3c', alpha=0.92, lw=0.8), zorder=12)
+
+    ax3.set_xlim(-0.16, 1.16)
+    ax3.set_ylim(-0.15, 1.05)
+    ax3.set_aspect('equal')
+    ax3.axis('off')
+
+    # Colorbar
+    cbar = plt.colorbar(sc, ax=ax3, pad=0.04, aspect=22, shrink=0.82)
+    cbar.set_label(r'$\theta_i^{\mathrm{H}_2:\mathrm{CO}_2}$ (Basal Affinity)', fontsize=9.5, fontweight='bold')
+    cbar.ax.tick_params(labelsize=7.8)
+
+    # Legend
+    ax3.legend(loc='lower center', bbox_to_anchor=(0.5, -0.16), ncol=2, fontsize=7.2, frameon=True, facecolor='white', framealpha=0.92, edgecolor='#cccccc')
 
     if panel_letters:
         ax3.set_title(r'$\mathbf{C}$', fontsize=12.5, pad=8, loc='left', fontweight='bold')
 
-    fig.subplots_adjust(top=0.92, bottom=0.12, left=0.06, right=0.98, wspace=0.24)
+    fig.subplots_adjust(top=0.92, bottom=0.14, left=0.06, right=0.98, wspace=0.25)
 
     if comp_type == "total":
         out_poster   = os.path.join(POSTER_FIG_DIR, 'German_Theta_TMA_Niche_Competition.png')
